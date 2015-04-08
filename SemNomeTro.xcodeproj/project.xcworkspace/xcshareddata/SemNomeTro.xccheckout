@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3FBD8EFF-D601-4046-9500-52E4819D7144</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SemNomeTro</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>731A87D18B3DFDCF065DC7F4EAFEB6F1082A296A</key>
+		<string>bitbucket.org:EuAndreh/semnometro-app.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SemNomeTro.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>731A87D18B3DFDCF065DC7F4EAFEB6F1082A296A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>bitbucket.org:EuAndreh/semnometro-app.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>731A87D18B3DFDCF065DC7F4EAFEB6F1082A296A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>731A87D18B3DFDCF065DC7F4EAFEB6F1082A296A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SemNomeTro</string>
+		</dict>
+	</array>
+</dict>
+</plist>
