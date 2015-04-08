@@ -16,16 +16,22 @@
 
 @interface chronometer : UIView
 
-@property (nonatomic) NSDate *startDate;
 @property (nonatomic) NSDateFormatter *dateFormatter;
 @property (nonatomic) UILabel *chronometer;
 @property (nonatomic) NSTimer *chronometerTimer;
 
+//Arrays para manipular o tempo do cronometro
+@property (nonatomic) NSMutableArray *pauseTimes;
+@property (nonatomic) NSMutableArray *startTimes;
+@property (nonatomic) NSMutableArray *lapTimes;
+
 
 - (instancetype)initWithFrame:(CGRect)frame;
 
--(void)startedChronometer;
--(void)stopedChronometer;
+-(void)play_pauseChronometer;
+-(void)lapChronometer;
+-(NSMutableArray*)getLapsContent;
+
 
 -(void)updateTimer;
 

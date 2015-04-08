@@ -8,11 +8,14 @@
 
 #import "AppDelegate.h"
 #import "User_Model.h"
-/*
+
+#import "ViewController.h"
+
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-*/
+
+
 
 @interface AppDelegate ()
 
@@ -23,7 +26,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
+//
     //tava testando o calculo da idade
   
     NSDateComponents *date = [[NSDateComponents alloc] init];
@@ -37,7 +40,23 @@
     
     NSLog(@"%@", test);
 
-    return YES;
+  
+  
+  // ViewController para testar o botao + login do Facebook
+  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  self.window.rootViewController = [[ViewController alloc] init];
+  self.window.backgroundColor = [UIColor greenColor];
+  [self.window makeKeyAndVisible];
+  
+  
+  //  return YES;
+  
+  //
+  
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                  didFinishLaunchingWithOptions:launchOptions];
+
+  
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -65,19 +84,12 @@
 
 
 
-/*
+
 // API do Facebook
 
- Descomentar esse código todo e adicionar o apendice no final para o viewDidLoad
- 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-  [FBSDKAppEvents activateApp];
-}
+// Descomentar esse código todo e adicionar o apendice no final para o viewDidLoad
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                  didFinishLaunchingWithOptions:launchOptions];
-}
+
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -88,25 +100,23 @@
                                               sourceApplication:sourceApplication
                                                      annotation:annotation];
 }
+
+/*
  
 - (BOOL)application:(UIApplication *)application
- openURL:(NSURL *)url
- sourceApplication:(NSString *)sourceApplication
- annotation:(id)annotation {
- return [[FBSDKApplicationDelegate sharedInstance] application:application
- openURL:url
- sourceApplication:sourceApplication
- annotation:annotation];
- }
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                        openURL:url
+                                              sourceApplication:sourceApplication
+                                                     annotation:annotation];
+}
+*/
+ 
+ 
+ 
+ 
 
- 
- 
- 
- 
- // Adicionar para o viewDidLoad do ViewController
- FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
- loginButton.center = self.view.center;
- [self.view addSubview:loginButton];
- */
 
 @end
