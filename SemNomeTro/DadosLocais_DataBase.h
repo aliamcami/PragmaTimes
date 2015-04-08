@@ -1,7 +1,7 @@
 /**
  arrayDeTempos é um array com o seguinte formato:
- na posição 0, está o NSDate de quando o grupo de tempos foi gravado (de quando começou a ser gravado ou de quando terminou?)
- nas posições seguintes estão os tempos, no formato NSNumber
+ na posição 0, está o NSDate de quando o grupo de tempos começou a ser gravado
+ nas posições seguintes estão os tempos, no formato NSNumber, tipop float
  
  identificadorDoAtleta é o identificador único de cada atleta: o email dele, caso fornecido, ou o email do treinador prefixador de um número único.
  
@@ -33,6 +33,7 @@
  */
 
 #import <Foundation/Foundation.h>
+
 
 @interface DadosLocais_DataBase : NSObject
 

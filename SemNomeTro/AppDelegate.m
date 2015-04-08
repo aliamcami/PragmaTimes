@@ -25,6 +25,7 @@
     
     
     //tava testando o calculo da idade
+  
     NSDateComponents *date = [[NSDateComponents alloc] init];
     [date setYear:1970];
     [date setMonth:4];

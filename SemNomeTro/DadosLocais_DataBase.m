@@ -7,6 +7,7 @@
 
 @property (nonatomic, readonly) NSString *arquivoTempos, *arquivoAtletas, *arquivoTreinador;
 
+
 @end
 
 @implementation DadosLocais_DataBase
