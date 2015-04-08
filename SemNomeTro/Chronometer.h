@@ -16,6 +16,10 @@
 
 @interface chronometer : UIView
 
+@property (nonatomic) NSString *name;
+//Para mostrar mais informações sobre o cronometro
+@property (nonatomic) short focus;
+
 @property (nonatomic) NSDateFormatter *dateFormatter;
 @property (nonatomic) UILabel *chronometer;
 @property (nonatomic) NSTimer *chronometerTimer;
@@ -27,11 +31,13 @@
 
 
 - (instancetype)initWithFrame:(CGRect)frame;
+-(void)resizeCronometer:(CGRect)size;
 
 -(void)play_pauseChronometer;
 -(void)lapChronometer;
 -(NSMutableArray*)getLapsContent;
 
+//-(BOOL)isFocused;
 
 -(void)updateTimer;
 
