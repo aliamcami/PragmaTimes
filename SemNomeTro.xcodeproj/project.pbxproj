@@ -22,6 +22,7 @@
 		D587673B1AD3230300F29BCC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58767391AD3230300F29BCC /* LaunchScreen.xib */; };
 		D58767471AD3230300F29BCC /* SemNomeTroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D58767461AD3230300F29BCC /* SemNomeTroTests.m */; };
 		D599581F1AD4497900BCF33B /* User_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D599581E1AD4497900BCF33B /* User_Model.m */; };
+		D5C5765E1AD5DCAD0066CA29 /* TableView_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5765D1AD5DCAD0066CA29 /* TableView_Model.m */; };
 		D5C59DB81AD4573A004C4BC7 /* Chronometer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C59DB71AD4573A004C4BC7 /* Chronometer.m */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,8 @@
 		D58767461AD3230300F29BCC /* SemNomeTroTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SemNomeTroTests.m; sourceTree = "<group>"; };
 		D599581D1AD4497900BCF33B /* User_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User_Model.h; sourceTree = "<group>"; };
 		D599581E1AD4497900BCF33B /* User_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User_Model.m; sourceTree = "<group>"; };
+		D5C5765C1AD5DCAD0066CA29 /* TableView_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableView_Model.h; sourceTree = "<group>"; };
+		D5C5765D1AD5DCAD0066CA29 /* TableView_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableView_Model.m; sourceTree = "<group>"; };
 		D5C59DB61AD4573A004C4BC7 /* Chronometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chronometer.h; sourceTree = "<group>"; };
 		D5C59DB71AD4573A004C4BC7 /* Chronometer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chronometer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,6 +184,8 @@
 				D5C59DB71AD4573A004C4BC7 /* Chronometer.m */,
 				D5779E8D1AD47908003957E2 /* Athlete_Model.h */,
 				D5779E8E1AD47908003957E2 /* Athlete_Model.m */,
+				D5C5765C1AD5DCAD0066CA29 /* TableView_Model.h */,
+				D5C5765D1AD5DCAD0066CA29 /* TableView_Model.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -305,6 +310,7 @@
 				6B66DB591AD5BFA500E1E74C /* ViewController.m in Sources */,
 				6BAA00EF1AD45CB600D41E93 /* DadosLocais_DataBase.m in Sources */,
 				D5C59DB81AD4573A004C4BC7 /* Chronometer.m in Sources */,
+				D5C5765E1AD5DCAD0066CA29 /* TableView_Model.m in Sources */,
 				6B3E6AE21AD59E5B009BB35E /* Login_DataBase.m in Sources */,
 				D587672D1AD3230300F29BCC /* main.m in Sources */,
 				D5779E8F1AD47908003957E2 /* Athlete_Model.m in Sources */,

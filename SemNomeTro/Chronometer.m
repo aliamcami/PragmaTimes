@@ -10,6 +10,8 @@
 
 @implementation chronometer
 
+#pragma mark - Instance Methods
+
 //Metodo de instancia que inicia o cronometro em um tamanho especifico, fornecido previamente
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -60,6 +62,8 @@
     }
 }
 
+#pragma mark - Time Control Methods
+
 //Controlador de tempo do cronometro
 -(void)play_pauseChronometer
 {
@@ -92,6 +96,8 @@
 }
 
 
+#pragma mark - Returning Informations
+
 //Retorna um array contendo:
 //- NSDate de inicio do cronometro
 //- de 0 a N NSNumber contendo o tempo de cada volta
@@ -120,6 +126,8 @@
     
     return lapContents;
 }
+
+#pragma mark - Update Time
 
 //Método que altera o texto contido na label, mostrando o tempo do relogio
 -(void)updateTimer

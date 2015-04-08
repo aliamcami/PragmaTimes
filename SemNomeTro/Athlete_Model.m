@@ -10,6 +10,8 @@
 
 @implementation Athlete_Model
 
+#pragma mark - Instance Methods
+
 //Método de instancia para iniciar um atleta somente com o nome dado no cronometro
 - (instancetype)initWithName:(NSString*)name
 {
@@ -35,6 +37,7 @@
         self.wheight = wheight;
         self.height = height;
     }
+    
     return self;
 }
 

@@ -25,22 +25,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-//
-    //tava testando o calculo da idade
-  
-    NSDateComponents *date = [[NSDateComponents alloc] init];
-    [date setYear:1970];
-    [date setMonth:4];
-    [date setDay:4];
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    User_Model *test = [[User_Model alloc] initWithName:@"G" Email:@"djaf" andBirthDate:[calendar dateFromComponents:date]];
-    
-    NSLog(@"%@", test);
-
-  
   
   // ViewController para testar o botao + login do Facebook
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -48,15 +32,10 @@
   self.window.backgroundColor = [UIColor greenColor];
   [self.window makeKeyAndVisible];
   
-  
-  //  return YES;
-  
-  //
-  
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
 
-  
+//  return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
