@@ -34,7 +34,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface DadosLocais_DataBase : NSObject
 
 @end
