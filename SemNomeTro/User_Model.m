@@ -19,18 +19,13 @@
         self.birthDate = birthDate;
         
         //Calcula a idade da pessoa
-        NSDateComponents *age = [[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:self.birthDate toDate:[NSDate date] options:0];
+        NSDateComponents *age = [[NSCalendar currentCalendar] components:NSCalendarUnitYear
+                                                                fromDate:self.birthDate
+                                                                  toDate:[NSDate date]
+                                                                 options:0];
         self.age = (int)[age year];
     }
     return self;
 }
-
- 
-//utilizado para testes!
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"%@, %@, %@, %d", self.name, self.email, self.birthDate, self.age];
-}
-
 
 @end
