@@ -38,16 +38,16 @@
 //  return [atletas writeToFile:self.arquivoAtletas atomically:YES];
 ////  return YES;
 //}
-//
-//- (instancetype)init {
-//  self = [super init];
-//  if (self) {
-//    _arquivoTempos = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/tempos.plist"];
-//    _arquivoAtletas = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/atletas.plist"];
-//    _arquivoTreinador = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/treinador.plist"];
-//  }
-//  return self;
-//}
+
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+    _arquivoTempos = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/tempos.plist"];
+    _arquivoAtletas = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/atletas.plist"];
+    _arquivoTreinador = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/treinador.plist"];
+  }
+  return self;
+}
 
 
 // Tempos
@@ -135,17 +135,21 @@
                    peso:(double)peso altura:(double)altura sexo:(NSString *)sexo {
   READ_INIT(atletas, self.arquivoAtletas);
   
-  if ([email isEqualToString:@""])
-    email = [self geraEmail];
-  
-  [atletas setValue:@{@"nome": nome,
-                      @"foto": foto,
-                      @"peso": [NSNumber numberWithDouble:peso],
-                      @"altura": [NSNumber numberWithDouble:altura],
-                      @"sexo": sexo}
-             forKey:email];
-
-  GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
+  if ([atletas objectForKey:email])
+    NSLog(@"Atleta já existe! Conserte isso!");
+  else {
+    if ([email isEqualToString:@""])
+      email = [self geraEmail];
+    
+    [atletas setValue:@{@"nome": nome,
+                        @"foto": foto,
+                        @"peso": [NSNumber numberWithDouble:peso],
+                        @"altura": [NSNumber numberWithDouble:altura],
+                        @"sexo": sexo}
+               forKey:email];
+    
+    GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
+  }
 }
 
 -(void) atualizarAtleta:(NSString *)identificadorDoAtleta nome:(NSString *)nome

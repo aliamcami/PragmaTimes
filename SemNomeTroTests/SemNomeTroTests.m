@@ -2,6 +2,8 @@
 #import <XCTest/XCTest.h>
 #import "DadosLocais_DataBase.h"
 
+#define DB DadosLocais_DataBase *db = [[DadosLocais_DataBase alloc] init];
+
 @interface SemNomeTroTests : XCTestCase
 
 @end
@@ -33,20 +35,29 @@
 }
 
 - (void)testarGravacaoERecuperacaoDeAtleta {
-  DadosLocais_DataBase *db = [[DadosLocais_DataBase alloc] init];
+  DB
   [db adicionarAtleta:@"André" email:@"andremiramor@gmail.com" foto:@"" peso:80.0 altura:1.85 sexo:@"M"];
-  
+
   NSDictionary *atletaAndre = [db recuperarAtleta:@"andremiramor@gmail.com"];
-  
   NSDictionary *atletaAndreEsperado = @{@"nome": @"André",
                                         @"foto": @"",
                                         @"peso": @80.0,
                                         @"altura": @1.85,
                                         @"sexo": @"M"};
-  NSLog(@"%@", atletaAndre);
-  NSLog(@"%@", atletaAndreEsperado);
-
   XCTAssertEqualObjects(atletaAndre, atletaAndreEsperado);
+}
+
+- (void)testarGravarAtletaDuplicado {
+  DB
+  [db adicionarAtleta:@"Camila" email:@"aliamcamil@gmail.com" foto:@"" peso:80.0 altura:1.85 sexo:@"F"];
+  [db adicionarAtleta:@"Camila2" email:@"aliamcamil@gmail.com" foto:@"" peso:80.0 altura:1.85 sexo:@"F"];
+
+  NSDictionary *atletaCamilaEsperada = @{@"nome": @"Camila", // e não @"Camila2"
+                                         @"foto": @"",
+                                         @"peso": @80.0,
+                                         @"altura": @1.85,
+                                         @"sexo": @"F"};
+  XCTAssertEqualObjects(atletaCamilaEsperada, [db recuperarAtleta:@"aliamcamil@gmail.com"]);
 }
 
 @end
