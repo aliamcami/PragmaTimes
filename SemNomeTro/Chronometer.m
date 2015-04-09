@@ -10,6 +10,8 @@
 
 @implementation chronometer
 
+#pragma mark - Instance Methods
+
 //Metodo de instancia que inicia o cronometro em um tamanho especifico, fornecido previamente
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -26,11 +28,8 @@
         [self.dateFormatter setDateFormat:@"HH:mm:ss.SS"];
         [self.dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
         
-        //Cria a label cronometro que ocupa todo o tamanho da view
-        self.chronometer = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
-        
-        //Alinha o texto ao centro da label
-        [self.chronometer setTextAlignment:NSTextAlignmentCenter];
+        //Chama o metodo que edita o cronometro do modo necessario
+        [self resizeCronometer:frame];
         
         //Adiciona o cronometro como subview dessa classe
         [self addSubview:self.chronometer];
@@ -38,6 +37,32 @@
     
     return self;
 }
+
+//Metodo que vai alterar a organizaçao do espaço da view
+//Sem condiçoes de implementar sem saber como sera o espaço
+-(void)resizeCronometer:(CGRect)size
+{
+    //Lembrar de alignment Center, AdjustFontSizeToFitWidht, minimunScaleFactor(????)
+    
+    switch (self.focus) {
+        //Caso padrão, o tempo ocupara o espaço todo???
+        case 0:
+            break;
+        //Se está num tamanho maior que o normal, mas menor que a metade da tela
+        case 1:
+            break;
+        //Se é do tamanho de metade da tela
+        case 2:
+            break;
+        case 3:
+        //Se ocupa a tela toda
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - Time Control Methods
 
 //Controlador de tempo do cronometro
 -(void)play_pauseChronometer
@@ -64,25 +89,14 @@
     }
 }
 
-//Responsavel por iniciar o cronometro
--(void)startChronometer
-{
-    //Informa que o timer chamara o metodo updateTimer a cada 60 milisegundos. Após ser executado o teste, com esse intervalo de chamada, o iphone 6 utiliza 50% de sua capacidade de procesamento trabalhando com 540 cronometros.
-    self.chronometerTimer = [NSTimer scheduledTimerWithTimeInterval:0.06 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
-}
-
-//Faz com que o tempo do cronometro pare de rodar - NECESSITA SER ALTERADO, O TEMPO NAO DEVE PARAR DE RODAR
--(void)pauseChronometer
-{
-    [self.chronometerTimer invalidate];
-}
-
 -(void)lapChronometer
 {
     //Adiciona ao array de voltas o momento em que foi solicitado uma volta
     [self.lapTimes addObject:[NSDate date]];
 }
 
+
+#pragma mark - Returning Informations
 
 //Retorna um array contendo:
 //- NSDate de inicio do cronometro
@@ -113,6 +127,8 @@
     return lapContents;
 }
 
+#pragma mark - Update Time
+
 //Método que altera o texto contido na label, mostrando o tempo do relogio
 -(void)updateTimer
 {
@@ -142,5 +158,11 @@
     NSString *timeString = [self.dateFormatter stringFromDate:timerDate];
     self.chronometer.text = timeString;
 }
+
+//Informa se o Cronometro está em foco ou nao
+//-(BOOL)isFocused
+//{
+//    
+//}
 
 @end
