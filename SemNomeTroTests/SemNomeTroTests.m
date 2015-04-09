@@ -37,14 +37,12 @@
 - (void)testarGravacaoERecuperacaoDeAtleta {
   DB
   [db adicionarAtleta:@"André" email:@"andremiramor@gmail.com" foto:@"" peso:80.0 altura:1.85 sexo:@"M"];
-
-  NSDictionary *atletaAndre = [db recuperarAtleta:@"andremiramor@gmail.com"];
   NSDictionary *atletaAndreEsperado = @{@"nome": @"André",
                                         @"foto": @"",
                                         @"peso": @80.0,
                                         @"altura": @1.85,
                                         @"sexo": @"M"};
-  XCTAssertEqualObjects(atletaAndre, atletaAndreEsperado);
+  XCTAssertEqualObjects(atletaAndreEsperado, [db recuperarAtleta:@"andremiramor@gmail.com"]);
 }
 
 - (void)testarGravarAtletaDuplicado {
@@ -58,6 +56,22 @@
                                          @"altura": @1.85,
                                          @"sexo": @"F"};
   XCTAssertEqualObjects(atletaCamilaEsperada, [db recuperarAtleta:@"aliamcamil@gmail.com"]);
+}
+
+- (void)testarAdicionarERemoverAtleta {
+  DB
+  [db adicionarAtleta:@"André" email:@"andrecabeludo@hotmail.com" foto:@"" peso:80.0 altura:1.85 sexo:@"M"];
+  
+  NSDictionary *atletaAndreEsperado = @{@"nome": @"André",
+                                        @"foto": @"",
+                                        @"peso": @80.0,
+                                        @"altura": @1.85,
+                                        @"sexo": @"M"};
+  
+  XCTAssertEqualObjects(atletaAndreEsperado, [db recuperarAtleta:@"andrecabeludo@hotmail.com"]);
+  
+  [db removerAtleta:@"andrecabeludo@hotmail.com"];
+  XCTAssertNil([db recuperarAtleta:@"andrecabeludo@hotmail.com"]);
 }
 
 @end

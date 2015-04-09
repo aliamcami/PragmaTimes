@@ -173,8 +173,7 @@
   READ_INIT(atletas, self.arquivoAtletas);
   [atletas removeObjectForKey:identificadorDoAtleta];
   
-
-GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
+  GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
 }
 
 -(NSDictionary *) recuperarAtleta:(NSString *)identificadorDoAtleta {
