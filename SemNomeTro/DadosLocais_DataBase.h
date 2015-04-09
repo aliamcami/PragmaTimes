@@ -36,5 +36,28 @@
 
 @interface DadosLocais_DataBase : NSObject
 
+// Tempos
+-(void)gravarTempos:(NSArray *)arrayDeTempos identificadorDoAtleta:(NSString *)identificadorDoAtleta;
+-(void)removerGrupoDeTempos:(int)posicao identificadorDoAtleta:(NSString *)identificadorDoAtleta;
+-(void)removerTempoIndividual:(int)posicaoDoTempo grupoDeTempos:(int)posicaoDoGrupoDeTempos
+        identificadorDoAtleta:(NSString *)identificadorDoAtleta;
+-(NSArray *)recuperarTempos:(NSString *)identificadorDoAtleta;
+
+// Treinador
+-(NSDictionary *) recuperaTreinador;
+-(NSString *)recuperaEmailDoTreinador;
+-(void) loginTreinador;
+-(void) atualizarTreinador;
+-(void) logoutTreinador;
+
+// Atletas
+-(NSString *)geraEmail;
+-(void) adicionarAtleta:(NSString *)nome email:(NSString *)email foto:(NSString *)foto
+                   peso:(double)peso altura:(double)altura sexo:(NSString *)sexo;
+-(void) atualizarAtleta:(NSString *)identificadorDoAtleta nome:(NSString *)nome
+                  email:(NSString *)email foto:(NSString *)foto peso:(double)peso
+                 altura:(double)altura sexo:(NSString *)sexo;
+-(void) removerAtleta:(NSString *)identificadorDoAtleta;
+-(NSDictionary *) recuperarAtleta:(NSString *)identificadorDoAtleta;
 
 @end
