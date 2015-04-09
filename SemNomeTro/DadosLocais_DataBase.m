@@ -3,6 +3,7 @@
 #define CHECA_GRAVACAO(RES, ARQUIVO) if (RES) NSLog(@"Arquivo %@ gravado com sucesso.", ARQUIVO); else NSLog(@"Erro na gravação do arquivo: %@.", ARQUIVO);
 #define GRAVA_E_CHECA_GRAVACAO(DATA, RES, ARQUIVO) GRAVA(DATA, RES, ARQUIVO) CHECA_GRAVACAO(RES, ARQUIVO)
 
+#define READ_INIT(VAR, ARQUIVO) NSMutableDictionary *VAR = [NSMutableDictionary dictionaryWithContentsOfFile:ARQUIVO]; if (VAR == nil) VAR = [[NSMutableDictionary alloc] init]
 @interface DadosLocais_DataBase ()
 
 @property (nonatomic, readonly) NSString *arquivoTempos, *arquivoAtletas, *arquivoTreinador;
@@ -11,6 +12,32 @@
 @end
 
 @implementation DadosLocais_DataBase
+
+//-(BOOL)testarTeste {
+//  READ_INIT(atletas, self.arquivoAtletas);
+//
+//  NSString *email = @"andoremiramor@gmail.com";
+//  if ([email isEqualToString:@""])
+//    email = [self geraEmail];
+//  
+//  [atletas setValue:@{@"nome": @"Andfeio",
+//                      @"foto": @"foto",
+//                      @"peso": @"1",
+//                      @"altura": @"iOJ",
+//                      @"sexo": @"MF"}
+//             forKey:email];
+//  
+//    [@{@"vai":@"logo"} writeToFile:self.arquivoAtletas atomically:YES];
+//    NSLog(@"%@", [[NSDictionary alloc] initWithContentsOfFile:self.arquivoAtletas]);
+//
+//  GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
+//
+//  
+//  NSLog(@"%@", atletas);
+//  
+//  return [atletas writeToFile:self.arquivoAtletas atomically:YES];
+////  return YES;
+//}
 
 - (instancetype)init {
   self = [super init];
@@ -24,12 +51,10 @@
 
 
 // Tempos
+#pragma mark - Tempos
 
 -(void)gravarTempos:(NSArray *)arrayDeTempos identificadorDoAtleta:(NSString *)identificadorDoAtleta {
-  NSMutableDictionary *tempos = [NSMutableDictionary dictionaryWithContentsOfFile:self.arquivoTempos];
-  // Se o arquivo não existir
-  if (tempos == nil)
-    tempos = [[NSMutableDictionary alloc] init];
+  READ_INIT(tempos, self.arquivoTempos);
 
   NSMutableArray *temposDoAtleta = [tempos objectForKey:identificadorDoAtleta];
   // Se o atleta não existir
@@ -43,7 +68,7 @@
 }
 
 -(void)removerGrupoDeTempos:(int)posicao identificadorDoAtleta:(NSString *)identificadorDoAtleta {
-  NSMutableDictionary *tempos = [NSMutableDictionary dictionaryWithContentsOfFile:self.arquivoTempos];
+  READ_INIT(tempos, self.arquivoTempos);
   NSMutableArray *temposDoAtleta = [tempos objectForKey:identificadorDoAtleta];
 
   [temposDoAtleta removeObjectAtIndex:posicao];
@@ -54,7 +79,7 @@
 
 -(void)removerTempoIndividual:(int)posicaoDoTempo grupoDeTempos:(int)posicaoDoGrupoDeTempos
         identificadorDoAtleta:(NSString *)identificadorDoAtleta {
-  NSMutableDictionary *tempos = [NSMutableDictionary dictionaryWithContentsOfFile:self.arquivoTempos];
+  READ_INIT(tempos, self.arquivoTempos);
   NSMutableArray *temposDoAtleta = [tempos objectForKey:identificadorDoAtleta];
   
   NSMutableArray *grupoDeTempos = [temposDoAtleta objectAtIndex:posicaoDoGrupoDeTempos];
@@ -68,12 +93,13 @@
 }
 
 -(NSArray *)recuperarTempos:(NSString *)identificadorDoAtleta {
-  NSMutableDictionary *tempos = [NSMutableDictionary dictionaryWithContentsOfFile:self.arquivoTempos];
+  READ_INIT(tempos, self.arquivoTempos);
   return [tempos objectForKey:identificadorDoAtleta];
 }
 
 
 // Treinador
+#pragma mark - Treinador
 
 -(NSDictionary *) recuperaTreinador {
   return [NSDictionary dictionaryWithContentsOfFile:self.arquivoTreinador];
@@ -98,6 +124,7 @@
 
 
 // Atletas
+#pragma mark - Atletas
 
 -(NSString *)geraEmail {
   return [NSString stringWithFormat:@"%@-algumnumeroIdentificadorunico",
@@ -106,25 +133,29 @@
 
 -(void) adicionarAtleta:(NSString *)nome email:(NSString *)email foto:(NSString *)foto
                    peso:(double)peso altura:(double)altura sexo:(NSString *)sexo {
-    NSMutableDictionary *atletas = [NSMutableDictionary dictionaryWithContentsOfFile:self.arquivoAtletas];
+  READ_INIT(atletas, self.arquivoAtletas);
   
-  if ([email isEqualToString:@""])
-    email = [self geraEmail];
-  
-  [atletas setValue:@{@"nome": nome,
-                      @"foto": foto,
-                      @"peso": [NSNumber numberWithDouble:peso],
-                      @"altura": [NSNumber numberWithDouble:altura],
-                      @"sexo": sexo}
-             forKey:email];
-
-  GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
+  if ([atletas objectForKey:email])
+    NSLog(@"Atleta já existe! Conserte isso!");
+  else {
+    if ([email isEqualToString:@""])
+      email = [self geraEmail];
+    
+    [atletas setValue:@{@"nome": nome,
+                        @"foto": foto,
+                        @"peso": [NSNumber numberWithDouble:peso],
+                        @"altura": [NSNumber numberWithDouble:altura],
+                        @"sexo": sexo}
+               forKey:email];
+    
+    GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
+  }
 }
 
 -(void) atualizarAtleta:(NSString *)identificadorDoAtleta nome:(NSString *)nome
                   email:(NSString *)email foto:(NSString *)foto peso:(double)peso
                  altura:(double)altura sexo:(NSString *)sexo {
-  NSMutableDictionary *atletas = [NSMutableDictionary dictionaryWithContentsOfFile:self.arquivoAtletas];
+  READ_INIT(atletas, self.arquivoAtletas);
   NSDictionary *atleta = @{@"nome": nome,
                            @"foto": foto,
                            @"peso": [NSNumber numberWithDouble:peso],
@@ -139,15 +170,14 @@
 }
 
 -(void) removerAtleta:(NSString *)identificadorDoAtleta {
-  NSMutableDictionary *atletas = [NSMutableDictionary dictionaryWithContentsOfFile:self.arquivoAtletas];
+  READ_INIT(atletas, self.arquivoAtletas);
   [atletas removeObjectForKey:identificadorDoAtleta];
   
-
-GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
+  GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
 }
 
 -(NSDictionary *) recuperarAtleta:(NSString *)identificadorDoAtleta {
-  NSMutableDictionary *atletas = [NSMutableDictionary dictionaryWithContentsOfFile:self.arquivoAtletas];
+  READ_INIT(atletas, self.arquivoAtletas);
   return [atletas objectForKey:identificadorDoAtleta];
 }
 

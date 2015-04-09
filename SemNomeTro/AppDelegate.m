@@ -1,21 +1,14 @@
-//
-//  AppDelegate.m
-//  SemNomeTro
-//
-//  Created by Giovani Ferreira Silvério da Silva on 06/04/15.
-//  Copyright (c) 2015 Giovani Ferreira Silvério da Silva. All rights reserved.
-//
-
 #import "AppDelegate.h"
 #import "User_Model.h"
 
-#import "ViewController.h"
+//#import "ViewController.h"
 
+/*
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-
-
+*/
+#import "DadosLocais_DataBase.h"
 
 @interface AppDelegate ()
 
@@ -25,8 +18,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  /*
+   // ViewController para testar o botao + login do Facebook
   
-  // ViewController para testar o botao + login do Facebook
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.rootViewController = [[ViewController alloc] init];
   self.window.backgroundColor = [UIColor greenColor];
@@ -34,8 +28,8 @@
   
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
-
-//  return YES;
+*/
+  return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -60,16 +54,9 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
-
-
-
 // API do Facebook
-
 // Descomentar esse código todo e adicionar o apendice no final para o viewDidLoad
-
-
-
+/*
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -79,9 +66,6 @@
                                               sourceApplication:sourceApplication
                                                      annotation:annotation];
 }
-
-/*
- 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -92,10 +76,4 @@
                                                      annotation:annotation];
 }
 */
- 
- 
- 
- 
-
-
 @end

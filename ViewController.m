@@ -20,10 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-  // Adicionar para o viewDidLoad do ViewController
-  FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-  loginButton.center = self.view.center;
-  [self.view addSubview:loginButton];
+//   Adicionar para o viewDidLoad do ViewController
+
+//  FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
+//  loginButton.center = self.view.center;
+//  [self.view addSubview:loginButton];
 
   
     // Do any additional setup after loading the view from its nib.
