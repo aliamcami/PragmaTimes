@@ -13,6 +13,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "TableView_Model.h"
 
 @interface chronometer : UIView
 
@@ -27,7 +28,7 @@
 @property (nonatomic) UILabel *chronometer;
 @property (nonatomic) UILabel *chronometerName;
 @property (nonatomic) UILabel *chronometerBestLap;
-//Tem a table view tbm, mas ela é adicionada de forma diferente
+@property (nonatomic) TableView_Model *tableViewLaps;
 
 //Arrays para manipular o tempo do cronometro
 @property (nonatomic) NSMutableArray *pauseTimes;
@@ -39,12 +40,12 @@
 - (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus;
 
 -(void)resizeCronometer:(CGRect)size andFocus:(int)focus;
+-(void)adjustLabelTexts;
+-(void)editChronometerName:(NSString*)name;
 
 -(void)play_pauseChronometer;
 -(void)lapChronometer;
 -(NSArray*)getLapsContent;
-
-//-(BOOL)isFocused;
 
 -(void)updateTimer;
 

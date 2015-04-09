@@ -7,7 +7,6 @@
 //
 
 #import "chronometer.h"
-#import "TableView_Model.h"
 
 @implementation chronometer
 
@@ -60,6 +59,12 @@
     
     int screenDivisions;
     
+    //Retira tudo da tela, para nao haver sobreposicao de itens na tela
+    [self.chronometer removeFromSuperview];
+    [self.chronometerBestLap removeFromSuperview];
+    [self.chronometerName removeFromSuperview];
+    [self.tableViewLaps removeFromSuperview];
+    
     switch (self.focus) {
             
         //MOSTRA O NOME E O TEMPO
@@ -94,12 +99,12 @@
             CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
             
             //Instancia uma tableview com o tamanho definido
-            TableView_Model *tableViewLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
+            self.tableViewLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
                                                                            LapTimes:[self getLapsContent]
                                                                 andSelectedLapTimes:self.lapTimes];
             
             //Adiciona a tableview a tela
-            [self addSubview:tableViewLaps];
+            [self addSubview:self.tableViewLaps];
             
             break;
         }
@@ -122,7 +127,7 @@
             CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
             
             //Instancia uma tableview com o tamanho definido
-            TableView_Model *tableViewLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
+            self.tableViewLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
                                                                            LapTimes:[self getLapsContent]
                                                                 andSelectedLapTimes:self.lapTimes];
             
@@ -130,7 +135,7 @@
             [self.chronometerBestLap setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 6, self.frame.size.width, self.frame.size.height / screenDivisions)];
             
             //adiciona a tableview e a label com o melhor tempo a tela
-            [self addSubview:tableViewLaps];
+            [self addSubview:self.tableViewLaps];
             [self addSubview:self.chronometerBestLap];
             
             break;
@@ -142,9 +147,35 @@
             break;
     }
     
+    [self editChronometerName:self.name];
+    
     //Adiciona as labels que mostram o nome e o tempo do cronometro a tela
     [self addSubview:self.chronometerName];
     [self addSubview:self.chronometer];
+}
+
+//Ajusta todas as labels, para facilitar edicao dos textos das labels futuramente
+-(void)adjustLabelTexts
+{
+    self.chronometer = [[UILabel alloc] init];
+    self.chronometerBestLap = [[UILabel alloc] init];
+    self.chronometerName = [[UILabel alloc] init];
+    
+    self.chronometerName.textAlignment = NSTextAlignmentCenter;
+    self.chronometerBestLap.textAlignment = NSTextAlignmentCenter;
+    self.chronometer.textAlignment = NSTextAlignmentCenter;
+    
+    self.chronometerName.adjustsFontSizeToFitWidth = YES;
+    self.chronometerBestLap.adjustsFontSizeToFitWidth = YES;
+    self.chronometer.adjustsFontSizeToFitWidth = YES;
+    
+}
+
+//Atualiza o texto da label ao mesmo em que o nome do cronometro foi alterado, sem necessidade de arranjar um jeito de dar refresh na tela
+-(void)editChronometerName:(NSString*)name
+{
+    self.name = name;
+    self.chronometerName.text = self.name;
 }
 
 #pragma mark - Time Control Methods
@@ -178,7 +209,9 @@
 {
     //Adiciona ao array de voltas o momento em que foi solicitado uma volta
     [self.lapTimes addObject:[NSDate date]];
+    [self.tableViewLaps refreshTableViewWithLapTimes:[self getLapsContent] andSelectedLapTimes:self.lapTimes];
 }
+
 
 //Método que altera o texto contido na label, mostrando o tempo do relogio
 -(void)updateTimer
@@ -217,30 +250,35 @@
 //Retorna um array contendo:
 //- NSDate de inicio do cronometro
 //- de 0 a N NSNumber contendo o tempo de cada volta
+//Ou nao retorna nada se nao tiver nenhuma volta
 -(NSArray*)getLapsContent
 {
-    NSMutableArray *lapContents = [[NSMutableArray alloc] init];
-    NSTimeInterval interval = 0.0;
-    
-    //adicionando o NSDate de quando o cronometro foi startado
-    [lapContents addObject:[self.startTimes firstObject]];
-    
-    //Calcula o tempo entre a primeira volta e o horario de inicio do cronometro
-    //Evita passar por if toda hora dentro do loop
-    interval = [[self.lapTimes firstObject] timeIntervalSinceDate:[self.startTimes firstObject]];
-    [lapContents addObject:[NSNumber numberWithFloat:interval]];
-    
-    //Percorre o array de voltas, a partir da volta 2
-    for (int i = 1; i < [self.lapTimes count]; i++) {
+    if ([self.lapTimes count] == 0) {
+        return nil;
+    }else{
+        NSMutableArray *lapContents = [[NSMutableArray alloc] init];
+        NSTimeInterval interval = 0.0;
         
-        //Calcula o intervalo de tempo entre a volta atual e a volta passada
-        interval = [self.lapTimes[i] timeIntervalSinceDate:self.lapTimes[i - 1]];
-        NSNumber *numb = [NSNumber numberWithFloat:interval];
+        //adicionando o NSDate de quando o cronometro foi startado
+        [lapContents addObject:[self.startTimes firstObject]];
         
-        [lapContents addObject:numb];
+        //Calcula o tempo entre a primeira volta e o horario de inicio do cronometro
+        //Evita passar por if toda hora dentro do loop
+        interval = [[self.lapTimes firstObject] timeIntervalSinceDate:[self.startTimes firstObject]];
+        [lapContents addObject:[NSNumber numberWithFloat:interval]];
+        
+        //Percorre o array de voltas, a partir da segunda volta
+        for (int i = 1; i < [self.lapTimes count]; i++) {
+            
+            //Calcula o intervalo de tempo entre a volta atual e a volta passada
+            interval = [self.lapTimes[i] timeIntervalSinceDate:self.lapTimes[i - 1]];
+            NSNumber *numb = [NSNumber numberWithFloat:interval];
+            
+            [lapContents addObject:numb];
+        }
+        
+        return lapContents;
     }
-    
-    return lapContents;
 }
 
 @end

@@ -16,4 +16,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame LapTimes:(NSArray*)lapTimes andSelectedLapTimes:(NSArray*)selectedLapTimes;
 
+-(void)refreshTableViewWithLapTimes:(NSArray*)lapTimes andSelectedLapTimes:(NSArray*)selectedLapTimes;
+
 @end
