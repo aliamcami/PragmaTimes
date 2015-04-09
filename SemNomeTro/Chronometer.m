@@ -56,6 +56,8 @@
     self.focus = focus;
     self.frame = size;
     
+    int const origin = 0;
+    
     int screenDivisions;
     
     switch (self.focus) {
@@ -70,8 +72,8 @@
             screenDivisions = 3;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
             //atribui pedacos da tela as labels que mostram o nome e o tempo
-            [self.chronometer setFrame:CGRectMake(self.frame.origin.x, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
-            [self.chronometerName setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.chronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            [self.chronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
             
             break;
             
@@ -85,11 +87,11 @@
             screenDivisions = 6;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
             //atribui pedacos da tela as labels que mostram o nome e o tempo
-            [self.chronometerName setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height / screenDivisions)];
-            [self.chronometer setFrame:CGRectMake(self.frame.origin.x, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            [self.chronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.chronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
             
             //Define o tamanho que a tableview com as laps ocupara
-            CGRect tableViewLapsSize = CGRectMake(self.frame.origin.x, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
+            CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
             
             //Instancia uma tableview com o tamanho definido
             TableView_Model *tableViewLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
@@ -113,11 +115,11 @@
             screenDivisions = 7;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
             //atribui pedacos da tela as labels que mostram o nome e o tempo
-            [self.chronometerName setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height / screenDivisions)];
-            [self.chronometer setFrame:CGRectMake(self.frame.origin.x, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            [self.chronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.chronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
             
             //Define o tamanho que a tableview com as laps ocupara
-            CGRect tableViewLapsSize = CGRectMake(self.frame.origin.x, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
+            CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
             
             //Instancia uma tableview com o tamanho definido
             TableView_Model *tableViewLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
@@ -125,7 +127,7 @@
                                                                 andSelectedLapTimes:self.lapTimes];
             
             //separa um pedaco da tela para a label que vai mostrar a melhor volta
-            [self.chronometerBestLap setFrame:CGRectMake(self.frame.origin.x, (self.frame.size.height / screenDivisions) * 6, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.chronometerBestLap setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 6, self.frame.size.width, self.frame.size.height / screenDivisions)];
             
             //adiciona a tableview e a label com o melhor tempo a tela
             [self addSubview:tableViewLaps];
