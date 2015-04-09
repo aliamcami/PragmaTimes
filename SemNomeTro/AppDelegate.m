@@ -1,11 +1,3 @@
-//
-//  AppDelegate.m
-//  SemNomeTro
-//
-//  Created by Giovani Ferreira Silvério da Silva on 06/04/15.
-//  Copyright (c) 2015 Giovani Ferreira Silvério da Silva. All rights reserved.
-//
-
 #import "AppDelegate.h"
 #import "User_Model.h"
 
@@ -63,16 +55,18 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
-
-
-
 // API do Facebook
-
 // Descomentar esse código todo e adicionar o apendice no final para o viewDidLoad
-
 /*
-
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                        openURL:url
+                                              sourceApplication:sourceApplication
+                                                     annotation:annotation];
+}
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -83,22 +77,4 @@
                                                      annotation:annotation];
 }
 */
-/*
- 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
-  return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                        openURL:url
-                                              sourceApplication:sourceApplication
-                                                     annotation:annotation];
-}
-*/
- 
- 
- 
- 
-
-
 @end
