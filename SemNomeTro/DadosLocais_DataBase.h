@@ -52,13 +52,19 @@
 
 // Atletas
 -(NSString *)geraEmail;
--(void) adicionarAtleta:(NSString *)nome email:(NSString *)email foto:(NSString *)foto
+
+-(void) adicionarAtleta:(NSString *)email nome:(NSString *)nome foto:(NSString *)foto
                    peso:(double)peso altura:(double)altura sexo:(NSString *)sexo;
 -(void) atualizarAtleta:(NSString *)identificadorDoAtleta nome:(NSString *)nome
-                  email:(NSString *)email foto:(NSString *)foto peso:(double)peso
+                   foto:(NSString *)foto peso:(double)peso
                  altura:(double)altura sexo:(NSString *)sexo;
+-(void) atualizarAtletaComEmailNovo:(NSString *)identificadorDoAtletaVelho
+                          emailNovo:(NSString *)emailNovo nome:(NSString *)nome
+                               foto:(NSString *)foto peso:(double)peso
+                             altura:(double)altura sexo:(NSString *)sexo;
 -(void) removerAtleta:(NSString *)identificadorDoAtleta;
 -(NSDictionary *) recuperarAtleta:(NSString *)identificadorDoAtleta;
+-(void) removerTemposDoAtleta:(NSString *)identificadorDoAtleta;
 
 //-(BOOL)testarTeste;
 
