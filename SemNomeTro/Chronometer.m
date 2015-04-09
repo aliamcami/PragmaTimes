@@ -7,6 +7,7 @@
 //
 
 #import "chronometer.h"
+#import "TableView_Model.h"
 
 @implementation chronometer
 
@@ -27,39 +28,121 @@
         self.dateFormatter = [[NSDateFormatter alloc] init];
         [self.dateFormatter setDateFormat:@"HH:mm:ss.SS"];
         [self.dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-        
-        //Chama o metodo que edita o cronometro do modo necessario
-        [self resizeCronometer:frame];
-        
-        //Adiciona o cronometro como subview dessa classe
-        [self addSubview:self.chronometer];
     }
     
     return self;
 }
 
+//Metodo para ja iniciar o cronometro com o tamanho e as informascoes a serem mostradas da forma desejada
+- (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus
+{
+    self = [self initWithFrame:frame];
+    
+    if (self)
+    {
+        [self resizeCronometer:frame andFocus:focus];
+    }
+    
+    return self;
+}
+
+#pragma mark - Chronometer Organization
+
 //Metodo que vai alterar a organizaçao do espaço da view
 //Sem condiçoes de implementar sem saber como sera o espaço
--(void)resizeCronometer:(CGRect)size
+-(void)resizeCronometer:(CGRect)size andFocus:(int)focus
 {
     //Lembrar de alignment Center, AdjustFontSizeToFitWidht, minimunScaleFactor(????)
+    self.focus = focus;
+    self.frame = size;
+    
+    int screenDivisions;
     
     switch (self.focus) {
-        //Caso padrão, o tempo ocupara o espaço todo???
+            
+        //MOSTRA O NOME E O TEMPO
+        //Divide o cronometro em duas partes:
+        // - Label nome: ocupa o primeiro 1/3 da tela
+        // Mostra em uma label o nome do cronometro
+        // - Label cronometro: ocupar 2/3 da tela
+        // Mostra em uma label o tempo que esta sendo marcado
         case 0:
+            screenDivisions = 3;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
+            
+            //atribui pedacos da tela as labels que mostram o nome e o tempo
+            [self.chronometer setFrame:CGRectMake(self.frame.origin.x, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            [self.chronometerName setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            
             break;
-        //Se está num tamanho maior que o normal, mas menor que a metade da tela
+            
+        //MOSTRA O NOME, TEMPO E AS LAPS
+        //Divide o frame do cronometro em 5 partes
+        // - 1/6 fica com o a label que contem o nome do cronometro
+        // - 2/6 ficam com o label que mostra o tempo
+        // - 3/6 ficam com o a table viwe que mostra todas as lap
         case 1:
+        {
+            screenDivisions = 6;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
+            
+            //atribui pedacos da tela as labels que mostram o nome e o tempo
+            [self.chronometerName setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.chronometer setFrame:CGRectMake(self.frame.origin.x, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            
+            //Define o tamanho que a tableview com as laps ocupara
+            CGRect tableViewLapsSize = CGRectMake(self.frame.origin.x, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
+            
+            //Instancia uma tableview com o tamanho definido
+            TableView_Model *tableViewLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
+                                                                           LapTimes:[self getLapsContent]
+                                                                andSelectedLapTimes:self.lapTimes];
+            
+            //Adiciona a tableview a tela
+            [self addSubview:tableViewLaps];
+            
             break;
-        //Se é do tamanho de metade da tela
+        }
+            
+        //MOSTRA O NOME, O TEMPO, AS LAPS E A MELHOR LAP
+        //Divide a tela aem 7 pedacos:
+        // - 1/7 fica com a label que mostra o nome do cronometro na tela
+        // - 2/7 ficam com a label que mostra o tempo que esta sendo marcado na tela
+        // - 3/7 ficam com a table view que mostra as laps do cronometro
+        // - 1/7 fica com a label que mostra qual a melhor volta até o momento
         case 2:
+        {
+            screenDivisions = 7;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
+            
+            //atribui pedacos da tela as labels que mostram o nome e o tempo
+            [self.chronometerName setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.chronometer setFrame:CGRectMake(self.frame.origin.x, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            
+            //Define o tamanho que a tableview com as laps ocupara
+            CGRect tableViewLapsSize = CGRectMake(self.frame.origin.x, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
+            
+            //Instancia uma tableview com o tamanho definido
+            TableView_Model *tableViewLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
+                                                                           LapTimes:[self getLapsContent]
+                                                                andSelectedLapTimes:self.lapTimes];
+            
+            //separa um pedaco da tela para a label que vai mostrar a melhor volta
+            [self.chronometerBestLap setFrame:CGRectMake(self.frame.origin.x, (self.frame.size.height / screenDivisions) * 6, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            
+            //adiciona a tableview e a label com o melhor tempo a tela
+            [self addSubview:tableViewLaps];
+            [self addSubview:self.chronometerBestLap];
+            
             break;
-        case 3:
-        //Se ocupa a tela toda
-            break;
+        }
+            
+        //TRATAMENTO DE ERRO - A principio para testes - RETIRAR DEPOOSI
         default:
+            NSLog(@"Ta entrando onde nao deveria");
             break;
     }
+    
+    //Adiciona as labels que mostram o nome e o tempo do cronometro a tela
+    [self addSubview:self.chronometerName];
+    [self addSubview:self.chronometer];
 }
 
 #pragma mark - Time Control Methods
@@ -95,40 +178,6 @@
     [self.lapTimes addObject:[NSDate date]];
 }
 
-
-#pragma mark - Returning Informations
-
-//Retorna um array contendo:
-//- NSDate de inicio do cronometro
-//- de 0 a N NSNumber contendo o tempo de cada volta
--(NSMutableArray*)getLapsContent
-{
-    NSMutableArray *lapContents = [[NSMutableArray alloc] init];
-    NSTimeInterval interval = 0.0;
-    
-    //adicionando o NSDate de quando o cronometro foi startado
-    [lapContents addObject:[self.startTimes firstObject]];
-    
-    //Calcula o tempo entre a primeira volta e o horario de inicio do cronometro
-    //Evita passar por if toda hora dentro do loop
-    interval = [[self.lapTimes firstObject] timeIntervalSinceDate:[self.startTimes firstObject]];
-    [lapContents addObject:[NSNumber numberWithFloat:interval]];
-    
-    //Percorre o array de voltas, a partir da volta 2
-    for (int i = 1; i < [self.lapTimes count]; i++) {
-        
-        //Calcula o intervalo de tempo entre a volta atual e a volta passada
-        interval = [self.lapTimes[i] timeIntervalSinceDate:self.lapTimes[i - 1]];
-        NSNumber *numb = [NSNumber numberWithFloat:interval];
-        
-        [lapContents addObject:numb];
-    }
-    
-    return lapContents;
-}
-
-#pragma mark - Update Time
-
 //Método que altera o texto contido na label, mostrando o tempo do relogio
 -(void)updateTimer
 {
@@ -159,10 +208,37 @@
     self.chronometer.text = timeString;
 }
 
-//Informa se o Cronometro está em foco ou nao
-//-(BOOL)isFocused
-//{
-//    
-//}
+
+
+#pragma mark - Returning Informations
+
+//Retorna um array contendo:
+//- NSDate de inicio do cronometro
+//- de 0 a N NSNumber contendo o tempo de cada volta
+-(NSArray*)getLapsContent
+{
+    NSMutableArray *lapContents = [[NSMutableArray alloc] init];
+    NSTimeInterval interval = 0.0;
+    
+    //adicionando o NSDate de quando o cronometro foi startado
+    [lapContents addObject:[self.startTimes firstObject]];
+    
+    //Calcula o tempo entre a primeira volta e o horario de inicio do cronometro
+    //Evita passar por if toda hora dentro do loop
+    interval = [[self.lapTimes firstObject] timeIntervalSinceDate:[self.startTimes firstObject]];
+    [lapContents addObject:[NSNumber numberWithFloat:interval]];
+    
+    //Percorre o array de voltas, a partir da volta 2
+    for (int i = 1; i < [self.lapTimes count]; i++) {
+        
+        //Calcula o intervalo de tempo entre a volta atual e a volta passada
+        interval = [self.lapTimes[i] timeIntervalSinceDate:self.lapTimes[i - 1]];
+        NSNumber *numb = [NSNumber numberWithFloat:interval];
+        
+        [lapContents addObject:numb];
+    }
+    
+    return lapContents;
+}
 
 @end

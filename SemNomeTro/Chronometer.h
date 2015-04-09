@@ -21,8 +21,13 @@
 @property (nonatomic) short focus;
 
 @property (nonatomic) NSDateFormatter *dateFormatter;
-@property (nonatomic) UILabel *chronometer;
 @property (nonatomic) NSTimer *chronometerTimer;
+
+//Possiveis coisas a serem mostradas no cronometro, tudo depende do tamanho que ele for ocupar na tela
+@property (nonatomic) UILabel *chronometer;
+@property (nonatomic) UILabel *chronometerName;
+@property (nonatomic) UILabel *chronometerBestLap;
+//Tem a table view tbm, mas ela é adicionada de forma diferente
 
 //Arrays para manipular o tempo do cronometro
 @property (nonatomic) NSMutableArray *pauseTimes;
@@ -31,11 +36,13 @@
 
 
 - (instancetype)initWithFrame:(CGRect)frame;
--(void)resizeCronometer:(CGRect)size;
+- (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus;
+
+-(void)resizeCronometer:(CGRect)size andFocus:(int)focus;
 
 -(void)play_pauseChronometer;
 -(void)lapChronometer;
--(NSMutableArray*)getLapsContent;
+-(NSArray*)getLapsContent;
 
 //-(BOOL)isFocused;
 
