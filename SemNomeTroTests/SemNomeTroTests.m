@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "DadosLocais_DataBase.h"
+
 
 @interface SemNomeTroTests : XCTestCase
 
@@ -37,6 +39,10 @@
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
     }];
+}
+
+- (void)testarGravacaoDeAtleta {
+  
 }
 
 @end

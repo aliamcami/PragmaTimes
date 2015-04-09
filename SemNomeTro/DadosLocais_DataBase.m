@@ -24,6 +24,7 @@
 
 
 // Tempos
+#pragma mark - Tempos
 
 -(void)gravarTempos:(NSArray *)arrayDeTempos identificadorDoAtleta:(NSString *)identificadorDoAtleta {
   NSMutableDictionary *tempos = [NSMutableDictionary dictionaryWithContentsOfFile:self.arquivoTempos];
@@ -74,6 +75,7 @@
 
 
 // Treinador
+#pragma mark - Treinador
 
 -(NSDictionary *) recuperaTreinador {
   return [NSDictionary dictionaryWithContentsOfFile:self.arquivoTreinador];
@@ -98,6 +100,7 @@
 
 
 // Atletas
+#pragma mark - Atletas
 
 -(NSString *)geraEmail {
   return [NSString stringWithFormat:@"%@-algumnumeroIdentificadorunico",
