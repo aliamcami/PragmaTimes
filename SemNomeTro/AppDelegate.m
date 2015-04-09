@@ -8,7 +8,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 */
-
+#import "DadosLocais_DataBase.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +18,21 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  DadosLocais_DataBase *db = [[DadosLocais_DataBase alloc] init];
+//  [db adicionarAtleta:@"André" email:@"andremiramor@gmail.com" foto:@"" peso:80.0 altura:1.85 sexo:@"M"];
+  [db testarTeste];
   
+//  NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/vai.plist"];
+//  [@{@"vai":@"logo"} writeToFile:path atomically:YES];
+//  NSLog(@"%@", [[NSDictionary alloc] initWithContentsOfFile:path]);
+//  NSString *aDocumentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+  
+ // NSString *aFilePath = [NSString stringWithFormat:@"%@/Comments.plist", aDocumentsDirectory];
+
+  
+//  NSString *arquivo = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/atletas.plist"];
+//  NSMutableDictionary *atletas = [NSMutableDictionary dictionaryWithContentsOfFile:arquivo];
+//  NSLog(@"%@", atletas);
   /*
    // ViewController para testar o botao + login do Facebook
   

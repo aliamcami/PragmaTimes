@@ -1,15 +1,6 @@
-//
-//  SemNomeTroTests.m
-//  SemNomeTroTests
-//
-//  Created by Giovani Ferreira Silvério da Silva on 06/04/15.
-//  Copyright (c) 2015 Giovani Ferreira Silvério da Silva. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "DadosLocais_DataBase.h"
-
 
 @interface SemNomeTroTests : XCTestCase
 
@@ -30,7 +21,7 @@
 - (void)testExample {
   // This is an example of a functional test case.
   XCTAssert(YES, @"Pass");
-  XCTAssert(NO, @"Fail");
+//  XCTAssert(NO, @"Fail");
   
 }
 
@@ -41,8 +32,22 @@
     }];
 }
 
-- (void)testarGravacaoDeAtleta {
+- (void)testarGravacaoERecuperacaoDeAtleta {
+  DadosLocais_DataBase *db = [[DadosLocais_DataBase alloc] init];
+  [db adicionarAtleta:@"André" email:@"andremiramor@gmail.com" foto:@"" peso:80.0 altura:1.85 sexo:@"M"];
   
+  NSDictionary *atletaAndre = [db recuperarAtleta:@"andremiramor@gmail.com"];
+  
+  NSDictionary *atletaAndreEsperado = @{@"nome": @"André",
+                                        @"foto": @"",
+                                        @"peso": @80.0,
+                                        @"altura": @1.85,
+                                        @"sexo": @"M"};
+  NSLog(@"%@", atletaAndre);
+  NSLog(@"%@", atletaAndreEsperado);
+
+  XCTAssertEqualObjects(atletaAndre, atletaAndreEsperado);
 }
 
 @end
+

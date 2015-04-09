@@ -60,4 +60,6 @@
 -(void) removerAtleta:(NSString *)identificadorDoAtleta;
 -(NSDictionary *) recuperarAtleta:(NSString *)identificadorDoAtleta;
 
+//-(BOOL)testarTeste;
+
 @end
