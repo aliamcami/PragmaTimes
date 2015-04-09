@@ -58,7 +58,7 @@
 
   NSMutableArray *temposDoAtleta = [tempos objectForKey:identificadorDoAtleta];
   // Se o atleta não existir
-  if (temposDoAtleta == nil)
+  if (temposDoAtleta == nil) // TODO: errado! o atleta tem que existir antes!
     temposDoAtleta = [[NSMutableArray alloc] init];
   
   [temposDoAtleta addObject:arrayDeTempos];
@@ -131,12 +131,12 @@
           [self recuperaEmailDoTreinador]]; // TODO implementar isso aqui
 }
 
--(void) adicionarAtleta:(NSString *)nome email:(NSString *)email foto:(NSString *)foto
+-(void) adicionarAtleta:(NSString *)email nome:(NSString *)nome foto:(NSString *)foto
                    peso:(double)peso altura:(double)altura sexo:(NSString *)sexo {
   READ_INIT(atletas, self.arquivoAtletas);
   
   if ([atletas objectForKey:email])
-    NSLog(@"Atleta já existe! Conserte isso!");
+    NSLog(@"Atleta já existe! Conserte isso!"); // TODO retornar NO se já existir
   else {
     if ([email isEqualToString:@""])
       email = [self geraEmail];
@@ -153,8 +153,8 @@
 }
 
 -(void) atualizarAtleta:(NSString *)identificadorDoAtleta nome:(NSString *)nome
-                  email:(NSString *)email foto:(NSString *)foto peso:(double)peso
-                 altura:(double)altura sexo:(NSString *)sexo {
+                   foto:(NSString *)foto peso:(double)peso altura:(double)altura
+                   sexo:(NSString *)sexo {
   READ_INIT(atletas, self.arquivoAtletas);
   NSDictionary *atleta = @{@"nome": nome,
                            @"foto": foto,
@@ -162,23 +162,46 @@
                            @"altura": [NSNumber numberWithDouble:altura],
                            @"sexo": sexo};
   
-  // TODO: verificar se o email foi modificado. Se sim, atualizar tudo: foto, identificadorDoAtleta em todos os lugares e esssas coisas.
-  
   [atletas setValue:atleta forKey:identificadorDoAtleta];
-  
   GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
+}
+
+-(void) atualizarAtletaComEmailNovo:(NSString *)identificadorDoAtletaVelho
+                          emailNovo:(NSString *)emailNovo nome:(NSString *)nome
+                               foto:(NSString *)foto peso:(double)peso
+                             altura:(double)altura sexo:(NSString *)sexo {
+
+  // Cria novo atleta
+  [self adicionarAtleta:emailNovo nome:nome foto:foto peso:peso altura:altura sexo:sexo];
+
+  // Remove atleta antigo
+  READ_INIT(atletas, self.arquivoAtletas);
+  [atletas removeObjectForKey:identificadorDoAtletaVelho];
+  GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
+  
+  // Transfere tempos do atletaVelho para o atletaNovo
+  READ_INIT(tempos, self.arquivoTempos);
+  [tempos setValue:[self recuperarTempos:identificadorDoAtletaVelho] forKey:emailNovo];
+  [tempos removeObjectForKey:identificadorDoAtletaVelho];
+  GRAVA_E_CHECA_GRAVACAO(tempos, res2, self.arquivoTempos);
 }
 
 -(void) removerAtleta:(NSString *)identificadorDoAtleta {
   READ_INIT(atletas, self.arquivoAtletas);
+  [self removerTemposDoAtleta:identificadorDoAtleta];
   [atletas removeObjectForKey:identificadorDoAtleta];
-  
   GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
 }
 
 -(NSDictionary *) recuperarAtleta:(NSString *)identificadorDoAtleta {
   READ_INIT(atletas, self.arquivoAtletas);
   return [atletas objectForKey:identificadorDoAtleta];
+}
+
+-(void) removerTemposDoAtleta:(NSString *)identificadorDoAtleta {
+  READ_INIT(tempos, self.arquivoTempos);
+  [tempos removeObjectForKey:identificadorDoAtleta];
+  GRAVA_E_CHECA_GRAVACAO(tempos, res, self.arquivoTempos);
 }
 
 @end
