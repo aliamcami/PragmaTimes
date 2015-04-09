@@ -9,12 +9,13 @@
 #import "AppDelegate.h"
 #import "User_Model.h"
 
-#import "ViewController.h"
+//#import "ViewController.h"
 
+/*
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-
+*/
 
 
 @interface AppDelegate ()
@@ -26,7 +27,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   
-  // ViewController para testar o botao + login do Facebook
+  /*
+   // ViewController para testar o botao + login do Facebook
+  
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.rootViewController = [[ViewController alloc] init];
   self.window.backgroundColor = [UIColor greenColor];
@@ -34,8 +37,8 @@
   
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
-
-//  return YES;
+*/
+  return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -68,7 +71,7 @@
 
 // Descomentar esse código todo e adicionar o apendice no final para o viewDidLoad
 
-
+/*
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -79,7 +82,7 @@
                                               sourceApplication:sourceApplication
                                                      annotation:annotation];
 }
-
+*/
 /*
  
 - (BOOL)application:(UIApplication *)application
