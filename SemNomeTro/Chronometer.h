@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Giovani Ferreira Silvério da Silva. All rights reserved.
 //
 
-#define CRONOMETRO_BASE = 0
-#define CRONOMETRO_INTERMEDIARIO = 1
-#define CRONOMETRO_COMPLETO = 2
+#define CRONOMETRO_BASE 0
+#define CRONOMETRO_INTERMEDIARIO 1
+#define CRONOMETRO_COMPLETO 2
 
 #import <UIKit/UIKit.h>
 #import "TableView_Model.h"
