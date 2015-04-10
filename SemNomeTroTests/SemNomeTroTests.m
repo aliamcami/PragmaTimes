@@ -13,6 +13,10 @@
 - (void)setUp {
   [super setUp];
   // Put setup code here. This method is called before the invocation of each test method in the class.
+  DB
+  [@[] writeToFile:db.arquivoAtletas atomically:YES];
+  [@[] writeToFile:db.arquivoTempos atomically:YES];
+  [@[] writeToFile:db.arquivoTreinador atomically:YES];
 }
 
 - (void)tearDown {
@@ -33,26 +37,28 @@
 
 - (void)testarGravacaoERecuperacaoDeAtleta {
   DB
-  [db adicionarAtleta:@"andremiramor" nome:@"André" foto:@"" peso:80.0 altura:1.85 sexo:@"M"];
+  NSString *idDoAtleta = @"andremiramor@gmail.com";
+  [db adicionarAtleta:idDoAtleta nome:@"André" foto:@"" peso:80.0 altura:1.85 sexo:@"M"];
   NSDictionary *atletaAndreEsperado = @{@"nome": @"André",
                                         @"foto": @"",
                                         @"peso": @80.0,
                                         @"altura": @1.85,
                                         @"sexo": @"M"};
-  XCTAssertEqualObjects(atletaAndreEsperado, [db recuperarAtleta:@"andremiramor@gmail.com"]);
+  XCTAssertEqualObjects(atletaAndreEsperado, [db recuperarAtleta:idDoAtleta]);
 }
 
 - (void)testarGravarAtletaDuplicado {
   DB
-  [db adicionarAtleta:@"aliamcamil@gmail.com" nome:@"Camila" foto:@"" peso:80.0 altura:1.85 sexo:@"F"];
-  [db adicionarAtleta:@"aliamcamil@gmail.com" nome:@"Camila2" foto:@"" peso:80.0 altura:1.85 sexo:@"F"];
+  NSString *idDoAtleta = @"aliamcamil@gmail.com";
+  [db adicionarAtleta:idDoAtleta nome:@"Camila" foto:@"" peso:80.0 altura:1.85 sexo:@"F"];
+  [db adicionarAtleta:idDoAtleta nome:@"Camila2" foto:@"" peso:80.0 altura:1.85 sexo:@"F"];
   
   NSDictionary *atletaCamilaEsperada = @{@"nome": @"Camila", // e não @"Camila2"
                                          @"foto": @"",
                                          @"peso": @80.0,
                                          @"altura": @1.85,
                                          @"sexo": @"F"};
-  XCTAssertEqualObjects(atletaCamilaEsperada, [db recuperarAtleta:@"aliamcamil@gmail.com"]);
+  XCTAssertEqualObjects(atletaCamilaEsperada, [db recuperarAtleta:idDoAtleta]);
 }
 
 - (void)testarAdicionarERemoverAtleta {
@@ -73,6 +79,7 @@
 }
 
 // TODO: adicionar mais testes de atletas, principalmente de atualizacao
+// TODO: CRUD do treinador
 
 // Testes de tempos
 #pragma mark - Testes de tempos

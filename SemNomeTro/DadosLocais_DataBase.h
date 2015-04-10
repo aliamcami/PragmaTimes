@@ -36,6 +36,9 @@
 
 @interface DadosLocais_DataBase : NSObject
 
+// Arquivos
+@property (nonatomic, readonly) NSString *arquivoTempos, *arquivoAtletas, *arquivoTreinador;
+
 // Tempos
 -(void)gravarTempos:(NSArray *)arrayDeTempos identificadorDoAtleta:(NSString *)identificadorDoAtleta;
 -(void)removerGrupoDeTempos:(int)posicao identificadorDoAtleta:(NSString *)identificadorDoAtleta;
