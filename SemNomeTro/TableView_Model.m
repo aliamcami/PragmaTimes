@@ -26,6 +26,16 @@
     return self;
 }
 
+#pragma mark - Edit TableView
+
+//Atualiza as celulas da tableView
+-(void)refreshTableViewWithLapTimes:(NSArray*)lapTimes andSelectedLapTimes:(NSArray*)selectedLapTimes
+{
+    self.lapTimes = lapTimes;
+    self.selectedLapTimes = selectedLapTimes;
+    [self.tableView reloadData];    //Funcao que atualiza os dados das celulas da tableview
+}
+
 #pragma mark - TableView Config
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
