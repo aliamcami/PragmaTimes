@@ -8,7 +8,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 */
-
+#import "DadosLocais_DataBase.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +18,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  
   /*
    // ViewController para testar o botao + login do Facebook
   
