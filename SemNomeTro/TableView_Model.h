@@ -1,6 +1,6 @@
 //
 //  TableView_Model.h
-//  SemNomeTro
+//  chronometer
 //
 //  Created by Giovani Ferreira Silvério da Silva on 08/04/15.
 //  Copyright (c) 2015 Giovani Ferreira Silvério da Silva. All rights reserved.
@@ -13,6 +13,9 @@
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) NSArray *lapTimes;
 @property (nonatomic) NSArray *selectedLapTimes;
+
+//Formatacao para apresentacao
+@property (nonatomic) NSDateFormatter *dateFormatter;
 
 - (instancetype)initWithFrame:(CGRect)frame LapTimes:(NSArray*)lapTimes andSelectedLapTimes:(NSArray*)selectedLapTimes;
 
