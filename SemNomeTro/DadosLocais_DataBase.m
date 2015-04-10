@@ -6,38 +6,12 @@
 #define READ_INIT(VAR, ARQUIVO) NSMutableDictionary *VAR = [NSMutableDictionary dictionaryWithContentsOfFile:ARQUIVO]; if (VAR == nil) VAR = [[NSMutableDictionary alloc] init]
 @interface DadosLocais_DataBase ()
 
-@property (nonatomic, readonly) NSString *arquivoTempos, *arquivoAtletas, *arquivoTreinador;
+//@property (nonatomic, readonly) NSString *arquivoTempos, *arquivoAtletas, *arquivoTreinador;
 
 
 @end
 
 @implementation DadosLocais_DataBase
-
-//-(BOOL)testarTeste {
-//  READ_INIT(atletas, self.arquivoAtletas);
-//
-//  NSString *email = @"andoremiramor@gmail.com";
-//  if ([email isEqualToString:@""])
-//    email = [self geraEmail];
-//  
-//  [atletas setValue:@{@"nome": @"Andfeio",
-//                      @"foto": @"foto",
-//                      @"peso": @"1",
-//                      @"altura": @"iOJ",
-//                      @"sexo": @"MF"}
-//             forKey:email];
-//  
-//    [@{@"vai":@"logo"} writeToFile:self.arquivoAtletas atomically:YES];
-//    NSLog(@"%@", [[NSDictionary alloc] initWithContentsOfFile:self.arquivoAtletas]);
-//
-//  GRAVA_E_CHECA_GRAVACAO(atletas, res, self.arquivoAtletas);
-//
-//  
-//  NSLog(@"%@", atletas);
-//  
-//  return [atletas writeToFile:self.arquivoAtletas atomically:YES];
-////  return YES;
-//}
 
 - (instancetype)init {
   self = [super init];
