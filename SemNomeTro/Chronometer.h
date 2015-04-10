@@ -1,16 +1,14 @@
 //
-//  Chronometer.h
-//  SemNomeTro
+//  chronometer.h
+//  chronometer
 //
 //  Created by Giovani Ferreira Silvério da Silva on 07/04/15.
 //  Copyright (c) 2015 Giovani Ferreira Silvério da Silva. All rights reserved.
 //
-/*
- Objeto Cronometro
- 
- - Faz o calculo do tempo decorrido desde o inicio ate o momento atual
- 
- */
+
+#define CRONOMETRO_BASE = 0
+#define CRONOMETRO_INTERMEDIARIO = 1
+#define CRONOMETRO_COMPLETO = 2
 
 #import <UIKit/UIKit.h>
 #import "TableView_Model.h"
@@ -24,7 +22,6 @@
 
 //Formatacao para apresentacao
 @property (nonatomic) NSDateFormatter *dateFormatter;
-@property (nonatomic) NSNumberFormatter *numberFormatter;
 
 //Possiveis coisas a serem mostradas no cronometro, tudo depende do tamanho que ele for ocupar na tela
 @property (nonatomic) UILabel *chronometer;
@@ -42,15 +39,11 @@
 - (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus;
 
 -(void)resizeCronometer:(CGRect)size andFocus:(int)focus;
--(void)adjustLabelTexts;
 -(void)editChronometerName:(NSString*)name;
 
 -(void)play_pauseChronometer;
 -(void)lapChronometer;
--(void)updateTimer;
 
--(NSArray*)getLapsContent;
--(NSNumber*)bestLap;
 -(NSArray*)getChronometerContent;
 
 @end

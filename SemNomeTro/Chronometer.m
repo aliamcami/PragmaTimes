@@ -28,14 +28,6 @@
         [self.dateFormatter setDateFormat:@"HH:mm:ss.SS"];
         [self.dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
         
-        //formatando como os numeros serao apresentados
-        self.numberFormatter = [[NSNumberFormatter alloc] init];
-        self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-        self.numberFormatter.maximumIntegerDigits = 3;
-        self.numberFormatter.minimumFractionDigits = 3;
-        self.numberFormatter.groupingSeparator = @":";
-        self.numberFormatter.decimalSeparator = @".";
-        
         //Aloca e ajusta o texto das labels
         [self adjustLabelTexts];
     }
@@ -111,8 +103,8 @@
             
             //Instancia uma tableview com o tamanho definido
             self.tableViewLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
-                                                               LapTimes:[self getLapsContent]
-                                                    andSelectedLapTimes:self.lapTimes];
+                                                               LapTimes:[self formattedLapContents]
+                                                    andSelectedLapTimes:[self formattedSelectedLaps]];
             
             //Adiciona a tableview a tela
             [self addSubview:self.tableViewLaps];
@@ -139,13 +131,13 @@
             
             //Instancia uma tableview com o tamanho definido
             self.tableViewLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
-                                                               LapTimes:[self getLapsContent]
-                                                    andSelectedLapTimes:self.lapTimes];
+                                                               LapTimes:[self formattedLapContents]
+                                                    andSelectedLapTimes:[self formattedSelectedLaps]];
             
             //separa um pedaco da tela para a label que vai mostrar a melhor volta
             [self.chronometerBestLap setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 6, self.frame.size.width, self.frame.size.height / screenDivisions)];
             
-            self.chronometerBestLap.text = [NSString stringWithFormat:@"%@", [self.numberFormatter stringFromNumber:[self bestLap]]];
+            self.chronometerBestLap.text = [self timeFormatter:[self bestLap]];
             
             //adiciona a tableview e a label com o melhor tempo a tela
             [self addSubview:self.tableViewLaps];
@@ -222,8 +214,8 @@
 {
     //Adiciona ao array de voltas o momento em que foi solicitado uma volta
     [self.lapTimes addObject:[NSDate date]];
-    [self.tableViewLaps refreshTableViewWithLapTimes:[self getLapsContent] andSelectedLapTimes:self.lapTimes];
-    self.chronometerBestLap.text = [NSString stringWithFormat:@"%@", [self.numberFormatter stringFromNumber:[self bestLap]]];
+    [self.tableViewLaps refreshTableViewWithLapTimes:[self formattedLapContents] andSelectedLapTimes:[self formattedSelectedLaps]];
+    self.chronometerBestLap.text = [self timeFormatter:[self bestLap]];
 }
 
 
@@ -259,12 +251,45 @@
 
 #pragma mark - Returning Informations
 
+-(NSString*)timeFormatter:(NSNumber*)timeInSeconds
+{
+    //Strings auxiliares para editar a forma como sera apresentado
+    NSString *hrs = [[NSString alloc] init];
+    NSString *min = [[NSString alloc] init];
+    NSString *sec = [[NSString alloc] init];
+    
+    //calculo de horas e minutos a partir dos segundos
+    NSUInteger h = (NSUInteger)[timeInSeconds floatValue] / 3600;
+    NSUInteger m = (NSUInteger)([timeInSeconds floatValue] / 60) % 60;
+    
+    //adiciona um 0 a mais caso o numero nao seja maior que 10 (so para uma apresentacao mais padronizada)
+    if (h < 10) {
+        hrs = [hrs stringByAppendingFormat:@"0%lu", (unsigned long)h];
+    }else{
+        hrs = [hrs stringByAppendingFormat:@"%lu", (unsigned long)h];
+    }
+    if (m < 10) {
+        min = [min stringByAppendingFormat:@"0%lu", (unsigned long)m];
+    }else{
+        min = [min stringByAppendingFormat:@"%lu", (unsigned long)m];
+    }
+    if ([timeInSeconds floatValue] < 10) {
+        sec = [sec stringByAppendingFormat:@"0%.3f", [timeInSeconds floatValue]];
+    }else{
+        sec = [sec stringByAppendingFormat:@"%.3f", [timeInSeconds floatValue]];
+    }
+    
+    //retorna a string toda formatada
+    return [NSString stringWithFormat:@"%@:%@:%@", hrs, min, sec];
+}
+
 -(NSNumber*)bestLap
 {
     //Verifica se ja foi marcada alguma volta para nao ocorrer erros
     if ([self.lapTimes count] == 0) {
         return nil;
     }else{
+        
         
         //Variavel auxiliar, para nao precisar chamar o metodo toda hora
         NSArray *laps = [self getLapsContent];
@@ -287,11 +312,13 @@
     }
 }
 
+//Retorna o tempo de cada volta
 -(NSArray*)getLapsContent
 {
     NSMutableArray *lapContents = [[NSMutableArray alloc] init];
     NSTimeInterval interval = 0.0;
     
+    //verifica se ja foi marcada alguma volta
     if ([self.lapTimes count] == 0) {
         return nil;
         
@@ -332,6 +359,39 @@
     return lapContents;
 }
 
+#pragma mark - TableView Fulfill
 
+-(NSArray*)formattedSelectedLaps
+{
+    //Configuracoes do formato de data a ser utilizado
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setTimeZone:[NSTimeZone localTimeZone]];    //Era pra deixar a timeZone localizada (n sei se funfou)
+    [df setDateFormat:@"MMM - dd: HH:mm"];  //Define como que sera mostrado a data
+    
+    //array auxiliar que armazenara as strings formatadas
+    NSMutableArray *formattedSelectedLaps = [[NSMutableArray alloc] init];
+    
+    //percorre todos os momentos em que as voltas foram marcadas
+    for (NSDate *date in self.lapTimes) {
+        //formata a data em que a volta foi marcada para o formato desejdo
+        [formattedSelectedLaps addObject:[df stringFromDate:date]];
+    }
+    
+    return formattedSelectedLaps;
+}
+
+//Retorna um array de strings formatados atraves da funcao timeFormatter
+-(NSArray*)formattedLapContents
+{
+    //Array auxiliar para armazenar as strings de tempo
+    NSMutableArray *formattedTimes = [[NSMutableArray alloc] init];
+    
+    //percorre todos os objetos do vetor e chama a funcao que formata eles para string
+    for (NSNumber *n in [self getLapsContent]) {
+        [formattedTimes addObject:[self timeFormatter:n]];
+    }
+    
+    return formattedTimes;
+}
 
 @end
