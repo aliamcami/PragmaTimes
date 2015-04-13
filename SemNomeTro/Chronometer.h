@@ -28,10 +28,10 @@
 @property (nonatomic) NSDateFormatter *formatterRest;
 
 //Possiveis coisas a serem mostradas no cronometro, tudo depende do tamanho que ele for ocupar na tela
-@property (nonatomic) UILabel *chronometer;
-@property (nonatomic) UILabel *chronometerName;
-@property (nonatomic) UILabel *chronometerBestLap;
-@property (nonatomic) TableView_Model *tableViewLaps;
+@property (nonatomic) UILabel *lblChronometer;
+@property (nonatomic) UILabel *lblChronometerName;
+@property (nonatomic) UILabel *lblChronometerBestLap;
+@property (nonatomic) TableView_Model *tbLaps;
 
 //Arrays para manipular o tempo do cronometro
 @property (nonatomic) NSMutableArray *pauseTimes;
@@ -46,6 +46,7 @@
 -(void)editChronometerName:(NSString*)name;
 -(void)editRestTime:(int)restTime;
 
+-(void)resetChronometer;
 -(void)play_pauseChronometer;
 -(void)restChronometer;
 -(void)lapChronometer;

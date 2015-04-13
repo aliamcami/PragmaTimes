@@ -25,7 +25,6 @@
         
         //Define como sera a formatacao para o tempo do cronometro
         self.formatterChronometer = [[NSDateFormatter alloc] init];
-        [self.formatterChronometer setDateFormat:@"HH:mm:ss.SS"];
         [self.formatterChronometer setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
         
         //define como sera a formatacao do tempo para o descanso
@@ -68,10 +67,10 @@
     int screenDivisions;
     
     //Retira tudo da tela, para nao haver sobreposicao de itens na tela
-    [self.chronometer removeFromSuperview];
-    [self.chronometerBestLap removeFromSuperview];
-    [self.chronometerName removeFromSuperview];
-    [self.tableViewLaps removeFromSuperview];
+    [self.lblChronometer removeFromSuperview];
+    [self.lblChronometerBestLap removeFromSuperview];
+    [self.lblChronometerName removeFromSuperview];
+    [self.tbLaps removeFromSuperview];
     
     switch (self.focus) {
             
@@ -85,8 +84,8 @@
             screenDivisions = 3;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
             //atribui pedacos da tela as labels que mostram o nome e o tempo
-            [self.chronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
-            [self.chronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.lblChronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            [self.lblChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
             
             break;
             
@@ -100,19 +99,19 @@
             screenDivisions = 6;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
             //atribui pedacos da tela as labels que mostram o nome e o tempo
-            [self.chronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
-            [self.chronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            [self.lblChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.lblChronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
             
             //Define o tamanho que a tableview com as laps ocupara
             CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
             
             //Instancia uma tableview com o tamanho definido
-            self.tableViewLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
-                                                               LapTimes:[self formattedLapContents]
-                                                    andSelectedLapTimes:[self formattedSelectedLaps]];
+            self.tbLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
+                                                        LapTimes:[self formattedLapContents]
+                                             andSelectedLapTimes:[self formattedSelectedLaps]];
             
             //Adiciona a tableview a tela
-            [self addSubview:self.tableViewLaps];
+            [self addSubview:self.tbLaps];
             
             break;
         }
@@ -128,25 +127,25 @@
             screenDivisions = 7;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
             //atribui pedacos da tela as labels que mostram o nome e o tempo
-            [self.chronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
-            [self.chronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            [self.lblChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.lblChronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
             
             //Define o tamanho que a tableview com as laps ocupara
             CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
             
             //Instancia uma tableview com o tamanho definido
-            self.tableViewLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
-                                                               LapTimes:[self formattedLapContents]
-                                                    andSelectedLapTimes:[self formattedSelectedLaps]];
+            self.tbLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
+                                                        LapTimes:[self formattedLapContents]
+                                             andSelectedLapTimes:[self formattedSelectedLaps]];
             
             //separa um pedaco da tela para a label que vai mostrar a melhor volta
-            [self.chronometerBestLap setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 6, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.lblChronometerBestLap setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 6, self.frame.size.width, self.frame.size.height / screenDivisions)];
             
-            self.chronometerBestLap.text = [self timeFormatter:[self bestLap]];
+            self.lblChronometerBestLap.text = [self timeFormatter:[self bestLap]];
             
             //adiciona a tableview e a label com o melhor tempo a tela
-            [self addSubview:self.tableViewLaps];
-            [self addSubview:self.chronometerBestLap];
+            [self addSubview:self.tbLaps];
+            [self addSubview:self.lblChronometerBestLap];
             
             break;
         }
@@ -160,26 +159,26 @@
     [self editChronometerName:self.name];
     
     //Adiciona as labels que mostram o nome e o tempo do cronometro a tela
-    [self addSubview:self.chronometerName];
-    [self addSubview:self.chronometer];
+    [self addSubview:self.lblChronometerName];
+    [self addSubview:self.lblChronometer];
 }
 
 //Ajusta todas as labels, para facilitar edicao dos textos das labels futuramente
 -(void)adjustLabelTexts
 {
-    self.chronometer = [[UILabel alloc] init];
-    self.chronometerBestLap = [[UILabel alloc] init];
-    self.chronometerName = [[UILabel alloc] init];
+    self.lblChronometer = [[UILabel alloc] init];
+    self.lblChronometerBestLap = [[UILabel alloc] init];
+    self.lblChronometerName = [[UILabel alloc] init];
     
-    self.chronometerName.textAlignment = NSTextAlignmentCenter;
-    self.chronometerBestLap.textAlignment = NSTextAlignmentCenter;
-    self.chronometer.textAlignment = NSTextAlignmentCenter;
+    self.lblChronometerName.textAlignment = NSTextAlignmentCenter;
+    self.lblChronometerBestLap.textAlignment = NSTextAlignmentCenter;
+    self.lblChronometer.textAlignment = NSTextAlignmentCenter;
     
-    self.chronometerName.adjustsFontSizeToFitWidth = YES;
-    self.chronometerBestLap.adjustsFontSizeToFitWidth = YES;
-    self.chronometer.adjustsFontSizeToFitWidth = YES;
+    self.lblChronometerName.adjustsFontSizeToFitWidth = YES;
+    self.lblChronometerBestLap.adjustsFontSizeToFitWidth = YES;
+    self.lblChronometer.adjustsFontSizeToFitWidth = YES;
     
-    self.chronometer.text = [self timeFormatter:0];  //Faz o cronometro mostrar 0
+    self.lblChronometer.text = [self timeFormatter:0];  //Faz o cronometro mostrar 0
     
 }
 
@@ -187,7 +186,7 @@
 -(void)editChronometerName:(NSString*)name
 {
     self.name = name;
-    self.chronometerName.text = self.name;
+    self.lblChronometerName.text = self.name;
 }
 
 //Ajusta o tempo de descanso do cronometro
@@ -198,6 +197,31 @@
 
 #pragma mark - Time Control Methods
 
+//Zera o cronometro
+-(void)resetChronometer
+{
+    //faz o cronometro parar de rodar
+    if (!(self.timeController == nil)) {
+        [self.timeController invalidate];
+        self.timeController = nil;
+    }
+    
+    //limpa os array que contem os tempos do cronometro
+    [self.lapTimes removeAllObjects];
+    [self.pauseTimes removeAllObjects];
+    [self.startTimes removeAllObjects];
+    
+    //define a melhor volta como zero
+    self.lblChronometerBestLap.text = [self timeFormatter:0];
+    
+    //atualiza a tableView
+    [self.tbLaps refreshTableViewWithLapTimes:[self formattedLapContents] andSelectedLapTimes:[self formattedSelectedLaps]];
+    self.
+    
+    //zera o cronometro que aparece na tela
+    self.chronometer.text = [self timeFormatter:0];
+}
+
 -(void)playChronometer
 {
     //Ativa o cronometro
@@ -207,21 +231,22 @@
                                                          userInfo:nil repeats:YES];
     //Adiciona ao array de inicio o momento em que o cronometro começou a correr
     [self.startTimes addObject:[NSDate date]];
+    
+    //Faz o timer correr em um loop separado do loop da aplicacao, evitando o problema de para atualizacao da label do cronometro
+    [[NSRunLoop currentRunLoop] addTimer:self.timeController
+                                 forMode:NSRunLoopCommonModes];
 }
 
 -(void)pauseChronometer
 {
-    //garante que o chronometro nao vai ser invalidado duas vezes
-    if ([self.timeController isValid]) {
-        //Destroi o timer do cronometro, resultando na nao atualizaçao do cronometro
-        [self.timeController invalidate];
-        
-        //Libera a memoria ocupada pelo timer
-        self.timeController = nil;
-        
-        //Adiciona ao array de pausas o momento em que o cronometro foi pausado
-        [self.pauseTimes addObject:[NSDate date]];
-    }
+    //Destroi o timer do cronometro, resultando na nao atualizaçao do cronometro
+    [self.timeController invalidate];
+    
+    //Libera a memoria ocupada pelo timer
+    self.timeController = nil;
+    
+    //Adiciona ao array de pausas o momento em que o cronometro foi pausado
+    [self.pauseTimes addObject:[NSDate date]];
 }
 
 //Controlador de tempo do cronometro, dividi o play e pause em dois metodos pq precisava chamar o pause manualmente algumsa vezes
@@ -243,7 +268,13 @@
     self.startRest = [NSDate date]; //Guarda a hora de inicio do tempo de descanso
     
     //starta o timer para chamar o metodo update rest a cada 100 milisegundos
+    
     self.timeController = [NSTimer scheduledTimerWithTimeInterval:0.06 target:self selector:@selector(updateRest) userInfo:nil repeats:YES];
+    
+    //Faz o timer correr em um loop separado do loop da aplicacao, evitando o problema de para atualizacao da label do cronometro
+    [[NSRunLoop currentRunLoop] addTimer:self.timeController
+                                 forMode:NSRunLoopCommonModes];
+    
 }
 
 //Marca uma volta no cronometro
@@ -252,8 +283,8 @@
     if ([self.startTimes count] > 0) {
         //Adiciona ao array de voltas o momento em que foi solicitado uma volta
         [self.lapTimes addObject:[NSDate date]];
-        [self.tableViewLaps refreshTableViewWithLapTimes:[self formattedLapContents] andSelectedLapTimes:[self formattedSelectedLaps]];
-        self.chronometerBestLap.text = [self timeFormatter:[self bestLap]];
+        [self.tbLaps refreshTableViewWithLapTimes:[self formattedLapContents] andSelectedLapTimes:[self formattedSelectedLaps]];
+        self.lblChronometerBestLap.text = [self timeFormatter:[self bestLap]];
     }
 }
 
@@ -269,14 +300,14 @@
     NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeIntervalCountDown];
     
     NSString *timeString = [self.formatterRest stringFromDate:timerDate];
-    self.chronometer.text = timeString;
+    self.lblChronometer.text = timeString;
     
     if (timeIntervalCountDown <= 0) {
         [self.timeController invalidate];
         self.timeController = nil;
         
         if ([self.pauseTimes count] == 0) {
-            self.chronometer.text = [self timeFormatter:0];
+            self.lblChronometer.text = [self timeFormatter:0];
         }else{
             NSTimeInterval timeOfPause = 0.0;   //Conta a quantidade de tempo que o cronometro ficou parado
             for (int i = 1; i < [self.pauseTimes count]; i++) {     //Percorre o array que armazena todas as pausas ate a penultima posicao
@@ -298,7 +329,7 @@
             
             //Altera o texto do label de acordo com o date formater setado anteriormente
             NSString *timeString = [self.formatterChronometer stringFromDate:timerDate];
-            self.chronometer.text = timeString;
+            self.lblChronometer.text = timeString;
         }
     }
 }
@@ -325,12 +356,11 @@
     {
         timeInterval = [currentDate timeIntervalSinceDate:[self.startTimes lastObject]];
     }
-    //transforma o tempo do cronometro em uma NSDate
-    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     
-    //Altera o texto do label de acordo com o date formater setado anteriormente
-    NSString *timeString = [self.formatterChronometer stringFromDate:timerDate];
-    self.chronometer.text = timeString;
+    
+    //Chama a funcao de formatacao de tempo para mostrar o texto de forma bela kkk
+    NSString *timeString = [self timeFormatter:[NSNumber numberWithFloat:timeInterval]];
+    self.lblChronometer.text = timeString;
 }
 
 #pragma mark - Returning Informations
@@ -338,34 +368,25 @@
 //formata um numero (tempo) em uma string formatada e apresentavel
 -(NSString*)timeFormatter:(NSNumber*)timeInSeconds
 {
-    //Strings auxiliares para editar a forma como sera apresentado
-    NSString *hrs = [[NSString alloc] init];
-    NSString *min = [[NSString alloc] init];
-    NSString *sec = [[NSString alloc] init];
-    
     //calculo de horas e minutos a partir dos segundos
     NSUInteger h = (NSUInteger)[timeInSeconds floatValue] / 3600;
     NSUInteger m = (NSUInteger)([timeInSeconds floatValue] / 60) % 60;
     
-    //adiciona um 0 a mais caso o numero nao seja maior que 10 (so para uma apresentacao mais padronizada)
-    if (h < 10) {
-        hrs = [hrs stringByAppendingFormat:@"0%lu", (unsigned long)h];
+    //Verifica que informacoes necessitam ser mostradas
+    if (h != 0) {
+        [self.formatterChronometer setDateFormat:@"HH:mm:ss.SS"];
     }else{
-        hrs = [hrs stringByAppendingFormat:@"%lu", (unsigned long)h];
-    }
-    if (m < 10) {
-        min = [min stringByAppendingFormat:@"0%lu", (unsigned long)m];
-    }else{
-        min = [min stringByAppendingFormat:@"%lu", (unsigned long)m];
-    }
-    if ([timeInSeconds floatValue] < 10) {
-        sec = [sec stringByAppendingFormat:@"0%.3f", [timeInSeconds floatValue]];
-    }else{
-        sec = [sec stringByAppendingFormat:@"%.3f", [timeInSeconds floatValue]];
+        if (m != 0) {
+            [self.formatterChronometer setDateFormat:@"mm:ss.SS"];
+        }else{
+            [self.formatterChronometer setDateFormat:@"ss.SS"];
+        }
     }
     
-    //retorna a string toda formatada
-    return [NSString stringWithFormat:@"%@:%@:%@", hrs, min, sec];
+    //transforma o tempo do cronometro em uma NSDate
+    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:[timeInSeconds floatValue]];
+    
+    return [self.formatterChronometer stringFromDate:timerDate];
 }
 
 //calcula a melhor volta entre as marcadas
