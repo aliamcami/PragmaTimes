@@ -9,6 +9,14 @@
 
 #import "TableView_Model.h"
 
+@interface TableView_Model()
+
+@property (nonatomic) UITableView *tableView;
+@property (nonatomic) NSArray *lapTimes;
+@property (nonatomic) NSArray *chronometerTotalTimeAtLap;
+
+@end
+
 @implementation TableView_Model
 
 #pragma mark - InstanceType Methods

@@ -10,10 +10,6 @@
 
 @interface TableView_Model : UIView <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic) UITableView *tableView;
-@property (nonatomic) NSArray *lapTimes;
-@property (nonatomic) NSArray *chronometerTotalTimeAtLap;
-
 //Formatacao para apresentacao
 @property (nonatomic) NSDateFormatter *dateFormatter;
 
