@@ -13,7 +13,7 @@
 #import <UIKit/UIKit.h>
 #import "TableView_Model.h"
 
-@interface chronometer : UIView
+@interface Chronometer : UIView
 
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSDate *startRest;
@@ -38,9 +38,7 @@
 @property (nonatomic) NSMutableArray *startTimes;
 @property (nonatomic) NSMutableArray *lapTimes;
 
-
-- (instancetype)initWithFrame:(CGRect)frame;
-- (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus;
+//- (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus; //Nao necessario por enquanto
 
 -(void)resizeCronometer:(CGRect)size andFocus:(int)focus;
 -(void)editChronometerName:(NSString*)name;

@@ -6,17 +6,15 @@
 //  Copyright (c) 2015 Giovani Ferreira Silvério da Silva. All rights reserved.
 //
 
-#import "chronometer.h"
+#import "Chronometer.h"
 
-@implementation chronometer
+@implementation Chronometer
 
 #pragma mark - Instance Methods
 
-//Metodo de instancia que inicia o cronometro em um tamanho especifico, fornecido previamente
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)init
 {
-    self = [super initWithFrame:frame];
-    
+    self = [super init];
     if (self) {
         //Inicia todos os arrays controladores de tempo
         self.pauseTimes = [[NSMutableArray alloc] init];
@@ -35,10 +33,9 @@
         //Aloca e ajusta o texto das labels
         [self adjustLabelTexts];
     }
-    
     return self;
 }
-
+/* Metodo nao necessario por enquanto
 //Metodo para ja iniciar o cronometro com o tamanho e as informascoes a serem mostradas da forma desejada
 - (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus
 {
@@ -51,7 +48,7 @@
     
     return self;
 }
-
+*/
 #pragma mark - Chronometer Configuration
 
 //Metodo que vai alterar a organizaçao do espaço da view
@@ -85,6 +82,7 @@
             
             //atribui pedacos da tela as labels que mostram o nome e o tempo
             [self.lblChronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            
             [self.lblChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
             
             break;
@@ -149,13 +147,21 @@
             
             break;
         }
-            
-            //TRATAMENTO DE ERRO - A principio para testes - RETIRAR DEPOOSI
-        default:
-            NSLog(@"Ta entrando onde nao deveria");
-            break;
     }
     
+    //Ajusta a fonte e o tamanho do texto para a label que mostra o nome do cronometro
+    int lblTextSize = MIN(self.lblChronometerName.frame.size.width, self.lblChronometerName.frame.size.height);
+    self.lblChronometerName.font = [UIFont fontWithName:@"AppleGothic" size:lblTextSize * 0.8];
+    
+    //Ajusta a fonte e o tamanho do texto para a lael que mostra o nome do cronoetro
+    lblTextSize = MIN(self.lblChronometer.frame.size.width, self.lblChronometer.frame.size.height);
+    self.lblChronometer.font = [UIFont fontWithName:@"AppleGothic" size:lblTextSize * 0.95];
+    
+    //Ajusta a fonte e o tamanho od texto para alabel que mostra o nome do cronometro
+    lblTextSize = MIN(self.lblChronometerBestLap.frame.size.width, self.lblChronometerBestLap.frame.size.height);
+    self.lblChronometerBestLap.font = [UIFont fontWithName:@"AppleGothic" size:lblTextSize * 0.8];
+    
+    //Adiciona o nome do cronometro ao label que mostra o nome do cronometro
     [self editChronometerName:self.name];
     
     //Adiciona as labels que mostram o nome e o tempo do cronometro a tela
@@ -195,6 +201,30 @@
     self.restTime = restTime;
 }
 
+//formata um numero (tempo) em uma string formatada e apresentavel
+-(NSString*)timeFormatter:(NSNumber*)timeInSeconds
+{
+    //calculo de horas e minutos a partir dos segundos
+    NSUInteger h = (NSUInteger)[timeInSeconds floatValue] / 3600;
+    NSUInteger m = (NSUInteger)([timeInSeconds floatValue] / 60) % 60;
+    
+    //Verifica que informacoes necessitam ser mostradas
+    if (h >= 1) {
+        [self.formatterChronometer setDateFormat:@"HH:mm:ss.SS"];
+    }else{
+        if (m >= 1) {
+            [self.formatterChronometer setDateFormat:@"mm:ss.SS"];
+        }else{
+            [self.formatterChronometer setDateFormat:@"ss.SS"];
+        }
+    }
+    
+    //transforma o tempo do cronometro em uma NSDate
+    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:[timeInSeconds floatValue]];
+    
+    return [self.formatterChronometer stringFromDate:timerDate];
+}
+
 #pragma mark - Time Control Methods
 
 //Zera o cronometro
@@ -219,7 +249,7 @@
     self.
     
     //zera o cronometro que aparece na tela
-    self.chronometer.text = [self timeFormatter:0];
+    self.lblChronometer.text = [self timeFormatter:0];
 }
 
 -(void)playChronometer
@@ -297,10 +327,7 @@
     
     NSTimeInterval timeIntervalCountDown = self.restTime - timeInterval;
     
-    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeIntervalCountDown];
-    
-    NSString *timeString = [self.formatterRest stringFromDate:timerDate];
-    self.lblChronometer.text = timeString;
+    self.lblChronometer.text = [self timeFormatter:[NSNumber numberWithFloat:timeIntervalCountDown]];
     
     if (timeIntervalCountDown <= 0) {
         [self.timeController invalidate];
@@ -324,12 +351,7 @@
             //Subtrai todo o intervalo em que o cronometro ficou pausado do tempo total de execuçao do cronometro
             timeInterval -= timeOfPause;
             
-            //transforma o tempo de execucao do cronometro para uma data
-            NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-            
-            //Altera o texto do label de acordo com o date formater setado anteriormente
-            NSString *timeString = [self.formatterChronometer stringFromDate:timerDate];
-            self.lblChronometer.text = timeString;
+            self.lblChronometer.text = [self timeFormatter:[NSNumber numberWithFloat:timeInterval]];
         }
     }
 }
@@ -364,30 +386,6 @@
 }
 
 #pragma mark - Returning Informations
-
-//formata um numero (tempo) em uma string formatada e apresentavel
--(NSString*)timeFormatter:(NSNumber*)timeInSeconds
-{
-    //calculo de horas e minutos a partir dos segundos
-    NSUInteger h = (NSUInteger)[timeInSeconds floatValue] / 3600;
-    NSUInteger m = (NSUInteger)([timeInSeconds floatValue] / 60) % 60;
-    
-    //Verifica que informacoes necessitam ser mostradas
-    if (h != 0) {
-        [self.formatterChronometer setDateFormat:@"HH:mm:ss.SS"];
-    }else{
-        if (m != 0) {
-            [self.formatterChronometer setDateFormat:@"mm:ss.SS"];
-        }else{
-            [self.formatterChronometer setDateFormat:@"ss.SS"];
-        }
-    }
-    
-    //transforma o tempo do cronometro em uma NSDate
-    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:[timeInSeconds floatValue]];
-    
-    return [self.formatterChronometer stringFromDate:timerDate];
-}
 
 //calcula a melhor volta entre as marcadas
 -(NSNumber*)bestLap
