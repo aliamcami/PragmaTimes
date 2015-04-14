@@ -23,6 +23,7 @@
                                                                 fromDate:self.birthDate
                                                                   toDate:[NSDate date]
                                                                  options:0];
+        //Seta a idade como a difrenca de anos da data ate hoje
         self.age = (int)[age year];
     }
     return self;

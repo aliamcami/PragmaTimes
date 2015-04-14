@@ -12,13 +12,13 @@
 
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) NSArray *lapTimes;
-@property (nonatomic) NSArray *selectedLapTimes;
+@property (nonatomic) NSArray *chronometerTotalTimeAtLap;
 
 //Formatacao para apresentacao
 @property (nonatomic) NSDateFormatter *dateFormatter;
 
-- (instancetype)initWithFrame:(CGRect)frame LapTimes:(NSArray*)lapTimes andSelectedLapTimes:(NSArray*)selectedLapTimes;
+- (instancetype)initWithFrame:(CGRect)frame LapTimes:(NSArray*)lapTimes andchronometerTotalTimeAtLap:(NSArray*)selectedLapTimes;
 
--(void)refreshTableViewWithLapTimes:(NSArray*)lapTimes andSelectedLapTimes:(NSArray*)selectedLapTimes;
+-(void)refreshTableViewWithLapTimes:(NSArray*)lapTimes andchronometerTotalTimeAtLap:(NSArray*)selectedLapTimes;
 
 @end

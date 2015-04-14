@@ -13,7 +13,7 @@
 
 #pragma mark - InstanceType Methods
 
-- (instancetype)initWithFrame:(CGRect)frame LapTimes:(NSArray*)lapTimes andSelectedLapTimes:(NSArray*)selectedLapTimes
+- (instancetype)initWithFrame:(CGRect)frame LapTimes:(NSArray*)lapTimes andchronometerTotalTimeAtLap:(NSArray*)selectedLapTimes
 {
     self = [self initWithFrame:frame];
     if (self) {
@@ -21,7 +21,7 @@
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.lapTimes = lapTimes;
-        self.selectedLapTimes = selectedLapTimes;
+        self.chronometerTotalTimeAtLap = selectedLapTimes;
         
         //Inicia a property dateFormatter, informa qual formato de data sera usado
         self.dateFormatter = [[NSDateFormatter alloc] init];
@@ -36,10 +36,10 @@
 #pragma mark - Edit TableView
 
 //Atualiza as celulas da tableView
--(void)refreshTableViewWithLapTimes:(NSArray*)lapTimes andSelectedLapTimes:(NSArray*)selectedLapTimes
+-(void)refreshTableViewWithLapTimes:(NSArray*)lapTimes andchronometerTotalTimeAtLap:(NSArray*)selectedLapTimes
 {
     self.lapTimes = lapTimes;
-    self.selectedLapTimes = selectedLapTimes;
+    self.chronometerTotalTimeAtLap = selectedLapTimes;
     [self.tableView reloadData];    //Funcao que atualiza os dados das celulas da tableview
 }
 
@@ -51,7 +51,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.selectedLapTimes count];
+    return [self.chronometerTotalTimeAtLap count];
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -63,7 +63,7 @@
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"Lap %li: %@", (long)indexPath.row, [self.lapTimes objectAtIndex:indexPath.row]];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Horario da Volta: %@", [self.selectedLapTimes objectAtIndex:indexPath.row]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Horario da Volta: %@", [self.chronometerTotalTimeAtLap objectAtIndex:indexPath.row]];
     
     return cell;
 }

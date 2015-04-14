@@ -16,27 +16,7 @@
 @interface Chronometer : UIView
 
 @property (nonatomic) NSString *name;
-@property (nonatomic) NSDate *startRest;
 @property (nonatomic) int restTime;
-
-@property (nonatomic) NSTimer *timeController;
-//Para mostrar mais informações sobre o cronometro
-@property (nonatomic) short focus;
-
-//Formatacao para apresentacao
-@property (nonatomic) NSDateFormatter *formatterChronometer;
-@property (nonatomic) NSDateFormatter *formatterRest;
-
-//Possiveis coisas a serem mostradas no cronometro, tudo depende do tamanho que ele for ocupar na tela
-@property (nonatomic) UILabel *lblChronometer;
-@property (nonatomic) UILabel *lblChronometerName;
-@property (nonatomic) UILabel *lblChronometerBestLap;
-@property (nonatomic) TableView_Model *tbLaps;
-
-//Arrays para manipular o tempo do cronometro
-@property (nonatomic) NSMutableArray *pauseTimes;
-@property (nonatomic) NSMutableArray *startTimes;
-@property (nonatomic) NSMutableArray *lapTimes;
 
 //- (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus; //Nao necessario por enquanto
 
