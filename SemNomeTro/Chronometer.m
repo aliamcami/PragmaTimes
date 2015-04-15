@@ -358,7 +358,7 @@
         [self.tbLaps refreshTableViewWithLapTimes:[self formattedLapContents] andchronometerTotalTimeAtLap:[self formattedChronometerTimeAtLaps]];
         self.lblChronometerBestLap.text = [self timeFormatter:[self bestLap]];
         
-        [self playChronometer];
+        //[self playChronometer];
     }
 }
 

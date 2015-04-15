@@ -8,7 +8,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 */
-#import "DadosLocais_DataBase.h"
+//#import "DadosLocais_DataBase.h"
 
 @interface AppDelegate ()
 

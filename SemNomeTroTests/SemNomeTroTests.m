@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "DadosLocais_DataBase.h"
+//#import "DadosLocais_DataBase.h"
 
 #define DB DadosLocais_DataBase *db = [[DadosLocais_DataBase alloc] init];
 
@@ -13,10 +13,10 @@
 - (void)setUp {
   [super setUp];
   // Put setup code here. This method is called before the invocation of each test method in the class.
-  DB
-  [@[] writeToFile:db.arquivoAtletas atomically:YES];
-  [@[] writeToFile:db.arquivoTempos atomically:YES];
-  [@[] writeToFile:db.arquivoTreinador atomically:YES];
+//  DB
+//  [@[] writeToFile:db.arquivoAtletas atomically:YES];
+//  [@[] writeToFile:db.arquivoTempos atomically:YES];
+//  [@[] writeToFile:db.arquivoTreinador atomically:YES];
 }
 
 - (void)tearDown {
@@ -31,7 +31,7 @@
   }];
 }
 
-
+/*
 // Testes de atletas
 #pragma mark - Testes de atletas
 
@@ -219,6 +219,7 @@
   [db atualizarAtleta:idDoAtleta nome:nomeDepois foto:fotoDepois peso:pesoDepois altura:alturaDepois sexo:sexoDepois];
   XCTAssertEqualObjects(atletaDepois, [db recuperarAtleta:idDoAtleta]);
 }
+ */
 @end
 
 
