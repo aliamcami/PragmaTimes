@@ -14,6 +14,11 @@
 		862C74EC1ADEF2CF00CEA9AC /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */; };
 		862C74ED1ADEF2CF00CEA9AC /* CustomCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */; };
 		862C74F01ADEF30C00CEA9AC /* MyColorHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */; };
+		D5539BB51ADF19F600499473 /* add_cronometro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5539BB01ADF19F600499473 /* add_cronometro@2x.png */; };
+		D5539BB61ADF19F600499473 /* edit_cronometro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5539BB11ADF19F600499473 /* edit_cronometro@2x.png */; };
+		D5539BB71ADF19F600499473 /* icone_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5539BB21ADF19F600499473 /* icone_play@2x.png */; };
+		D5539BB81ADF19F600499473 /* icone_volta@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5539BB31ADF19F600499473 /* icone_volta@2x.png */; };
+		D5539BB91ADF19F600499473 /* pause_grande@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5539BB41ADF19F600499473 /* pause_grande@2x.png */; };
 		D55F80811ADD7B560071A70C /* Login_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D55F80801ADD7B560071A70C /* Login_Model.m */; };
 		D5779E8F1AD47908003957E2 /* Athlete_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D5779E8E1AD47908003957E2 /* Athlete_Model.m */; };
 		D587672D1AD3230300F29BCC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D587672C1AD3230300F29BCC /* main.m */; };
@@ -51,6 +56,11 @@
 		862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewController.m; sourceTree = "<group>"; };
 		862C74EE1ADEF30C00CEA9AC /* MyColorHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyColorHolder.h; sourceTree = "<group>"; };
 		862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyColorHolder.m; sourceTree = "<group>"; };
+		D5539BB01ADF19F600499473 /* add_cronometro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "add_cronometro@2x.png"; path = "../../Cronometro Imagens/Arquivo_Comprimido/add_cronometro@2x.png"; sourceTree = "<group>"; };
+		D5539BB11ADF19F600499473 /* edit_cronometro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "edit_cronometro@2x.png"; path = "../../Cronometro Imagens/Arquivo_Comprimido/edit_cronometro@2x.png"; sourceTree = "<group>"; };
+		D5539BB21ADF19F600499473 /* icone_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icone_play@2x.png"; path = "../../Cronometro Imagens/Arquivo_Comprimido/icone_play@2x.png"; sourceTree = "<group>"; };
+		D5539BB31ADF19F600499473 /* icone_volta@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icone_volta@2x.png"; path = "../../Cronometro Imagens/Arquivo_Comprimido/icone_volta@2x.png"; sourceTree = "<group>"; };
+		D5539BB41ADF19F600499473 /* pause_grande@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pause_grande@2x.png"; path = "../../Cronometro Imagens/Arquivo_Comprimido/pause_grande@2x.png"; sourceTree = "<group>"; };
 		D55F807F1ADD7B560071A70C /* Login_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login_Model.h; sourceTree = "<group>"; };
 		D55F80801ADD7B560071A70C /* Login_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login_Model.m; sourceTree = "<group>"; };
 		D5779E8D1AD47908003957E2 /* Athlete_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Athlete_Model.h; sourceTree = "<group>"; };
@@ -92,6 +102,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D5539BAF1ADF19E300499473 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D5539BB01ADF19F600499473 /* add_cronometro@2x.png */,
+				D5539BB11ADF19F600499473 /* edit_cronometro@2x.png */,
+				D5539BB21ADF19F600499473 /* icone_play@2x.png */,
+				D5539BB31ADF19F600499473 /* icone_volta@2x.png */,
+				D5539BB41ADF19F600499473 /* pause_grande@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		D587671E1AD3230300F29BCC = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +230,7 @@
 		D599581C1AD4488B00BCF33B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D5539BAF1ADF19E300499473 /* Images */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -294,6 +317,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D58767361AD3230300F29BCC /* Main.storyboard in Resources */,
+				D5539BB71ADF19F600499473 /* icone_play@2x.png in Resources */,
+				D5539BB91ADF19F600499473 /* pause_grande@2x.png in Resources */,
+				D5539BB81ADF19F600499473 /* icone_volta@2x.png in Resources */,
+				D5539BB51ADF19F600499473 /* add_cronometro@2x.png in Resources */,
+				D5539BB61ADF19F600499473 /* edit_cronometro@2x.png in Resources */,
 				D587673B1AD3230300F29BCC /* LaunchScreen.xib in Resources */,
 				6BF4FB1E1AD6EE0800BAE81B /* ViewController.xib in Resources */,
 				D58767381AD3230300F29BCC /* Images.xcassets in Resources */,

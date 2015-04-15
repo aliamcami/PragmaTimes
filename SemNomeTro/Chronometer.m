@@ -7,12 +7,21 @@
 //
 
 #import "Chronometer.h"
+#import <CoreImage/CoreImage.h>
 
 @interface Chronometer ()
 
 @property (nonatomic) NSDate *startRest;
 @property (nonatomic) BOOL inRest;
 @property (nonatomic) NSNumber *currentTime;
+
+@property (nonatomic) UIImageView *blurred;
+
+@property (nonatomic) UIView *icons;
+@property (nonatomic) UIImageView *lapIcon;
+@property (nonatomic) UIImageView *playIcon;
+@property (nonatomic) UIImageView *pauseIcon;
+@property (nonatomic) UILabel *lblCountLap;
 
 @property (nonatomic) NSTimer *timeController;
 //Para mostrar mais informações sobre o cronometro
@@ -44,6 +53,14 @@
 {
     self = [super init];
     if (self) {
+        
+        self.lapIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icone_volta@2x.png"]];
+        self.playIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icone_play@2x.png"]];
+        self.pauseIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pause_grande@2x.png"]];
+        self.lblCountLap = [[UILabel alloc] init];
+        
+        self.icons = [[UIView alloc] init];
+        
         //Inicia todos os arrays controladores de tempo
         self.pauseTimes = [[NSMutableArray alloc] init];
         self.startTimes = [[NSMutableArray alloc] init];
@@ -66,21 +83,39 @@
     }
     return self;
 }
-/* Metodo nao necessario por enquanto
- //Metodo para ja iniciar o cronometro com o tamanho e as informascoes a serem mostradas da forma desejada
- - (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus
- {
- self = [self initWithFrame:frame];
- 
- if (self)
- {
- [self resizeCronometer:frame andFocus:focus];
- }
- 
- return self;
- }
- */
+
 #pragma mark - Chronometer Configuration
+
+-(void)updateIcons
+{
+    if ([self.startTimes count] == [self.pauseTimes count]) {
+        
+    }else{
+        [self.icons removeFromSuperview];
+        [self.lapIcon removeFromSuperview];
+        [self.playIcon removeFromSuperview];
+        [self.lblCountLap removeFromSuperview];
+        [self.pauseIcon removeFromSuperview];
+        
+        if ([self.lapTimes count] > 0) {
+            self.lapIcon.frame = CGRectMake(25, 10, 21, 15);
+            [self.icons addSubview:self.lapIcon];
+            
+            self.lblCountLap.frame = CGRectMake(53, 11, 50, 15);
+            self.lblCountLap.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.lapTimes count]];
+            self.lblCountLap.textColor = [UIColor whiteColor];
+            
+            [self.icons addSubview:self.lblCountLap];
+        }
+        
+        if ([self.startTimes count] > [self.pauseTimes count]) {
+            self.playIcon.frame = CGRectMake(self.icons.frame.size.width - 40, 10, 15, 15);
+            [self.icons addSubview:self.playIcon];
+        }
+        
+        [self addSubview:self.icons];
+    }
+}
 
 //Metodo que vai alterar a organizaçao do espaço da view
 //Sem condiçoes de implementar sem saber como sera o espaço
@@ -99,22 +134,26 @@
     [self.lblChronometerBestLap removeFromSuperview];
     [self.lblChronometerName removeFromSuperview];
     [self.tbLaps removeFromSuperview];
+    [self.icons removeFromSuperview];
     
     switch (self.focus) {
             
             //MOSTRA O NOME E O TEMPO
-            //Divide o cronometro em duas partes:
-            // - Label nome: ocupa o primeiro 1/3 da tela
-            // Mostra em uma label o nome do cronometro
-            // - Label cronometro: ocupar 2/3 da tela
-            // Mostra em uma label o tempo que esta sendo marcado
+            //Divide o cronometro em 4 partes:
+            //1/4 - icones de volta e play
+            //2/4 - tempo do cronometro
+            //1/4 - nome do cronometro
         case CRONOMETRO_BASE:
-            screenDivisions = 3;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
+            screenDivisions = 6;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
+            
+            [self.icons setFrame:CGRectMake(origin, origin, self.frame.size.width, (self.frame.size.height / screenDivisions))];
+            
+            [self updateIcons];
             
             //atribui pedacos da tela as labels que mostram o nome e o tempo
-            [self.lblChronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions), self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 4)];
             
-            [self.lblChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.lblChronometerName setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 5, self.frame.size.width, self.frame.size.height / screenDivisions)];
             
             break;
             
@@ -125,14 +164,17 @@
             // - 3/6 ficam com o a table viwe que mostra todas as lap
         case CRONOMETRO_INTERMEDIARIO:
         {
-            screenDivisions = 6;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
+            screenDivisions = 8;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
-            //atribui pedacos da tela as labels que mostram o nome e o tempo
             [self.lblChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
-            [self.lblChronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            
+            [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions))];
+            [self updateIcons];
+            
+            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions) * 2, self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 3)];
             
             //Define o tamanho que a tableview com as laps ocupara
-            CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
+            CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 5, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
             
             //Instancia uma tableview com o tamanho definido
             self.tbLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
@@ -153,24 +195,27 @@
             // - 1/7 fica com a label que mostra qual a melhor volta até o momento
         case CRONOMETRO_COMPLETO:
         {
-            screenDivisions = 7;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
+            screenDivisions = 9;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
-            //atribui pedacos da tela as labels que mostram o nome e o tempo
             [self.lblChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
-            [self.lblChronometer setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            
+            [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions))];
+            [self updateIcons];
+            
+            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions) * 2, self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 3)];
             
             //Define o tamanho que a tableview com as laps ocupara
-            CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
+            CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 5, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
+            
+            //separa um pedaco da tela para a label que vai mostrar a melhor volta
+            [self.lblChronometerBestLap setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 8, self.frame.size.width, self.frame.size.height / screenDivisions)];
             
             //Instancia uma tableview com o tamanho definido
             self.tbLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
                                                         LapTimes:[self formattedLapContents]
                                     andchronometerTotalTimeAtLap:[self formattedChronometerTimeAtLaps]];
             
-            //separa um pedaco da tela para a label que vai mostrar a melhor volta
-            [self.lblChronometerBestLap setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 6, self.frame.size.width, self.frame.size.height / screenDivisions)];
-            
-            self.lblChronometerBestLap.text = [self timeFormatter:[self bestLap]];
+            self.lblChronometerBestLap.text = [NSString stringWithFormat:@"Best Lap: %@", [self timeFormatter:[self bestLap]]];
             
             //adiciona a tableview e a label com o melhor tempo a tela
             [self addSubview:self.tbLaps];
@@ -182,15 +227,15 @@
     
     //Ajusta a fonte e o tamanho do texto para a label que mostra o nome do cronometro
     int lblTextSize = MIN(self.lblChronometerName.frame.size.width, self.lblChronometerName.frame.size.height);
-    self.lblChronometerName.font = [UIFont fontWithName:@"AppleGothic" size:lblTextSize * 0.8];
+    self.lblChronometerName.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.8];
     
     //Ajusta a fonte e o tamanho do texto para a lael que mostra o nome do cronoetro
     lblTextSize = MIN(self.lblChronometer.frame.size.width, self.lblChronometer.frame.size.height);
-    self.lblChronometer.font = [UIFont fontWithName:@"AppleGothic" size:lblTextSize * 0.95];
+    self.lblChronometer.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.95];
     
     //Ajusta a fonte e o tamanho od texto para alabel que mostra o nome do cronometro
     lblTextSize = MIN(self.lblChronometerBestLap.frame.size.width, self.lblChronometerBestLap.frame.size.height);
-    self.lblChronometerBestLap.font = [UIFont fontWithName:@"AppleGothic" size:lblTextSize * 0.8];
+    self.lblChronometerBestLap.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.8];
     
     //Adiciona o nome do cronometro ao label que mostra o nome do cronometro
     [self editChronometerName:self.name];
@@ -206,6 +251,14 @@
     self.lblChronometer = [[UILabel alloc] init];
     self.lblChronometerBestLap = [[UILabel alloc] init];
     self.lblChronometerName = [[UILabel alloc] init];
+    
+    self.lblChronometer.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+    self.lblChronometerBestLap.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+    self.lblChronometerName.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+    
+    self.lblChronometer.textColor = [UIColor whiteColor];
+    self.lblChronometerBestLap.textColor = [UIColor whiteColor];
+    self.lblChronometerName.textColor = [UIColor whiteColor];
     
     self.lblChronometerName.textAlignment = NSTextAlignmentCenter;
     self.lblChronometerBestLap.textAlignment = NSTextAlignmentCenter;
@@ -237,17 +290,12 @@
 {
     //calculo de horas e minutos a partir dos segundos
     NSUInteger h = (NSUInteger)[timeInSeconds floatValue] / 3600;
-    NSUInteger m = (NSUInteger)([timeInSeconds floatValue] / 60) % 60;
     
     //Verifica que informacoes necessitam ser mostradas
     if (h >= 1) {
         [self.formatterChronometer setDateFormat:@"HH:mm:ss.SS"];
     }else{
-        if (m >= 1) {
-            [self.formatterChronometer setDateFormat:@"mm:ss.SS"];
-        }else{
-            [self.formatterChronometer setDateFormat:@"ss.SS"];
-        }
+        [self.formatterChronometer setDateFormat:@"mm:ss.SS"];
     }
     
     //transforma o tempo do cronometro em uma NSDate
@@ -296,6 +344,8 @@
     //Faz o timer correr em um loop separado do loop da aplicacao, evitando o problema de para atualizacao da label do cronometro
     [[NSRunLoop currentRunLoop] addTimer:self.timeController
                                  forMode:NSRunLoopCommonModes];
+    
+    [self updateIcons]; //Atualiza os icones da tela
 }
 
 -(void)pauseChronometer
@@ -308,6 +358,10 @@
     
     //Adiciona ao array de pausas o momento em que o cronometro foi pausado
     [self.pauseTimes addObject:[NSDate date]];
+    
+    //    self.blurred = [[UIImageView alloc] initWithImage:[self blurWithCoreImage:[self takeSnapshotOfView:self]]];
+    //    [self addSubview:self.blurred];
+    //    [self bringSubviewToFront:self.blurred];
 }
 
 //Controlador de tempo do cronometro, dividi o play e pause em dois metodos pq precisava chamar o pause manualmente algumsa vezes
@@ -356,9 +410,9 @@
         [self updateChronometer];
         [self.chronometerTimeAtLap addObject:self.currentTime];
         [self.tbLaps refreshTableViewWithLapTimes:[self formattedLapContents] andchronometerTotalTimeAtLap:[self formattedChronometerTimeAtLaps]];
-        self.lblChronometerBestLap.text = [self timeFormatter:[self bestLap]];
+        self.lblChronometerBestLap.text = [NSString stringWithFormat:@"Best Lap: %@", [self timeFormatter:[self bestLap]]];
         
-        //[self playChronometer];
+        [self updateIcons];
     }
 }
 
@@ -509,6 +563,61 @@
     [lapContents addObjectsFromArray:[self getLapsContent]];
     
     return lapContents;
+}
+
+#pragma mark - Blur Effect
+
+- (UIImage *)blurWithCoreImage:(UIImage *)sourceImage
+{
+    CIImage *inputImage = [CIImage imageWithCGImage:sourceImage.CGImage];
+    
+    // Apply Affine-Clamp filter to stretch the image so that it does not
+    // look shrunken when gaussian blur is applied
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    CIFilter *clampFilter = [CIFilter filterWithName:@"CIAffineClamp"];
+    [clampFilter setValue:inputImage forKey:@"inputImage"];
+    [clampFilter setValue:[NSValue valueWithBytes:&transform objCType:@encode(CGAffineTransform)] forKey:@"inputTransform"];
+    
+    // Apply gaussian blur filter with radius of 30
+    CIFilter *gaussianBlurFilter = [CIFilter filterWithName: @"CIGaussianBlur"];
+    [gaussianBlurFilter setValue:clampFilter.outputImage forKey: @"inputImage"];
+    [gaussianBlurFilter setValue:@30 forKey:@"inputRadius"];
+    
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef cgImage = [context createCGImage:gaussianBlurFilter.outputImage fromRect:[inputImage extent]];
+    
+    // Set up output context.
+    UIGraphicsBeginImageContext(self.frame.size);
+    CGContextRef outputContext = UIGraphicsGetCurrentContext();
+    
+    // Invert image coordinates
+    CGContextScaleCTM(outputContext, 1.0, -1.0);
+    CGContextTranslateCTM(outputContext, 0, -self.frame.size.height);
+    
+    // Draw base image.
+    CGContextDrawImage(outputContext, self.frame, cgImage);
+    
+    // Apply white tint
+    CGContextSaveGState(outputContext);
+    CGContextSetFillColorWithColor(outputContext, [UIColor colorWithWhite:1 alpha:0.2].CGColor);
+    CGContextFillRect(outputContext, self.frame);
+    CGContextRestoreGState(outputContext);
+    
+    // Output image is ready.
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return outputImage;
+}
+
+- (UIImage*)takeSnapshotOfView:(UIView *)view
+{
+    UIGraphicsBeginImageContext(CGSizeMake(view.frame.size.width, view.frame.size.height));
+    [view drawViewHierarchyInRect:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height) afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 #pragma mark - TableView Fulfill
