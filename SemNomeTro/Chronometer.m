@@ -12,6 +12,7 @@
 
 @property (nonatomic) NSDate *startRest;
 @property (nonatomic) BOOL inRest;
+@property (nonatomic) NSNumber *currentTime;
 
 @property (nonatomic) NSTimer *timeController;
 //Para mostrar mais informações sobre o cronometro
@@ -316,7 +317,7 @@
         [self.timeController invalidate];
         self.timeController = nil;
         self.inRest = false;
-        self.lblChronometer.text = [self timeFormatter:[self getCurrentTime]];
+        self.lblChronometer.text = [self timeFormatter:self.currentTime];
     }else{
         if (![self.timeController isValid]) {//Verifica se o cronometro está parado
             [self playChronometer];
@@ -352,9 +353,12 @@
     if (!([[self startTimes] count] == [[self pauseTimes] count])) {
         //Adiciona ao array de voltas o momento em que foi solicitado uma volta
         [self.lapTimes addObject:[NSDate date]];
+        [self updateChronometer];
+        [self.chronometerTimeAtLap addObject:self.currentTime];
         [self.tbLaps refreshTableViewWithLapTimes:[self formattedLapContents] andchronometerTotalTimeAtLap:[self formattedChronometerTimeAtLaps]];
         self.lblChronometerBestLap.text = [self timeFormatter:[self bestLap]];
-        [self.chronometerTimeAtLap addObject:[self getCurrentTime]];
+        
+        [self playChronometer];
     }
 }
 
@@ -420,31 +424,15 @@
         timeInterval = [currentDate timeIntervalSinceDate:[self.startTimes lastObject]];
     }
     
-    
     //Chama a funcao de formatacao de tempo para mostrar o texto de forma bela kkk
-    NSString *timeString = [self timeFormatter:[NSNumber numberWithFloat:timeInterval]];
+    NSString *timeString = [self timeFormatter:self.currentTime];
     self.lblChronometer.text = timeString;
+    
+    self.currentTime = [NSNumber numberWithFloat:timeInterval];
+    
 }
 
 #pragma mark - Returning Informations
-
-//Para calcular o ultimo tempo
--(NSNumber*)getCurrentTime{
-    NSTimeInterval timeInterval;
-    NSTimeInterval timeOfPause = 0.0;   //Conta a quantidade de tempo que o cronometro ficou parado
-    for (int i = 1; i < [self.pauseTimes count]; i++) {     //Percorre o array que armazena todas as pausas ate a penultima posicao
-        //Adiciona ao contador todo o tempo entre o pause e o ultimo start
-        timeOfPause += [[self.startTimes objectAtIndex:i] timeIntervalSinceDate:[self.pauseTimes objectAtIndex:i - 1]];
-    }
-    
-    //Calcula o intervalo de tempo entre o momento em que o cronometro foi startado e a ultima pausa
-    timeInterval = [[self.pauseTimes lastObject] timeIntervalSinceDate:[self.startTimes firstObject]];
-    
-    //Subtrai todo o intervalo em que o cronometro ficou pausado do tempo total de execuçao do cronometro
-    timeInterval -= timeOfPause;
-    
-    return [NSNumber numberWithFloat:timeInterval];
-}
 
 //calcula a melhor volta entre as marcadas
 -(NSNumber*)bestLap
@@ -525,10 +513,16 @@
 
 #pragma mark - TableView Fulfill
 
-//Pega o tempo do cronometro no momento da volta
+//Pega o tempo do cronometro formatado no momento da volta
 -(NSArray*)formattedChronometerTimeAtLaps
 {
-    return self.chronometerTimeAtLap;
+    NSMutableArray *timeStg = [[NSMutableArray alloc] init];
+    
+    for (NSNumber *numb in self.chronometerTimeAtLap) {
+        [timeStg addObject: [self timeFormatter:numb]];
+    }
+    
+    return timeStg;
 }
 
 //retorna o momento em que as voltas foram marcadas de forma padronizada e como string para melhor apresentacao na tableview

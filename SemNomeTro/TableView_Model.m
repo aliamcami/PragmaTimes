@@ -71,7 +71,7 @@
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"Lap %li: %@", (long)indexPath.row, [self.lapTimes objectAtIndex:indexPath.row]];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Horario da Volta: %@", [self.chronometerTotalTimeAtLap objectAtIndex:indexPath.row]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Tempo Total: %@", [self.chronometerTotalTimeAtLap objectAtIndex:indexPath.row]];
     
     return cell;
 }
