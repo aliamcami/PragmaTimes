@@ -91,35 +91,36 @@
 
 #pragma mark - Chronometer Configuration
 
+//Atualiza os icones na tela (volta e play)
 -(void)updateIcons
 {
-    if ([self.startTimes count] == [self.pauseTimes count]) {
+    //Remove tudo da tela para nao ter lixo...
+    [self.icons removeFromSuperview];
+    [self.lapIcon removeFromSuperview];
+    [self.playIcon removeFromSuperview];
+    [self.lblCountLap removeFromSuperview];
+    [self.pauseIcon removeFromSuperview];
+
+    //Verifica se tem voltas marcadas
+    if ([self.lapTimes count] > 0) {
+        self.lapIcon.frame = CGRectMake(25, 10, 21, 15);
+        [self.icons addSubview:self.lapIcon];
         
-    }else{
-        [self.icons removeFromSuperview];
-        [self.lapIcon removeFromSuperview];
-        [self.playIcon removeFromSuperview];
-        [self.lblCountLap removeFromSuperview];
-        [self.pauseIcon removeFromSuperview];
+        //Adiciona o numero de voltas a tela
+        self.lblCountLap.frame = CGRectMake(53, 11, 50, 15);
+        self.lblCountLap.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.lapTimes count]];
+        self.lblCountLap.textColor = [UIColor whiteColor];
         
-        if ([self.lapTimes count] > 0) {
-            self.lapIcon.frame = CGRectMake(25, 10, 21, 15);
-            [self.icons addSubview:self.lapIcon];
-            
-            self.lblCountLap.frame = CGRectMake(53, 11, 50, 15);
-            self.lblCountLap.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.lapTimes count]];
-            self.lblCountLap.textColor = [UIColor whiteColor];
-            
-            [self.icons addSubview:self.lblCountLap];
-        }
-        
-        if ([self.startTimes count] > [self.pauseTimes count]) {
-            self.playIcon.frame = CGRectMake(self.icons.frame.size.width - 40, 10, 15, 15);
-            [self.icons addSubview:self.playIcon];
-        }
-        
-        [self addSubview:self.icons];
+        [self.icons addSubview:self.lblCountLap];
     }
+    
+    //Verifica se o cronometro esta pausado
+    if ([self.startTimes count] > [self.pauseTimes count]) {
+        self.playIcon.frame = CGRectMake(self.icons.frame.size.width - 40, 10, 15, 15);
+        [self.icons addSubview:self.playIcon];
+    }
+    
+    [self addSubview:self.icons];
 }
 
 //Metodo que vai alterar a organizaçao do espaço da view
@@ -366,9 +367,7 @@
     //Adiciona ao array de pausas o momento em que o cronometro foi pausado
     [self.pauseTimes addObject:[NSDate date]];
     
-    //    self.blurred = [[UIImageView alloc] initWithImage:[self blurWithCoreImage:[self takeSnapshotOfView:self]]];
-    //    [self addSubview:self.blurred];
-    //    [self bringSubviewToFront:self.blurred];
+    [self updateIcons];
 }
 
 //Controlador de tempo do cronometro, dividi o play e pause em dois metodos pq precisava chamar o pause manualmente algumsa vezes
