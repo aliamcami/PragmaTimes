@@ -7,13 +7,13 @@
 //
 
 #import "Chronometer.h"
-#import <CoreImage/CoreImage.h>
 
 @interface Chronometer ()
 
 @property (nonatomic) NSDate *startRest;
 @property (nonatomic) BOOL inRest;
 @property (nonatomic) NSNumber *currentTime;
+@property (nonatomic) NSNumber *pausedTime;
 
 @property (nonatomic) UIImageView *blurred;
 
@@ -42,6 +42,7 @@
 @property (nonatomic) NSMutableArray *startTimes;
 @property (nonatomic) NSMutableArray *lapTimes;
 @property (nonatomic) NSMutableArray *chronometerTimeAtLap;
+@property (nonatomic) NSMutableArray *pausedTimeUntilLap;
 
 @end
 
@@ -61,11 +62,15 @@
         
         self.icons = [[UIView alloc] init];
         
+        self.currentTime = [NSNumber numberWithFloat:0];
+        self.pausedTime = [NSNumber numberWithFloat:0];
+        
         //Inicia todos os arrays controladores de tempo
         self.pauseTimes = [[NSMutableArray alloc] init];
         self.startTimes = [[NSMutableArray alloc] init];
         self.lapTimes = [[NSMutableArray alloc] init];
         self.chronometerTimeAtLap = [[NSMutableArray alloc] init];
+        self.pausedTimeUntilLap = [[NSMutableArray alloc] init];
         
         //Define como sera a formatacao para o tempo do cronometro
         self.formatterChronometer = [[NSDateFormatter alloc] init];
@@ -334,12 +339,14 @@
 -(void)playChronometer
 {
     //Ativa o cronometro
-    self.timeController = [NSTimer scheduledTimerWithTimeInterval:0.06
+    self.timeController = [NSTimer scheduledTimerWithTimeInterval:0.045
                                                            target:self
                                                          selector:@selector(updateChronometer)
                                                          userInfo:nil repeats:YES];
     //Adiciona ao array de inicio o momento em que o cronometro começou a correr
     [self.startTimes addObject:[NSDate date]];
+    
+    self.pausedTime = [self getTimeOfPause];
     
     //Faz o timer correr em um loop separado do loop da aplicacao, evitando o problema de para atualizacao da label do cronometro
     [[NSRunLoop currentRunLoop] addTimer:self.timeController
@@ -383,22 +390,24 @@
 
 -(void)restChronometer
 {
-    self.inRest = true;
-    
-    if ([self.startTimes count] > [self.pauseTimes count]) {
-        [self pauseChronometer]; //Garante que o cronometro sera pausado na hora da execucao
+    //Verifica se o cronometro já está em modo descanso
+    if (self.inRest == false) {
+        self.inRest = true;
+        
+        if ([self.startTimes count] > [self.pauseTimes count]) {
+            [self pauseChronometer]; //Garante que o cronometro sera pausado na hora da execucao
+        }
+        
+        self.startRest = [NSDate date]; //Guarda a hora de inicio do tempo de descanso
+        
+        //starta o timer para chamar o metodo update rest a cada 100 milisegundos
+        
+        self.timeController = [NSTimer scheduledTimerWithTimeInterval:0.06 target:self selector:@selector(updateRest) userInfo:nil repeats:YES];
+        
+        //Faz o timer correr em um loop separado do loop da aplicacao, evitando o problema de para atualizacao da label do cronometro
+        [[NSRunLoop currentRunLoop] addTimer:self.timeController
+                                     forMode:NSRunLoopCommonModes];
     }
-    
-    self.startRest = [NSDate date]; //Guarda a hora de inicio do tempo de descanso
-    
-    //starta o timer para chamar o metodo update rest a cada 100 milisegundos
-    
-    self.timeController = [NSTimer scheduledTimerWithTimeInterval:0.06 target:self selector:@selector(updateRest) userInfo:nil repeats:YES];
-    
-    //Faz o timer correr em um loop separado do loop da aplicacao, evitando o problema de para atualizacao da label do cronometro
-    [[NSRunLoop currentRunLoop] addTimer:self.timeController
-                                 forMode:NSRunLoopCommonModes];
-    
 }
 
 //Marca uma volta no cronometro
@@ -407,6 +416,18 @@
     if (!([[self startTimes] count] == [[self pauseTimes] count])) {
         //Adiciona ao array de voltas o momento em que foi solicitado uma volta
         [self.lapTimes addObject:[NSDate date]];
+        
+        if ([self.pausedTimeUntilLap count] > 0) {
+            float count;
+            for (int i = 0; i < [self.pausedTimeUntilLap count]; i++) {
+                count += [[self.pausedTimeUntilLap objectAtIndex:i] floatValue];
+            }
+            
+            [self.pausedTimeUntilLap addObject:[NSNumber numberWithFloat:[[self getTimeOfPause] floatValue] - count]];
+        }else{
+            [self.pausedTimeUntilLap addObject:[NSNumber numberWithFloat:[[self getTimeOfPause] floatValue]]];
+        }
+        
         [self updateChronometer];
         [self.chronometerTimeAtLap addObject:self.currentTime];
         [self.tbLaps refreshTableViewWithLapTimes:[self formattedLapContents] andchronometerTotalTimeAtLap:[self formattedChronometerTimeAtLaps]];
@@ -435,22 +456,7 @@
         if ([self.pauseTimes count] == 0) {
             self.lblChronometer.text = [self timeFormatter:0];
         }else{
-            NSTimeInterval timeOfPause = 0.0;   //Conta a quantidade de tempo que o cronometro ficou parado
-            for (int i = 1; i < [self.pauseTimes count]; i++) {     //Percorre o array que armazena todas as pausas ate a penultima posicao
-                //Adiciona ao contador todo o tempo entre o pause e o ultimo start
-                timeOfPause += [[self.startTimes objectAtIndex:i] timeIntervalSinceDate:[self.pauseTimes objectAtIndex:i - 1]];
-            }
-            
-            //Calcula o intervalo de tempo entre o momento em que o cronometro foi startado e o momento atual
-            timeInterval = [currentDate timeIntervalSinceDate:[self.startTimes firstObject]];
-            
-            //calcula o tempo entre o ultimo pause e o tempo agora, visto que ainda nao foi dado outro start
-            timeOfPause += [[NSDate date] timeIntervalSinceDate:[self.pauseTimes lastObject]];
-            
-            //Subtrai todo o intervalo em que o cronometro ficou pausado do tempo total de execuçao do cronometro
-            timeInterval -= timeOfPause;
-            
-            self.lblChronometer.text = [self timeFormatter:[NSNumber numberWithFloat:timeInterval]];
+            self.lblChronometer.text = [self timeFormatter:self.currentTime];
         }
     }
 }
@@ -461,32 +467,33 @@
     NSDate *currentDate = [NSDate date];
     NSTimeInterval timeInterval;
     
-    if (self.pauseTimes){       //Verifica se o cronometro ja foi pausado alguma vez
-        NSTimeInterval timeOfPause = 0.0;   //Conta a quantidade de tempo que o cronometro ficou parado
-        for (int i = 0; i < [self.pauseTimes count]; i++) {     //Percorre o array que armazena todas as pausas
-            //Adiciona ao contador, todo o tempo entre a pausa e o proximo start
-            timeOfPause += [[self.startTimes objectAtIndex:i + 1] timeIntervalSinceDate:[self.pauseTimes objectAtIndex:i]];
-        }
-        //Calcula o intervalo de tempo entre o momento em que o cronometro foi startado e o momento atual
-        timeInterval = [currentDate timeIntervalSinceDate:[self.startTimes firstObject]];
-        
-        //Subtrai todo o intervalo em que o cronometro ficou pausado do tempo total de execuçao do cronometro
-        timeInterval -= timeOfPause;
-        
+    if ([self.pauseTimes count] > 0){       //Verifica se o cronometro ja foi pausado alguma vez
+        timeInterval = [[NSDate date] timeIntervalSinceDate:[self.startTimes firstObject]];
+        timeInterval -= [self.pausedTime floatValue];
     }else       //Caso o cronometro nao tenha sido pausado nenhuma vez
     {
         timeInterval = [currentDate timeIntervalSinceDate:[self.startTimes lastObject]];
     }
     
+    self.currentTime = [NSNumber numberWithFloat:timeInterval];
+    
     //Chama a funcao de formatacao de tempo para mostrar o texto de forma bela kkk
     NSString *timeString = [self timeFormatter:self.currentTime];
     self.lblChronometer.text = timeString;
-    
-    self.currentTime = [NSNumber numberWithFloat:timeInterval];
-    
 }
 
 #pragma mark - Returning Informations
+
+//Retorna o tempo de pausa total do cronometro
+-(NSNumber*)getTimeOfPause
+{
+    NSTimeInterval timeOfPause = 0.0;   //Conta a quantidade de tempo que o cronometro ficou parado
+    for (int i = 0; i < [self.pauseTimes count]; i++) {     //Percorre o array que armazena todas as pausas
+        //Adiciona ao contador, todo o tempo entre a pausa e o proximo start
+        timeOfPause += [[self.startTimes objectAtIndex:i + 1] timeIntervalSinceDate:[self.pauseTimes objectAtIndex:i]];
+    }
+    return [NSNumber numberWithFloat:timeOfPause];
+}
 
 //calcula a melhor volta entre as marcadas
 -(NSNumber*)bestLap
@@ -533,13 +540,16 @@
         //Calcula o tempo entre a primeira volta e o horario de inicio do cronometro
         //Evita passar por if toda hora dentro do loop
         interval = [[self.lapTimes firstObject] timeIntervalSinceDate:[self.startTimes firstObject]];
+        interval -= [[self.pausedTimeUntilLap objectAtIndex:0] floatValue];
         [lapContents addObject:[NSNumber numberWithFloat:interval]];
         
         //Percorre o array de voltas, a partir da segunda volta
         for (int i = 1; i < [self.lapTimes count]; i++) {
+            interval = 0;
             
             //Calcula o intervalo de tempo entre a volta atual e a volta passada
             interval = [self.lapTimes[i] timeIntervalSinceDate:self.lapTimes[i - 1]];
+            interval -= [[self.pausedTimeUntilLap objectAtIndex:i] floatValue];
             NSNumber *numb = [NSNumber numberWithFloat:interval];
             
             [lapContents addObject:numb];
@@ -563,61 +573,6 @@
     [lapContents addObjectsFromArray:[self getLapsContent]];
     
     return lapContents;
-}
-
-#pragma mark - Blur Effect
-
-- (UIImage *)blurWithCoreImage:(UIImage *)sourceImage
-{
-    CIImage *inputImage = [CIImage imageWithCGImage:sourceImage.CGImage];
-    
-    // Apply Affine-Clamp filter to stretch the image so that it does not
-    // look shrunken when gaussian blur is applied
-    CGAffineTransform transform = CGAffineTransformIdentity;
-    CIFilter *clampFilter = [CIFilter filterWithName:@"CIAffineClamp"];
-    [clampFilter setValue:inputImage forKey:@"inputImage"];
-    [clampFilter setValue:[NSValue valueWithBytes:&transform objCType:@encode(CGAffineTransform)] forKey:@"inputTransform"];
-    
-    // Apply gaussian blur filter with radius of 30
-    CIFilter *gaussianBlurFilter = [CIFilter filterWithName: @"CIGaussianBlur"];
-    [gaussianBlurFilter setValue:clampFilter.outputImage forKey: @"inputImage"];
-    [gaussianBlurFilter setValue:@30 forKey:@"inputRadius"];
-    
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CGImageRef cgImage = [context createCGImage:gaussianBlurFilter.outputImage fromRect:[inputImage extent]];
-    
-    // Set up output context.
-    UIGraphicsBeginImageContext(self.frame.size);
-    CGContextRef outputContext = UIGraphicsGetCurrentContext();
-    
-    // Invert image coordinates
-    CGContextScaleCTM(outputContext, 1.0, -1.0);
-    CGContextTranslateCTM(outputContext, 0, -self.frame.size.height);
-    
-    // Draw base image.
-    CGContextDrawImage(outputContext, self.frame, cgImage);
-    
-    // Apply white tint
-    CGContextSaveGState(outputContext);
-    CGContextSetFillColorWithColor(outputContext, [UIColor colorWithWhite:1 alpha:0.2].CGColor);
-    CGContextFillRect(outputContext, self.frame);
-    CGContextRestoreGState(outputContext);
-    
-    // Output image is ready.
-    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return outputImage;
-}
-
-- (UIImage*)takeSnapshotOfView:(UIView *)view
-{
-    UIGraphicsBeginImageContext(CGSizeMake(view.frame.size.width, view.frame.size.height));
-    [view drawViewHierarchyInRect:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height) afterScreenUpdates:YES];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
 }
 
 #pragma mark - TableView Fulfill
