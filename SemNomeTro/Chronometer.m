@@ -402,7 +402,7 @@
         
         //starta o timer para chamar o metodo update rest a cada 100 milisegundos
         
-        self.timeController = [NSTimer scheduledTimerWithTimeInterval:0.06 target:self selector:@selector(updateRest) userInfo:nil repeats:YES];
+        self.timeController = [NSTimer scheduledTimerWithTimeInterval:0.045 target:self selector:@selector(updateRest) userInfo:nil repeats:YES];
         
         //Faz o timer correr em um loop separado do loop da aplicacao, evitando o problema de para atualizacao da label do cronometro
         [[NSRunLoop currentRunLoop] addTimer:self.timeController
