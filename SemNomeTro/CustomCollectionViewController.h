@@ -14,11 +14,13 @@
 #define COR_AMARELO RGB(240, 203, 68)
 #define MAX_QNT_CORES_DISPONIVEIS 5
 
+//configuracoes de view
+#define CONFIG_PRIMEIRA_CELULA_DESTAQUE 0
+#define CONFIG_ULTIMA_CELULA_DESTAQUE 1
+#define CONFIG_NENHUMA_CELULA_DESTAQUE 2
 
 #import <UIKit/UIKit.h>
 
 @interface CustomCollectionViewController : UICollectionViewController
-@property (nonatomic) int qntChronometers;
-@property (nonatomic) NSMutableArray *arrayChronometers;
 
 @end
