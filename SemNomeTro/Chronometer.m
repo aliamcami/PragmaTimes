@@ -124,7 +124,7 @@
     
     //Adiciona o simbolo de play se o cronometro estiver rodando
     if ([self.startTimes count] > [self.pauseTimes count]) {
-        self.playIcon.frame = CGRectMake(self.icons.frame.size.width - 40, 10, 15, 15);
+        self.playIcon.frame = CGRectMake(self.icons.frame.size.width - 30, 10, 15, 15);
         [self.icons addSubview:self.playIcon];
     }
     
@@ -138,7 +138,7 @@
             [self.maskView addSubview:self.pauseIcon];
             [self addSubview:self.maskView];
         }else{
-            self.restIcon.frame = CGRectMake(self.icons.frame.size.width - 40, 10, 15, 15);
+            self.restIcon.frame = CGRectMake(self.icons.frame.size.width - 30, 10, 15, 15);
             //            self.restIcon.transform = CGAffineTransformMakeRotation(M_PI / 3);
             [self.icons addSubview:self.restIcon];
         }
