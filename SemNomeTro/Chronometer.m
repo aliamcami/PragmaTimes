@@ -7,6 +7,7 @@
 //
 
 #import "Chronometer.h"
+#import <AudioToolbox/AudioServices.h>
 
 @interface Chronometer ()
 
@@ -20,6 +21,7 @@
 @property (nonatomic) UIView *icons;
 @property (nonatomic) UIImageView *lapIcon;
 @property (nonatomic) UIImageView *playIcon;
+@property (nonatomic) UIImageView *restIcon;
 @property (nonatomic) UIImageView *pauseIcon;
 @property (nonatomic) UILabel *lblCountLap;
 
@@ -58,6 +60,7 @@
         self.lapIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icone_volta@2x.png"]];
         self.playIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icone_play@2x.png"]];
         self.pauseIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pause_grande@2x.png"]];
+        self.restIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icone_return@2x.png"]];
         self.lblCountLap = [[UILabel alloc] init];
         
         self.icons = [[UIView alloc] init];
@@ -104,6 +107,7 @@
     [self.pauseIcon removeFromSuperview];
     [self.maskView removeFromSuperview];
     [self.pauseIcon removeFromSuperview];
+    [self.restIcon removeFromSuperview];
     
     //Adiciona o icone e o numero de voltas
     if ([self.lapTimes count] > 0) {
@@ -126,12 +130,18 @@
     
     //Adiciona a mascara e o simbolo de pausa
     if ([self.startTimes count] == [self.pauseTimes count]) {
-        self.maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-        self.maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-        self.pauseIcon.frame = CGRectMake(self.frame.size.width - 60, 10, 40, 40);
-        
-        [self.maskView addSubview:self.pauseIcon];
-        [self addSubview:self.maskView];
+        if (self.inRest == false) {
+            self.maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+            self.maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+            self.pauseIcon.frame = CGRectMake(self.frame.size.width - 60, 10, 40, 40);
+            
+            [self.maskView addSubview:self.pauseIcon];
+            [self addSubview:self.maskView];
+        }else{
+            self.restIcon.frame = CGRectMake(self.icons.frame.size.width - 40, 10, 15, 15);
+            //            self.restIcon.transform = CGAffineTransformMakeRotation(M_PI / 3);
+            [self.icons addSubview:self.restIcon];
+        }
     }
     
     [self addSubview:self.icons];
@@ -392,6 +402,7 @@
         self.timeController = nil;
         self.inRest = false;
         self.lblChronometer.text = [self timeFormatter:self.currentTime];
+        [self updateIcons];
     }else{
         if (![self.timeController isValid]) {//Verifica se o cronometro está parado
             [self playChronometer];
@@ -410,6 +421,8 @@
         if ([self.startTimes count] > [self.pauseTimes count]) {
             [self pauseChronometer]; //Garante que o cronometro sera pausado na hora da execucao
         }
+        
+        [self updateIcons];
         
         self.startRest = [NSDate date]; //Guarda a hora de inicio do tempo de descanso
         
@@ -447,6 +460,9 @@
         self.lblChronometerBestLap.text = [NSString stringWithFormat:@"Best Lap: %@", [self timeFormatter:[self bestLap]]];
         
         [self updateIcons];
+        
+        //Faz com que o iphone vibre quando uma volta for marcada
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     }
 }
 
@@ -471,6 +487,7 @@
         }else{
             self.lblChronometer.text = [self timeFormatter:self.currentTime];
         }
+        [self updateIcons];
     }
 }
 
