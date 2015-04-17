@@ -15,7 +15,7 @@
 @property (nonatomic) NSNumber *currentTime;
 @property (nonatomic) NSNumber *pausedTime;
 
-@property (nonatomic) UIImageView *blurred;
+@property (nonatomic) UIView *maskView;
 
 @property (nonatomic) UIView *icons;
 @property (nonatomic) UIImageView *lapIcon;
@@ -62,6 +62,8 @@
         
         self.icons = [[UIView alloc] init];
         
+        self.maskView = [[UIView alloc] init];
+        
         self.currentTime = [NSNumber numberWithFloat:0];
         self.pausedTime = [NSNumber numberWithFloat:0];
         
@@ -100,24 +102,36 @@
     [self.playIcon removeFromSuperview];
     [self.lblCountLap removeFromSuperview];
     [self.pauseIcon removeFromSuperview];
-
-    //Verifica se tem voltas marcadas
+    [self.maskView removeFromSuperview];
+    [self.pauseIcon removeFromSuperview];
+    
+    //Adiciona o icone e o numero de voltas
     if ([self.lapTimes count] > 0) {
-        self.lapIcon.frame = CGRectMake(25, 10, 21, 15);
+        self.lapIcon.frame = CGRectMake(15, 10, 21, 15);
         [self.icons addSubview:self.lapIcon];
         
         //Adiciona o numero de voltas a tela
-        self.lblCountLap.frame = CGRectMake(53, 11, 50, 15);
+        self.lblCountLap.frame = CGRectMake(45, 11, 50, 15);
         self.lblCountLap.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.lapTimes count]];
         self.lblCountLap.textColor = [UIColor whiteColor];
         
         [self.icons addSubview:self.lblCountLap];
     }
     
-    //Verifica se o cronometro esta pausado
+    //Adiciona o simbolo de play se o cronometro estiver rodando
     if ([self.startTimes count] > [self.pauseTimes count]) {
         self.playIcon.frame = CGRectMake(self.icons.frame.size.width - 40, 10, 15, 15);
         [self.icons addSubview:self.playIcon];
+    }
+    
+    //Adiciona a mascara e o simbolo de pausa
+    if ([self.startTimes count] == [self.pauseTimes count]) {
+        self.maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        self.maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        self.pauseIcon.frame = CGRectMake(self.frame.size.width - 60, 10, 40, 40);
+        
+        [self.maskView addSubview:self.pauseIcon];
+        [self addSubview:self.maskView];
     }
     
     [self addSubview:self.icons];
