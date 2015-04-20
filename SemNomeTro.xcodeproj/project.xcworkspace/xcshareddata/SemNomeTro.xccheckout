@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>731A87D18B3DFDCF065DC7F4EAFEB6F1082A296A</key>
-		<string>bitbucket.org:EuAndreh/semnometro-app.git</string>
+		<string>bitbucket.org:EuAndreh/semnometro-app</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>SemNomeTro.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>bitbucket.org:EuAndreh/semnometro-app.git</string>
+	<string>bitbucket.org:EuAndreh/semnometro-app</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

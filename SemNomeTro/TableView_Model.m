@@ -49,9 +49,18 @@
     self.lapTimes = lapTimes;
     self.chronometerTotalTimeAtLap = selectedLapTimes;
     [self.tableView reloadData];    //Funcao que atualiza os dados das celulas da tableview
+    [self.tableView scrollToRowAtIndexPath:[self lastIndexPath] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 #pragma mark - TableView Config
+
+//Calcula qual é o ultimo index da tableView
+-(NSIndexPath *)lastIndexPath
+{
+    NSInteger lastSectionIndex = MAX(0, [self.tableView numberOfSections] - 1);
+    NSInteger lastRowIndex = MAX(0, [self.tableView numberOfRowsInSection:lastSectionIndex] - 1);
+    return [NSIndexPath indexPathForRow:lastRowIndex inSection:lastSectionIndex];
+}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -70,7 +79,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Lap %li: %@", (long)indexPath.row, [self.lapTimes objectAtIndex:indexPath.row]];
+    //    Era para definir o tamanho da fonte da tableview, mas o padrao esta da forma desejada
+    //    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
+    //    cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"Lap %li - %@", (long)indexPath.row + 1, [self.lapTimes objectAtIndex:indexPath.row]];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Tempo Total: %@", [self.chronometerTotalTimeAtLap objectAtIndex:indexPath.row]];
     
     return cell;

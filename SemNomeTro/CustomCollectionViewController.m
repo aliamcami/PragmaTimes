@@ -8,7 +8,6 @@
 
 #import "CustomCollectionViewController.h"
 #import "CustomCollectionViewCell.h"
-#import "Chronometer.h"
 #import "MyColorHolder.h"
 #import "SingletonData.h"
 @interface CustomCollectionViewController ()
