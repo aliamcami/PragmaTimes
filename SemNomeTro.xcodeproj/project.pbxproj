@@ -14,6 +14,8 @@
 		862C74EC1ADEF2CF00CEA9AC /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */; };
 		862C74ED1ADEF2CF00CEA9AC /* CustomCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */; };
 		862C74F01ADEF30C00CEA9AC /* MyColorHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */; };
+		867BB4881AE5BB9A004A4B15 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 867BB4871AE5BB9A004A4B15 /* SecondViewController.m */; };
+		867BB48B1AE5BBA6004A4B15 /* SingletonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 867BB48A1AE5BBA6004A4B15 /* SingletonData.m */; };
 		D55F80811ADD7B560071A70C /* Login_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D55F80801ADD7B560071A70C /* Login_Model.m */; };
 		D5779E8F1AD47908003957E2 /* Athlete_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D5779E8E1AD47908003957E2 /* Athlete_Model.m */; };
 		D587672D1AD3230300F29BCC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D587672C1AD3230300F29BCC /* main.m */; };
@@ -51,6 +53,10 @@
 		862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewController.m; sourceTree = "<group>"; };
 		862C74EE1ADEF30C00CEA9AC /* MyColorHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyColorHolder.h; sourceTree = "<group>"; };
 		862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyColorHolder.m; sourceTree = "<group>"; };
+		867BB4861AE5BB9A004A4B15 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		867BB4871AE5BB9A004A4B15 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		867BB4891AE5BBA6004A4B15 /* SingletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingletonData.h; sourceTree = "<group>"; };
+		867BB48A1AE5BBA6004A4B15 /* SingletonData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingletonData.m; sourceTree = "<group>"; };
 		D55F807F1ADD7B560071A70C /* Login_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login_Model.h; sourceTree = "<group>"; };
 		D55F80801ADD7B560071A70C /* Login_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login_Model.m; sourceTree = "<group>"; };
 		D5779E8D1AD47908003957E2 /* Athlete_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Athlete_Model.h; sourceTree = "<group>"; };
@@ -171,6 +177,10 @@
 		D59958191AD4483A00BCF33B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				867BB4891AE5BBA6004A4B15 /* SingletonData.h */,
+				867BB48A1AE5BBA6004A4B15 /* SingletonData.m */,
+				867BB4861AE5BB9A004A4B15 /* SecondViewController.h */,
+				867BB4871AE5BB9A004A4B15 /* SecondViewController.m */,
 				862C74EE1ADEF30C00CEA9AC /* MyColorHolder.h */,
 				862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */,
 				862C74EA1ADEF2CF00CEA9AC /* CustomCollectionViewController.h */,
@@ -321,9 +331,11 @@
 				862C74EC1ADEF2CF00CEA9AC /* CustomCollectionViewCell.m in Sources */,
 				6BAA00EF1AD45CB600D41E93 /* DadosLocais_DataBase.m in Sources */,
 				D5C59DB81AD4573A004C4BC7 /* Chronometer.m in Sources */,
+				867BB48B1AE5BBA6004A4B15 /* SingletonData.m in Sources */,
 				D5C5765E1AD5DCAD0066CA29 /* TableView_Model.m in Sources */,
 				6B3E6AE21AD59E5B009BB35E /* Login_DataBase.m in Sources */,
 				862C74F01ADEF30C00CEA9AC /* MyColorHolder.m in Sources */,
+				867BB4881AE5BB9A004A4B15 /* SecondViewController.m in Sources */,
 				D587672D1AD3230300F29BCC /* main.m in Sources */,
 				862C74ED1ADEF2CF00CEA9AC /* CustomCollectionViewController.m in Sources */,
 				D5779E8F1AD47908003957E2 /* Athlete_Model.m in Sources */,
