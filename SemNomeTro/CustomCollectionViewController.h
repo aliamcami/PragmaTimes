@@ -20,7 +20,10 @@
 #define CONFIG_NENHUMA_CELULA_DESTAQUE 2
 
 #import <UIKit/UIKit.h>
+#import "Chronometer.h"
 
 @interface CustomCollectionViewController : UICollectionViewController
+
+//-(Chronometer*)getNewChronometer;
 
 @end

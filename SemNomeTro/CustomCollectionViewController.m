@@ -8,8 +8,8 @@
 
 #import "CustomCollectionViewController.h"
 #import "CustomCollectionViewCell.h"
-#import "Chronometer.h"
 #import "MyColorHolder.h"
+
 
 @interface CustomCollectionViewController ()
 @property (nonatomic) NSMutableArray *arrayChronometers;
@@ -61,6 +61,7 @@ static float const diferenceForAlphaColor = 0.2;
 #pragma mark principais
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     //temporariamente atribui a qnt total de chronometros na tela para que os calculos de tamanhos possam ser feitos
     self.configQntChronometers= 2;
     self.configQntColunas = 2 ;
@@ -84,6 +85,8 @@ static float const diferenceForAlphaColor = 0.2;
     //Seta os chronometros no array de chronometros
     [self setChronometersIntoArray];
 }
+
+
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -380,7 +383,7 @@ static float const diferenceForAlphaColor = 0.2;
         restTime.numberOfTapsRequired = 2;
     
 //    //temporariamente adiciona cronometro
-        UISwipeGestureRecognizer *addChron= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(addNewCell)];
+//        UISwipeGestureRecognizer *addChron= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(addNewCell)];
     
     //    UISwipeGestureRecognizer *deleteChron = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(deleteCellatIndexPath:)];
     
@@ -388,7 +391,7 @@ static float const diferenceForAlphaColor = 0.2;
         [cell addGestureRecognizer:playStop];
         [cell addGestureRecognizer:lapMark];
         [cell addGestureRecognizer:restTime];
-        [cell addGestureRecognizer: addChron];
+//        [cell addGestureRecognizer: addChron];
     //    [cell addGestureRecognizer: deleteChron];
     
 }
