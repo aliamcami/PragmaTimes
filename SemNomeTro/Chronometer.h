@@ -9,20 +9,16 @@
 #define CRONOMETRO_BASE 0
 #define CRONOMETRO_INTERMEDIARIO 1
 #define CRONOMETRO_COMPLETO 2
+#define CRONOMETRO_EDITAVEL 3
 
 #import <UIKit/UIKit.h>
-#import "TableView_Model.h"
 
 @interface Chronometer : UIView
-
-@property (nonatomic) NSString *name;
-@property (nonatomic) int restTime;
 
 //- (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus; //Nao necessario por enquanto
 
 -(void)resizeCronometer:(CGRect)size andFocus:(int)focus;
--(void)editChronometerName:(NSString*)name;
--(void)editRestTime:(int)restTime;
+-(void)enableEditing;
 
 -(void)resetChronometer;
 -(void)play_pauseChronometer;

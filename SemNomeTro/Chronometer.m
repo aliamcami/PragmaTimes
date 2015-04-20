@@ -8,6 +8,9 @@
 
 #import "Chronometer.h"
 #import <AudioToolbox/AudioServices.h>
+#import "TableView_Model.h"
+#import "PickerView_Model.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface Chronometer ()
 
@@ -16,18 +19,31 @@
 @property (nonatomic) NSNumber *currentTime;
 @property (nonatomic) NSNumber *pausedTime;
 
+//Icones/frescurinhas do cronomometro
 @property (nonatomic) UIView *maskView;
-
 @property (nonatomic) UIView *icons;
 @property (nonatomic) UIImageView *lapIcon;
 @property (nonatomic) UIImageView *playIcon;
 @property (nonatomic) UIImageView *restIcon;
 @property (nonatomic) UIImageView *pauseIcon;
 @property (nonatomic) UILabel *lblCountLap;
+@property (nonatomic) UILabel *lblTimeRest;
+@property (nonatomic) UIButton *btnTimeRest;
+@property (nonatomic) UIView *restView;
 
+//Timer Do cronometro
 @property (nonatomic) NSTimer *timeController;
-//Para mostrar mais informações sobre o cronometro
+
+//Informacoes do cronometro
 @property (nonatomic) short focus;
+@property (nonatomic) BOOL isEditable;
+@property (nonatomic) NSString *name;
+@property (nonatomic) int restTime;
+
+//PickerView Contents
+@property (nonatomic) UIView *pickerView;
+@property (nonatomic) PickerView_Model *picker;
+@property (nonatomic) UIButton *pickerButton;
 
 //Formatacao para apresentacao
 @property (nonatomic) NSDateFormatter *formatterChronometer;
@@ -35,7 +51,7 @@
 
 //Possiveis coisas a serem mostradas no cronometro, tudo depende do tamanho que ele for ocupar na tela
 @property (nonatomic) UILabel *lblChronometer;
-@property (nonatomic) UILabel *lblChronometerName;
+@property (nonatomic) UITextField *txtChronometerName;
 @property (nonatomic) UILabel *lblChronometerBestLap;
 @property (nonatomic) TableView_Model *tbLaps;
 
@@ -88,6 +104,8 @@
         
         self.inRest = false;
         
+        self.name = @"Giovani";
+        
         //Aloca e ajusta o texto das labels
         [self adjustLabelTexts];
     }
@@ -95,6 +113,26 @@
 }
 
 #pragma mark - Chronometer Configuration
+
+-(void)enableEditing
+{
+    if (self.isEditable) {
+        //Caso esteja editavel, chamou essa funcao de novo, para de ser editavel
+        self.isEditable = false;
+        self.txtChronometerName.enabled = self.isEditable;
+        
+        [self editChronometerName:self.txtChronometerName.text];
+        
+        self.picker = nil;
+        
+        [self resizeCronometer:self.frame andFocus:CRONOMETRO_INTERMEDIARIO];
+    }else{
+        //Para caso nao esteja editavel, passa a ser editavel
+        self.isEditable = true;
+        
+        [self resizeCronometer:self.frame andFocus:CRONOMETRO_EDITAVEL];
+    }
+}
 
 //Atualiza os icones na tela (volta e play)
 -(void)updateIcons
@@ -124,7 +162,7 @@
     
     //Adiciona o simbolo de play se o cronometro estiver rodando
     if ([self.startTimes count] > [self.pauseTimes count]) {
-        self.playIcon.frame = CGRectMake(self.icons.frame.size.width - 30, 10, 15, 15);
+        self.playIcon.frame = CGRectMake(self.icons.frame.size.width - 40, 10, 15, 15);
         [self.icons addSubview:self.playIcon];
     }
     
@@ -136,10 +174,10 @@
             self.pauseIcon.frame = CGRectMake(self.frame.size.width - 60, 10, 40, 40);
             
             [self.maskView addSubview:self.pauseIcon];
+            
             [self addSubview:self.maskView];
         }else{
-            self.restIcon.frame = CGRectMake(self.icons.frame.size.width - 30, 10, 15, 15);
-            //            self.restIcon.transform = CGAffineTransformMakeRotation(M_PI / 3);
+            self.restIcon.frame = CGRectMake(self.icons.frame.size.width - 40, 10, 15, 15);
             [self.icons addSubview:self.restIcon];
         }
     }
@@ -162,9 +200,12 @@
     //Retira tudo da tela, para nao haver sobreposicao de itens na tela
     [self.lblChronometer removeFromSuperview];
     [self.lblChronometerBestLap removeFromSuperview];
-    [self.lblChronometerName removeFromSuperview];
+    [self.txtChronometerName removeFromSuperview];
     [self.tbLaps removeFromSuperview];
     [self.icons removeFromSuperview];
+    
+    //Torna o textfield nao editavel
+    self.txtChronometerName.enabled = false;
     
     switch (self.focus) {
             
@@ -183,7 +224,7 @@
             //atribui pedacos da tela as labels que mostram o nome e o tempo
             [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions), self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 4)];
             
-            [self.lblChronometerName setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 5, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.txtChronometerName setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 5, self.frame.size.width, self.frame.size.height / screenDivisions)];
             
             break;
             
@@ -196,7 +237,7 @@
         {
             screenDivisions = 8;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
-            [self.lblChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.txtChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
             
             [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions))];
             [self updateIcons];
@@ -227,7 +268,7 @@
         {
             screenDivisions = 9;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
-            [self.lblChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.txtChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
             
             [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions))];
             [self updateIcons];
@@ -253,11 +294,67 @@
             
             break;
         }
+            
+            //para caso o cronometro seja editavel
+        case CRONOMETRO_EDITAVEL:
+        {
+            screenDivisions = 12;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
+            
+            [self.txtChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, (self.frame.size.height / screenDivisions * 2))];
+            self.txtChronometerName.enabled = self.isEditable;
+            
+            [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 2, self.frame.size.width, (self.frame.size.height / screenDivisions))];
+            [self updateIcons];
+            
+            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 2)];
+            
+            //Define o tamanho que a tableview com as laps ocupara
+            CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 5, self.frame.size.width, (self.frame.size.height / screenDivisions) * 4);
+            
+            //Instancia uma tableview com o tamanho definido
+            self.tbLaps = [[TableView_Model alloc] initWithFrame:tableViewLapsSize
+                                                        LapTimes:[self formattedLapContents]
+                                    andchronometerTotalTimeAtLap:[self formattedChronometerTimeAtLaps]];
+            
+            self.restView = [[UIView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height / screenDivisions) * 10, self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
+            self.restView.backgroundColor = [UIColor whiteColor];
+            self.restView.layer.cornerRadius = 5;
+            self.restView.layer.masksToBounds = YES;
+            
+            self.lblTimeRest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.restView.frame.size.width - 80, self.restView.frame.size.height)];
+            
+            int lblTextSize = MIN(self.lblTimeRest.frame.size.width, self.lblTimeRest.frame.size.height);
+            self.lblTimeRest.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.5];
+            self.lblTimeRest.adjustsFontSizeToFitWidth = YES;
+            
+            self.btnTimeRest = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            [self.btnTimeRest setFrame:CGRectMake(self.restView.frame.size.width - 78, 0, 78, self.restView.frame.size.height)];
+            
+            [self.btnTimeRest addTarget:self action:@selector(editRestTime) forControlEvents:UIControlEventTouchUpInside];
+            [self.btnTimeRest setTitle:[NSString stringWithFormat:@"%@", [self timeFormatter:[NSNumber numberWithFloat:self.restTime]]] forState:UIControlStateNormal];
+            
+            lblTextSize = MIN(self.btnTimeRest.frame.size.width, self.btnTimeRest.frame.size.height);
+            self.btnTimeRest.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.3];
+            
+            self.lblTimeRest.text = @"Tempo de Descanso:";
+            self.lblTimeRest.textAlignment = NSTextAlignmentCenter;
+            
+            [self.restView addSubview:self.lblTimeRest];
+            [self.restView addSubview:self.btnTimeRest];
+            
+            [self addSubview:self.restView];
+            
+            //Adiciona a tableview a tela
+            [self addSubview:self.tbLaps];
+            
+            break;
+        }
+            
     }
     
     //Ajusta a fonte e o tamanho do texto para a label que mostra o nome do cronometro
-    int lblTextSize = MIN(self.lblChronometerName.frame.size.width, self.lblChronometerName.frame.size.height);
-    self.lblChronometerName.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.8];
+    int lblTextSize = MIN(self.txtChronometerName.frame.size.width, self.txtChronometerName.frame.size.height);
+    self.txtChronometerName.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.8];
     
     //Ajusta a fonte e o tamanho do texto para a lael que mostra o nome do cronoetro
     lblTextSize = MIN(self.lblChronometer.frame.size.width, self.lblChronometer.frame.size.height);
@@ -271,7 +368,7 @@
     [self editChronometerName:self.name];
     
     //Adiciona as labels que mostram o nome e o tempo do cronometro a tela
-    [self addSubview:self.lblChronometerName];
+    [self addSubview:self.txtChronometerName];
     [self addSubview:self.lblChronometer];
 }
 
@@ -280,21 +377,21 @@
 {
     self.lblChronometer = [[UILabel alloc] init];
     self.lblChronometerBestLap = [[UILabel alloc] init];
-    self.lblChronometerName = [[UILabel alloc] init];
+    self.txtChronometerName = [[UITextField alloc] init];
     
     self.lblChronometer.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
     self.lblChronometerBestLap.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-    self.lblChronometerName.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+    //    self.lblChronometerName.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
     
     self.lblChronometer.textColor = [UIColor whiteColor];
     self.lblChronometerBestLap.textColor = [UIColor whiteColor];
-    self.lblChronometerName.textColor = [UIColor whiteColor];
+    self.txtChronometerName.textColor = [UIColor whiteColor];
     
-    self.lblChronometerName.textAlignment = NSTextAlignmentCenter;
+    self.txtChronometerName.textAlignment = NSTextAlignmentCenter;
     self.lblChronometerBestLap.textAlignment = NSTextAlignmentCenter;
     self.lblChronometer.textAlignment = NSTextAlignmentCenter;
     
-    self.lblChronometerName.adjustsFontSizeToFitWidth = YES;
+    self.txtChronometerName.adjustsFontSizeToFitWidth = YES;
     self.lblChronometerBestLap.adjustsFontSizeToFitWidth = YES;
     self.lblChronometer.adjustsFontSizeToFitWidth = YES;
     
@@ -306,13 +403,62 @@
 -(void)editChronometerName:(NSString*)name
 {
     self.name = name;
-    self.lblChronometerName.text = self.name;
+    self.txtChronometerName.text = self.name;
 }
 
 //Ajusta o tempo de descanso do cronometro
--(void)editRestTime:(int)restTime
+-(void)editRestTime
 {
-    self.restTime = restTime;
+    self.pickerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width / 2, (self.frame.size.height / 3) * 2)];
+    self.pickerView.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2);
+    self.pickerView.backgroundColor = [UIColor whiteColor];
+    
+    self.pickerView.layer.cornerRadius = 5;
+    self.pickerView.layer.masksToBounds = YES;
+    
+    self.pickerButton.layer.cornerRadius = 5;
+    self.pickerButton.layer.masksToBounds = YES;
+    
+    self.picker = [[PickerView_Model alloc] initWithFrame:CGRectMake(0, 0, self.pickerView.frame.size.width, (self.pickerView.frame.size.height / 3) * 2)];
+    
+    self.pickerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.pickerButton addTarget:self action:@selector(confirmedRestTime) forControlEvents:UIControlEventTouchUpInside];
+    [self.pickerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.pickerButton setBackgroundColor:[UIColor greenColor]];
+    
+    self.pickerButton.frame = CGRectMake(0, (self.pickerView.frame.size.height / 3) * 2, self.pickerView.frame.size.width, (self.pickerView.frame.size.height / 3));
+    
+    int lblTextSize = MIN(self.pickerButton.frame.size.width, self.pickerButton.frame.size.height);
+    self.pickerButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.4];
+    [self.pickerButton setTitle:@"Confirm" forState:UIControlStateNormal];
+    
+    [self.pickerView addSubview:self.picker];
+    [self.pickerView addSubview:self.pickerButton];
+    [self addSubview:self.pickerView];
+}
+
+-(void)confirmedRestTime
+{
+    
+    NSTimeInterval time = ((self.picker.min * 60) + self.picker.sec);
+    self.restTime = time;
+    
+    self.btnTimeRest.titleLabel.text = [self timeFormatter:[NSNumber numberWithFloat:time]];
+    
+    [self.pickerView removeFromSuperview];
+    
+    self.pickerButton = nil;
+    [self.pickerView removeFromSuperview];
+    self.pickerView = nil;
+    
+    if (self.inRest) {
+        [self.timeController invalidate];
+        self.timeController = nil;
+        self.inRest = false;
+        self.lblChronometer.text = [self timeFormatter:self.currentTime];
+        [self updateIcons];
+        [self enableEditing];
+    }
 }
 
 //formata um numero (tempo) em uma string formatada e apresentavel
@@ -363,6 +509,10 @@
 
 -(void)playChronometer
 {
+    if (self.isEditable) {
+        [self enableEditing];
+    }
+    
     //Ativa o cronometro
     self.timeController = [NSTimer scheduledTimerWithTimeInterval:0.045
                                                            target:self
@@ -382,6 +532,10 @@
 
 -(void)pauseChronometer
 {
+    if (self.isEditable) {
+        [self enableEditing];
+    }
+    
     //Destroi o timer do cronometro, resultando na nao atualizaçao do cronometro
     [self.timeController invalidate];
     
@@ -416,6 +570,11 @@
 {
     //Verifica se o cronometro já está em modo descanso
     if (self.inRest == false) {
+        
+        if (self.isEditable) {
+            [self enableEditing];
+        }
+        
         self.inRest = true;
         
         if ([self.startTimes count] > [self.pauseTimes count]) {
@@ -440,6 +599,11 @@
 -(void)lapChronometer
 {
     if (!([[self startTimes] count] == [[self pauseTimes] count])) {
+        
+        if (self.isEditable) {
+            [self enableEditing];
+        }
+        
         //Adiciona ao array de voltas o momento em que foi solicitado uma volta
         [self.lapTimes addObject:[NSDate date]];
         
