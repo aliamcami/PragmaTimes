@@ -222,9 +222,9 @@
             [self updateIcons];
             
             //atribui pedacos da tela as labels que mostram o nome e o tempo
-            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions), self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 4)];
+            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions), self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 3)];
             
-            [self.txtChronometerName setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 5, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.txtChronometerName setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 4, self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
             
             break;
             
@@ -237,12 +237,12 @@
         {
             screenDivisions = 8;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
-            [self.txtChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.txtChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
             
-            [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions))];
+            [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 2, self.frame.size.width, (self.frame.size.height / screenDivisions))];
             [self updateIcons];
             
-            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions) * 2, self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 3)];
+            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 2)];
             
             //Define o tamanho que a tableview com as laps ocupara
             CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 5, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
@@ -268,12 +268,12 @@
         {
             screenDivisions = 9;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
-            [self.txtChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.txtChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
             
-            [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions))];
+            [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 2, self.frame.size.width, (self.frame.size.height / screenDivisions))];
             [self updateIcons];
             
-            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions) * 2, self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 3)];
+            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 2)];
             
             //Define o tamanho que a tableview com as laps ocupara
             CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 5, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
@@ -423,8 +423,8 @@
     
     self.pickerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self.pickerButton addTarget:self action:@selector(confirmedRestTime) forControlEvents:UIControlEventTouchUpInside];
-    [self.pickerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.pickerButton setBackgroundColor:[UIColor greenColor]];
+    [self.pickerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.pickerButton setBackgroundColor:[UIColor purpleColor]];
     
     self.pickerButton.frame = CGRectMake(0, (self.pickerView.frame.size.height / 3) * 2, self.pickerView.frame.size.width, (self.pickerView.frame.size.height / 3));
     
@@ -509,9 +509,9 @@
 
 -(void)playChronometer
 {
-    if (self.isEditable) {
-        [self enableEditing];
-    }
+    //    if (self.isEditable) {
+    //        [self enableEditing];
+    //    }
     
     //Ativa o cronometro
     self.timeController = [NSTimer scheduledTimerWithTimeInterval:0.045
@@ -532,9 +532,9 @@
 
 -(void)pauseChronometer
 {
-    if (self.isEditable) {
-        [self enableEditing];
-    }
+    //    if (self.isEditable) {
+    //        [self enableEditing];
+    //    }
     
     //Destroi o timer do cronometro, resultando na nao atualizaçao do cronometro
     [self.timeController invalidate];
