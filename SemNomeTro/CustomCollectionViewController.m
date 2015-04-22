@@ -378,7 +378,7 @@ static float const diferenceForAlphaColor = 0.2;
     
 //    //inicia o tempo de descanso, dois cliques com um dedo
         UITapGestureRecognizer *restTime = [[UITapGestureRecognizer alloc]initWithTarget:chron action:@selector(restChronometer)];
-        [chron editRestTime:5];
+//        [chron editRestTime:5];
         restTime.numberOfTouchesRequired = 1;
         restTime.numberOfTapsRequired = 2;
     
