@@ -1,100 +1,111 @@
 //
-//  CustomCollectionViewController.m
+//  SecondViewController.m
 //  UltimoTeste
 //
-//  Created by camila oliveira on 4/9/15.
+//  Created by camila oliveira on 4/17/15.
 //  Copyright (c) 2015 camila oliveira. All rights reserved.
 //
 
-#import "CustomCollectionViewController.h"
+#import "SecondViewController.h"
 #import "CustomCollectionViewCell.h"
+#import "Chronometer.h"
 #import "MyColorHolder.h"
 #import "SingletonData.h"
-@interface CustomCollectionViewController ()
-//@property (nonatomic) NSMutableArray *arrayChronometers;
 
-//configuracoes
-
-//quantidade de colunas que os chronometros serão divididos
-//@property (nonatomic) int configQntColunas;
-////Quantidade maxima de chronometros exibidos por pagina
-//@property (nonatomic) int configMaxChronometerPerPage;
-////qual será a celula a ser redimencionada caso haja espaço
-//@property (nonatomic) int configCelulaGrande;
-
+@interface SecondViewController ()
 @property (nonatomic)SingletonData *shared;
 @end
 
-@implementation CustomCollectionViewController{
+@implementation SecondViewController{
     CGSize chronometerSize;
     int workWidth;
     int workHeight;
-    int qntColuna;
     int lastUsedColor;
     int tipoChronometro;
+    int qntChronometros;
 }
 
 //constantes
+static int const qntColuna = 4;
 static int const minimunSpaceBetweenElements = 10;
 static int const horizontalBorder = 10;
-static int const verticalBorder = 15;
+static int const verticalBorder = 7;
 static float const diferenceForAlphaColor = 0.2;
 
-#pragma mark Configuracoes
-//-(void)configCelulaGrande:(int)celulaGrande {
-//    self.configCelulaGrande = celulaGrande;
-//}
-//-(void)configQuantidadeColunas:(int)qntColunas{
-//    self.configQntColunas = qntColunas;
-//}
-//-(void)configMaxCronometrosPorPagina:(int)qntCronometroPagina{
-//    self.configMaxChronometerPerPage = qntCronometroPagina;
-//}
-
 #pragma mark principais
--(void)viewDidAppear:(BOOL)animated{
-    [self.collectionView reloadData];
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.shared = [SingletonData sharedSingleton];
+    qntChronometros = ((int)[self.shared.arrayChronometers count]) -1 ;
+   
     
-    //temporariamente atribui a qnt total de chronometros na tela para que os calculos de tamanhos possam ser feitos
-    self.configQntColunas = 2;
-    self.configMaxChronometerPerPage = 8;
-    self.configCelulaGrande = CONFIG_NENHUMA_CELULA_DESTAQUE;
+   
+    
+    // COR DOS BUTOES DA NAVIGATION
+//    [[[self navigationController] navigationBar] setTintColor:[UIColor redColor]];
+    
+    
+//    [[[self.shared arrayChronometers]objectAtIndex:self.shared.mainChronIndex] resizeCronometer:rect andFocus:CRONOMETRO_COMPLETO];
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"MyCell"];
-  
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"camiCell"];
+    
+    
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [[self.shared arrayChronometers]count];;
+    MyColorHolder *color = [[self.shared arrayColors] objectAtIndex:self.shared.mainChronIndex];
+    Chronometer *chron = [[self.shared arrayChronometers] objectAtIndex:self.shared.mainChronIndex];
+    CGRect rect = CGRectMake(0, 0, self.mainChronView.frame.size.width, self.mainChronView.frame.size.height);
+    [chron resizeCronometer:rect andFocus:CRONOMETRO_INTERMEDIARIO];
+
+    [self setGestureRecognizers:chron atCell:self.mainChronView];
+    
+    [self.mainChronView addSubview:chron];
+    [self.mainChronView setBackgroundColor: color.theColor];
+    self.collectionView.backgroundColor = [UIColor clearColor];
+    self.collectionView.backgroundColor = color.theColor;
+
+    //muda cor da navigation bar
+    //    [[[self navigationController] navigationBar] setTranslucent:YES];
+//    [[[self navigationController] navigationBar] setBarTintColor:color.theColor];
+    
+    return qntChronometros;
 }
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"myCell" forIndexPath:indexPath];
+    CustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"camiCell" forIndexPath:indexPath];
     
-//removendo as subviews lixo das celulas
+    
+    if ((int)indexPath.row >= self.shared.mainChronIndex) {
+        indexPath = [NSIndexPath  indexPathForRow:indexPath.row+1 inSection:0];
+    }
+    
+    //removendo as subviews lixo das celulas
     for (UIView *v in cell.subviews) {
         [v removeFromSuperview];
     }
     
-//    //coloca o crhonometro em cada celula
-    Chronometer *chron = [[self.shared arrayChronometers] objectAtIndex:indexPath.row];
+   
+    MyColorHolder *color = [[self.shared arrayColors] objectAtIndex:indexPath.row];
+    Chronometer *chron = self.shared.arrayChronometers[indexPath.row];
+    
     [cell addSubview:chron];
+    [cell setBackgroundColor:color.theColor];
+    
     
     //arredonda os cantos da celula
-    [cell.layer setCornerRadius:20];
-
-    //atribui cor a celula
-    MyColorHolder *color = [[self.shared arrayColors] objectAtIndex:indexPath.row];
-    [cell setBackgroundColor:color.theColor];
+    [cell.layer setCornerRadius:12];
+    cell.clipsToBounds = NO;
+    cell.layer.shadowColor = [[UIColor blackColor] CGColor];
+    cell.layer.shadowOffset = CGSizeMake(0,3);
+    cell.layer.shadowOpacity = 0.4f;
+    
     
     //add geresture recognizer para cada uma das celulas
     [self setGestureRecognizers:chron atCell:cell];
@@ -103,9 +114,6 @@ static float const diferenceForAlphaColor = 0.2;
     return cell;
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-
-    //calcula a quantidade de colunas necessarias para a apresentacao dos cronometros
-    qntColuna = [self getQntColuna];
     
     //calcula o espaco disponivel para apresentar os cronometros já descontando o espado de bordas
     [self ajusteDoEpacoDeApresentacaoWidth:self.collectionView.frame.size.width andHeight: self.collectionView.frame.size.height];
@@ -117,39 +125,14 @@ static float const diferenceForAlphaColor = 0.2;
 }
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    //Reajusta a celula destaque
-    CGSize novo = CGSizeMake(0, 0);
-    if (self.configCelulaGrande != CONFIG_NENHUMA_CELULA_DESTAQUE) {
-        long int count = indexPath.row+1;
-        if (count == 1 & [[self.shared arrayChronometers]count] > 3) {
-            if ([[self.shared arrayChronometers]count] > 3) {
-                if ([self getQntColuna] == 3) {
-                    if (count % 3 == 2) {
-                        novo = CGSizeMake(chronometerSize.width*2 + 10, chronometerSize.height);
-                    }else if ([[self.shared arrayChronometers]count] % 3 == 1){
-                        novo = CGSizeMake(chronometerSize.width*3 + 20, chronometerSize.height);
-                    }
-                }else{
-                    if ([[self.shared arrayChronometers]count] % 2 != 0) {
-                        novo = CGSizeMake(chronometerSize.width*2 + 10, chronometerSize.height);
-                    }
-                    
-                }
-            }
-        }
-        
+    if ((int)indexPath.row >= self.shared.mainChronIndex) {
+        indexPath = [NSIndexPath  indexPathForRow:indexPath.row+1 inSection:0];
     }
-    
-    //identifica se o tamanho desta celula foi alterado
-    CGSize paraAtribuir = novo.height == 0? chronometerSize : novo;
-    
     //configura o tamanho de cada chronometro
-    CGRect rect = CGRectMake(0, 0, paraAtribuir.width, paraAtribuir.height);
+    CGRect rect = CGRectMake(0, 0, chronometerSize.width, chronometerSize.height);
     [[[self.shared arrayChronometers]objectAtIndex:indexPath.row] resizeCronometer:rect andFocus:tipoChronometro];
-    
     //retorna o tamanho da celula... que é o mesmo do cronometro
-    return paraAtribuir;
+    return chronometerSize;
 }
 
 /*
@@ -213,51 +196,49 @@ static float const diferenceForAlphaColor = 0.2;
 
 #pragma mark todos os calculos de ajuste de tamanho
 -(void)ajusteDoEpacoDeApresentacaoWidth:(int)width andHeight:(int)height{
-    workWidth = width - horizontalBorder*2 - (qntColuna - 1)*minimunSpaceBetweenElements;
-    workHeight = height - verticalBorder*2 -
-    MIN(ceil((((float)[[self.shared arrayChronometers]count]/qntColuna))),
-        self.configMaxChronometerPerPage/2+1)*minimunSpaceBetweenElements;
+    workWidth = width - horizontalBorder*2 -
+    MIN(qntColuna, (ceil(((float)qntChronometros)) - 1))*minimunSpaceBetweenElements;
+    workHeight = height - verticalBorder*2 - 2*minimunSpaceBetweenElements;
 }
 
 - (void)calcChronometerSize{
     //set tamanho dos cronometros dependendo da quantidade de cronometros
-    int altura;
-    switch ([[self.shared arrayChronometers]count]) {
+    int largura;
+    switch (qntChronometros) {
         case 1:
             chronometerSize = CGSizeMake(workWidth, workHeight);
             tipoChronometro = CRONOMETRO_COMPLETO;
             break;
         case 2:
-            chronometerSize = CGSizeMake(workWidth, workHeight/[[self.shared arrayChronometers]count]);
+            chronometerSize = CGSizeMake((workWidth-5)/qntChronometros, workHeight);
             tipoChronometro = CRONOMETRO_INTERMEDIARIO;
             break;
-        case 3:
-            //nao sei porque.. mas o -10 eh importante
-            chronometerSize = CGSizeMake(workWidth, (workHeight - 10)/[[self.shared arrayChronometers]count]);
-            tipoChronometro = CRONOMETRO_BASE;
+//        case 3:
+//            //nao sei porque.. mas o -10 eh importante
+//            chronometerSize = CGSizeMake(workWidth, (workHeight - 10)/[[self.shared arrayChronometers]count]);
+//            tipoChronometro = CRONOMETRO_BASE;
             break;
         default:
             tipoChronometro = CRONOMETRO_BASE;
-            altura =[self getChronometerHeight];
-            chronometerSize = CGSizeMake(workWidth/qntColuna, altura);
+            largura = [self getChronometerWidth];
+            if (qntChronometros <= qntColuna) {
+                chronometerSize = CGSizeMake(largura, workHeight);
+            }else{
+                chronometerSize = CGSizeMake(largura, (workHeight/2)+2);
+            }
     }
     
 }
 
--(int) getChronometerHeight{
-    
-    //calcula altura dos cronometros dependendo da quantidade de cronometros
-    if ([[self.shared arrayChronometers]count] > self.configMaxChronometerPerPage) {
-        return (workHeight)/(int)ceil((float)self.configMaxChronometerPerPage/qntColuna);
+-(int) getChronometerWidth{
+    //calcula largura dos cronometros dependendo da quantidade de cronometros
+    if (qntChronometros <= qntColuna) {
+        return workWidth / qntChronometros;
+    }else if (qntChronometros < 8){
+        return workWidth / ceil(qntChronometros / 2.0);
     }
-    return (workHeight)/(int)ceil((float)[[self.shared arrayChronometers]count]/qntColuna);
+    return workWidth / qntColuna;
     
-}
--(int)getQntColuna{
-    if ([[self.shared arrayChronometers]count] < 3) {
-        return 1;
-    }
-    return self.configQntColunas;
 }
 
 
@@ -314,28 +295,28 @@ static float const diferenceForAlphaColor = 0.2;
 
 
 #pragma mark GestureRecognizer
--(void)setGestureRecognizers:(Chronometer*)chron atCell:(CustomCollectionViewCell*)cell {
-//    //Um clique em cima do cronometro
-        UITapGestureRecognizer *playStop = [[UITapGestureRecognizer alloc]initWithTarget:chron action:@selector(play_pauseChronometer)];
-        playStop.cancelsTouchesInView = NO;
+-(void)setGestureRecognizers:(Chronometer*)chron atCell:(UIView*)cell {
+    //    //Um clique em cima do cronometro
+    UITapGestureRecognizer *playStop = [[UITapGestureRecognizer alloc]initWithTarget:chron action:@selector(play_pauseChronometer)];
+    playStop.cancelsTouchesInView = NO;
     
-//    //um clique com dois dedos... por enquanto
-        UITapGestureRecognizer *lapMark = [[UITapGestureRecognizer alloc]initWithTarget:chron action:@selector(lapChronometer)];
-//        [playStop requireGestureRecognizerToFail:lapMark]; //da um delay grande no pause
-        lapMark.numberOfTapsRequired = 1;
-        lapMark.numberOfTouchesRequired = 2;
-        lapMark.cancelsTouchesInView = NO;
+    //    //um clique com dois dedos... por enquanto
+    UITapGestureRecognizer *lapMark = [[UITapGestureRecognizer alloc]initWithTarget:chron action:@selector(lapChronometer)];
+    //        [playStop requireGestureRecognizerToFail:lapMark]; //da um delay grande no pause
+    lapMark.numberOfTapsRequired = 1;
+    lapMark.numberOfTouchesRequired = 2;
+    lapMark.cancelsTouchesInView = NO;
     
-//    //inicia o tempo de descanso, dois cliques com um dedo
-        UITapGestureRecognizer *restTime = [[UITapGestureRecognizer alloc]initWithTarget:chron action:@selector(restChronometer)];
-//        [chron editRestTime:5];
-        restTime.numberOfTouchesRequired = 1;
-        restTime.numberOfTapsRequired = 2;
-        restTime.cancelsTouchesInView = NO;
+    //    //inicia o tempo de descanso, dois cliques com um dedo
+    UITapGestureRecognizer *restTime = [[UITapGestureRecognizer alloc]initWithTarget:chron action:@selector(restChronometer)];
+//    [chron editRestTime:5];
+    restTime.numberOfTouchesRequired = 1;
+    restTime.numberOfTapsRequired = 2;
+    restTime.cancelsTouchesInView = NO;
     
-//    //temporariamente adiciona cronometro
-        UISwipeGestureRecognizer *addChron= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(addNewCell)];
-        addChron.cancelsTouchesInView = NO;
+    //    //temporariamente adiciona cronometro
+    UISwipeGestureRecognizer *addChron= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(addNewCell)];
+    addChron.cancelsTouchesInView = NO;
     
     //    UISwipeGestureRecognizer *deleteChron = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(deleteCellatIndexPath:)];
     
@@ -343,73 +324,76 @@ static float const diferenceForAlphaColor = 0.2;
     //editaChronometro
     UILongPressGestureRecognizer *edit = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(goToEditableChronView:)];
     edit.minimumPressDuration = 1;
-    
-    
-        [cell addGestureRecognizer:playStop];
-        [cell addGestureRecognizer:lapMark];
-        [cell addGestureRecognizer:restTime];
-        [cell addGestureRecognizer: addChron];
-        [cell addGestureRecognizer:edit];
+    [cell addGestureRecognizer:playStop];
+    [cell addGestureRecognizer:lapMark];
+    [cell addGestureRecognizer:restTime];
+    [cell addGestureRecognizer: addChron];
+    [cell addGestureRecognizer:edit];
     //    [cell addGestureRecognizer: deleteChron];
     
 }
 -(void)goToEditableChronView:(UILongPressGestureRecognizer*)gestureRecognizer{
-
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         return;
-    }else if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
+    }
+    
+    else if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
         NSIndexPath *i = [self.collectionView indexPathForItemAtPoint: [gestureRecognizer locationInView:self.collectionView] ];
         if (i != nil) {
-            self.shared.mainChronIndex = (int) i.row;
-            [self performSegueWithIdentifier:@"goToEditable" sender:nil];
-        }
-
+            if (i.row >= self.shared.mainChronIndex) {
+                self.shared.mainChronIndex = (int)i.row + 1;
+            }else{
+                self.shared.mainChronIndex = (int) i.row;
+            }
+            [self.collectionView reloadData];
+            [self.mainChronView reloadInputViews];
+            [self reloadInputViews];
     }
     
     }
-//- (void)handlePinchGesture:(UIPinchGestureRecognizer *)sender {
+}//- (void)handlePinchGesture:(UIPinchGestureRecognizer *)sender {
 //    if ([sender numberOfTouches] != 2)
 //        return;
-//    
+//
 //    // Get the pinch points.
 //    CGPoint p1 = [sender locationOfTouch:0 inView:[self collectionView]];
 //    CGPoint p2 = [sender locationOfTouch:1 inView:[self collectionView]];
-//    
+//
 //    // Compute the new spread distance.
 //    CGFloat xd = p1.x - p2.x;
 //    CGFloat yd = p1.y - p2.y;
 //    CGFloat distance = sqrt(xd*xd + yd*yd);
-//    
+//
 //    // Update the custom layout parameter and invalidate.
 //    MyCustomLayout* myLayout = (MyCustomLayout*)[[self collectionView] collectionViewLayout];
 //    [myLayout updateSpreadDistance:distance];
 //    [myLayout invalidateLayout];
 //}
 //-(void)handlePan:(UIPanGestureRecognizer *)panRecognizer {
-//    
+//
 //    CGPoint locationPoint = [panRecognizer locationInView:self.collectionView];
-//    
+//
 //    if (panRecognizer.state == UIGestureRecognizerStateBegan) {
-//        
+//
 //        NSIndexPath indexPathOfMovingCell = [self.collectionView indexPathForItemAtPoint:locationPoint];
 //        UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPathOfMovingCell];
-//        
+//
 //        UIGraphicsBeginImageContext(cell.bounds.size);
 //        [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
 //        UIImage *cellImage = UIGraphicsGetImageFromCurrentImageContext();
 //        UIGraphicsEndImageContext();
-//        
+//
 //        self.movingCell = [[UIImageView alloc] initWithImage:cellImage];
 //        [self.movingCell setCenter:locationPoint];
 //        [self.movingCell setAlpha:0.75f];
 //        [self.collectionView addSubview:self.movingCell];
-//        
+//
 //    }
-//    
+//
 //    if (panRecognizer.state == UIGestureRecognizerStateChanged) {
 //        [self.movingCell setCenter:locationPoint];
 //    }
-//    
+//
 //    if (panRecognizer.state == UIGestureRecognizerStateEnded) {
 //        [self.movingCell removeFromSuperview];
 //    }
@@ -434,14 +418,16 @@ static float const diferenceForAlphaColor = 0.2;
     [self addColorToUsedColorsArray]; //adiciona uma cor no array de cores
     NSArray *indexes = [NSArray arrayWithObjects:indexp, nil];
     [self.collectionView insertItemsAtIndexPaths:indexes];
-    [self.collectionView scrollToItemAtIndexPath:indexp atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
 }
 
 //metodo long pres
 
 /*
-[self performSegueWithIdentifier:@"detail"];
+ [self performSegueWithIdentifier:@"detail"];
  */
+- (IBAction)edit:(id)sender {
+    [self.shared.arrayChronometers[self.shared.mainChronIndex] enableEditing];
+}
 
 
 @end
