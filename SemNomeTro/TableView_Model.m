@@ -36,6 +36,8 @@
         [self.dateFormatter setDateFormat:@"HH:mm:ss.SS"];
         [self.dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
         
+        self.tableView.allowsSelection = NO;
+        
         [self addSubview:self.tableView];
     }
     return self;

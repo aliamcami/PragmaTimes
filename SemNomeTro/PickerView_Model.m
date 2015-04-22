@@ -29,6 +29,10 @@
         self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
         self.pickerView.dataSource = self;
         self.pickerView.delegate = self;
+        
+        [self.pickerView selectRow:30 inComponent:0 animated:YES];
+        [self.pickerView selectRow:30 inComponent:1 animated:YES];
+        
         [self addSubview:self.pickerView];
     }
     return self;
