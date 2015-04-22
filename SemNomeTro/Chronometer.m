@@ -566,7 +566,7 @@
     //    }
     
     //Necessario recolocar essa validacao pq esse metodo sera chamado de uma classe exterior
-    if (![self.timeController isValid]) {
+    if ([self.timeController isValid]) {
         //Destroi o timer do cronometro, resultando na nao atualizaçao do cronometro
         [self.timeController invalidate];
         

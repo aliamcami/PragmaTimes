@@ -334,8 +334,8 @@ static float const diferenceForAlphaColor = 0.2;
         restTime.cancelsTouchesInView = NO;
     
 //    //temporariamente adiciona cronometro
-        UISwipeGestureRecognizer *addChron= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(addNewCell)];
-        addChron.cancelsTouchesInView = NO;
+//        UISwipeGestureRecognizer *addChron= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(addNewCell)];
+//        addChron.cancelsTouchesInView = NO;
     
     //    UISwipeGestureRecognizer *deleteChron = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(deleteCellatIndexPath:)];
     
@@ -348,7 +348,7 @@ static float const diferenceForAlphaColor = 0.2;
         [cell addGestureRecognizer:playStop];
         [cell addGestureRecognizer:lapMark];
         [cell addGestureRecognizer:restTime];
-        [cell addGestureRecognizer: addChron];
+//        [cell addGestureRecognizer: addChron];
         [cell addGestureRecognizer:edit];
     //    [cell addGestureRecognizer: deleteChron];
     
