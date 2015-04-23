@@ -31,9 +31,6 @@
 //qual será a celula a ser redimencionada caso haja espaço
 @property (nonatomic) int configCelulaGrande;
 
-
-
-
 //-(Chronometer*)getNewChronometer;
 
 @end

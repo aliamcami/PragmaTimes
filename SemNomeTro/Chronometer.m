@@ -154,12 +154,16 @@
         if (self.frame.size.width < 100) {
             self.lapIcon.frame = CGRectMake(5, 5, 10, 10);
             
-            self.lblCountLap.frame = CGRectMake(20, 5, 11, 10);
+            self.lblCountLap.frame = CGRectMake(20, 5, 11, 40);
             int lblTextSize = MIN(self.lblCountLap.frame.size.width, self.lblCountLap.frame.size.height);
             self.lblCountLap.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize];
         }else{
             self.lapIcon.frame = CGRectMake(15, 10, 21, 15);
-            self.lblCountLap.frame = CGRectMake(45, 11, 50, 15);
+            
+            self.lblCountLap.frame = CGRectMake(45, 11, 50, 40);
+            
+            int lblTextSize = MIN(self.lblCountLap.frame.size.width, self.lblCountLap.frame.size.height);
+            self.lblCountLap.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize];
         }
         
         [self.icons addSubview:self.lapIcon];
@@ -709,6 +713,16 @@
 }
 
 #pragma mark - Returning Informations
+
+-(NSArray*)getStartTimes
+{
+    return self.startTimes;
+}
+
+-(NSArray*)getPauseTimes
+{
+    return self.pauseTimes;
+}
 
 //Retorna o tempo de pausa total do cronometro
 -(NSNumber*)getTimeOfPause

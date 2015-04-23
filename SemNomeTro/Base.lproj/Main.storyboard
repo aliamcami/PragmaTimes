@@ -44,6 +44,7 @@
                                 </state>
                                 <connections>
                                     <action selector="onContinuePressed:" destination="9KK-EO-j1R" eventType="touchUpInside" id="Xti-G7-Exw"/>
+                                    <segue destination="nZA-wg-NMT" kind="show" id="u24-EE-tyH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oDx-cx-8TD">
@@ -212,6 +213,11 @@
                                     <barButtonItem title="Item" id="4JP-mX-8PM">
                                         <connections>
                                             <action selector="edit:" destination="kEJ-3t-ede" id="Gou-eq-xUf"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="save" style="plain" id="A2Y-Dh-ZCX">
+                                        <connections>
+                                            <action selector="saveChronometer:" destination="kEJ-3t-ede" id="L5e-Eu-man"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
