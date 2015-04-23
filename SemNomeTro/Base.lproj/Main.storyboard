@@ -1,10 +1,100 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nZA-wg-NMT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9KK-EO-j1R">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Register View Controller-->
+        <scene sceneID="lUQ-Wg-8ON">
+            <objects>
+                <viewController id="9KK-EO-j1R" customClass="Register_ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="plG-FC-YZU"/>
+                        <viewControllerLayoutGuide type="bottom" id="ELz-FK-L8l"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hW8-9M-OZU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Cadastro" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eH8-Nv-8oM">
+                                <rect key="frame" x="16" y="28" width="568" height="231"/>
+                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gvf-Bw-wCc" userLabel="Senha">
+                                <rect key="frame" x="150" y="364" width="300" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ONn-cT-cGM" userLabel="Senha">
+                                <rect key="frame" x="150" y="423" width="300" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D5Q-ne-fEv">
+                                <rect key="frame" x="326" y="509" width="258" height="71"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <state key="normal" title="Continuar">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onContinuePressed:" destination="9KK-EO-j1R" eventType="touchUpInside" id="Xti-G7-Exw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oDx-cx-8TD">
+                                <rect key="frame" x="16" y="509" width="258" height="71"/>
+                                <color key="backgroundColor" red="0.06417092770938318" green="0.71734927398989901" blue="0.11888378097595563" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <state key="normal" title="Cadastrar">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onRegisterPressed:" destination="9KK-EO-j1R" eventType="touchUpInside" id="Rb2-Jd-HIy"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="60v-xr-IAc" userLabel="Email">
+                                <rect key="frame" x="150" y="305" width="300" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="60v-xr-IAc" firstAttribute="leading" secondItem="hW8-9M-OZU" secondAttribute="leadingMargin" constant="50" id="3Ct-e7-q1K"/>
+                            <constraint firstItem="D5Q-ne-fEv" firstAttribute="trailing" secondItem="hW8-9M-OZU" secondAttribute="trailingMargin" id="72S-DA-Cus"/>
+                            <constraint firstItem="ONn-cT-cGM" firstAttribute="leading" secondItem="hW8-9M-OZU" secondAttribute="leadingMargin" constant="50" id="9jL-wt-ON2"/>
+                            <constraint firstItem="eH8-Nv-8oM" firstAttribute="trailing" secondItem="hW8-9M-OZU" secondAttribute="trailingMargin" id="Gvc-WD-96H"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="60v-xr-IAc" secondAttribute="trailing" constant="50" id="NaO-xf-5Kq"/>
+                            <constraint firstItem="oDx-cx-8TD" firstAttribute="leading" secondItem="hW8-9M-OZU" secondAttribute="leadingMargin" id="NdK-Z3-tUq"/>
+                            <constraint firstItem="D5Q-ne-fEv" firstAttribute="width" secondItem="oDx-cx-8TD" secondAttribute="width" id="Sv0-KJ-qPs"/>
+                            <constraint firstItem="Gvf-Bw-wCc" firstAttribute="leading" secondItem="hW8-9M-OZU" secondAttribute="leadingMargin" constant="50" id="TJS-E8-N5U"/>
+                            <constraint firstItem="D5Q-ne-fEv" firstAttribute="leading" secondItem="oDx-cx-8TD" secondAttribute="trailing" priority="1" constant="30" id="gRe-0i-rb0"/>
+                            <constraint firstItem="ELz-FK-L8l" firstAttribute="top" secondItem="D5Q-ne-fEv" secondAttribute="bottom" constant="20" id="jep-PT-av2"/>
+                            <constraint firstItem="ELz-FK-L8l" firstAttribute="top" secondItem="oDx-cx-8TD" secondAttribute="bottom" constant="20" id="lR1-6J-coa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ONn-cT-cGM" secondAttribute="trailing" constant="50" id="rEH-RX-PST"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gvf-Bw-wCc" secondAttribute="trailing" constant="50" id="tAU-xV-oLE"/>
+                            <constraint firstItem="eH8-Nv-8oM" firstAttribute="top" secondItem="plG-FC-YZU" secondAttribute="bottom" constant="8" id="ufa-mK-Bwa"/>
+                            <constraint firstItem="eH8-Nv-8oM" firstAttribute="leading" secondItem="hW8-9M-OZU" secondAttribute="leadingMargin" id="vuo-sA-eMn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnContinue" destination="D5Q-ne-fEv" id="yx4-OU-zVi"/>
+                        <outlet property="btnRegister" destination="oDx-cx-8TD" id="jhR-rK-Lgh"/>
+                        <outlet property="txtEmail" destination="60v-xr-IAc" id="Fv6-5T-SQw"/>
+                        <outlet property="txtPassword" destination="Gvf-Bw-wCc" id="NnL-R0-7r2"/>
+                        <outlet property="txtPasswordConfirm" destination="ONn-cT-cGM" id="VIp-uJ-J6N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fFs-jL-6xq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="47" y="-164"/>
+        </scene>
         <!--Custom Collection View Controller-->
         <scene sceneID="k6w-mj-hHe">
             <objects>
