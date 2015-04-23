@@ -7,7 +7,7 @@
 //
 
 #import "Register_ViewController.h"
-#import ""
+//#import ""
 
 @interface Register_ViewController ()
 
@@ -53,8 +53,30 @@
 
 - (IBAction)onContinuePressed:(id)sender
 {
-    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:@"Dados dos cronometros / atletas não serão salvos sem o cadastro. E o andré teve muito trabalho para fazer esta parte. Por favor faça o cadastro!"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Desculpe, quero fazer cadastro!"
+                                          otherButtonTitles:@"Não gosto do andré mesmo...", nil];
+    [alert show];
 }
 
+//como fazer o alertview com açoes
+-(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 1:
+            [self opcao1];
+            break;
+
+    }
+}
+-(void)opcao1{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"DIE" message:nil delegate:nil cancelButtonTitle:@"Im sorry...Ill never cancel again!" otherButtonTitles:nil];
+    [alert show];
+}
+
+-(void)desculpe{
+    NSLog(@"o cancel eh o botao 0");
+}
 
 @end

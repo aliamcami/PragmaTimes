@@ -30,6 +30,10 @@
 		6BB7E3171AE8174300158533 /* KorreData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E3161AE8174300158533 /* KorreData.xcdatamodel */; };
 		6BF4FB1D1AD6EE0800BAE81B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4FB1B1AD6EE0800BAE81B /* ViewController.m */; };
 		6BF4FB1E1AD6EE0800BAE81B /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BF4FB1C1AD6EE0800BAE81B /* ViewController.xib */; };
+		860D081F1AE96F74006AE604 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860D08181AE96F74006AE604 /* Parse.framework */; };
+		860D08201AE96F74006AE604 /* Register_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081A1AE96F74006AE604 /* Register_ViewController.m */; };
+		860D08211AE96F74006AE604 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081C1AE96F74006AE604 /* SecondViewController.m */; };
+		860D08221AE96F74006AE604 /* SingletonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081E1AE96F74006AE604 /* SingletonData.m */; };
 		862C74EC1ADEF2CF00CEA9AC /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */; };
 		862C74ED1ADEF2CF00CEA9AC /* CustomCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */; };
 		862C74F01ADEF30C00CEA9AC /* MyColorHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */; };
@@ -89,6 +93,13 @@
 		6BF4FB1A1AD6EE0800BAE81B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6BF4FB1B1AD6EE0800BAE81B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6BF4FB1C1AD6EE0800BAE81B /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		860D08181AE96F74006AE604 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = SemNomeTro/Parse.framework; sourceTree = "<group>"; };
+		860D08191AE96F74006AE604 /* Register_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Register_ViewController.h; path = SemNomeTro/Register_ViewController.h; sourceTree = "<group>"; };
+		860D081A1AE96F74006AE604 /* Register_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Register_ViewController.m; path = SemNomeTro/Register_ViewController.m; sourceTree = "<group>"; };
+		860D081B1AE96F74006AE604 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondViewController.h; path = SemNomeTro/SecondViewController.h; sourceTree = "<group>"; };
+		860D081C1AE96F74006AE604 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondViewController.m; path = SemNomeTro/SecondViewController.m; sourceTree = "<group>"; };
+		860D081D1AE96F74006AE604 /* SingletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonData.h; path = SemNomeTro/SingletonData.h; sourceTree = "<group>"; };
+		860D081E1AE96F74006AE604 /* SingletonData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SingletonData.m; path = SemNomeTro/SingletonData.m; sourceTree = "<group>"; };
 		862C74E81ADEF2CF00CEA9AC /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
 		862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
 		862C74EA1ADEF2CF00CEA9AC /* CustomCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewController.h; sourceTree = "<group>"; };
@@ -135,6 +146,7 @@
 				6B9FE2D61AE839CE00CBF66F /* CoreLocation.framework in Frameworks */,
 				6B9FE2D41AE839C400CBF66F /* CoreGraphics.framework in Frameworks */,
 				6B9FE2D21AE839BA00CBF66F /* CFNetwork.framework in Frameworks */,
+				860D081F1AE96F74006AE604 /* Parse.framework in Frameworks */,
 				6B9FE2D01AE839B000CBF66F /* AudioToolbox.framework in Frameworks */,
 				6B9FE2CE1AE8393600CBF66F /* Parse.framework in Frameworks */,
 				6B9FE2CD1AE8393600CBF66F /* Bolts.framework in Frameworks */,
@@ -151,16 +163,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D5539BAF1ADF19E300499473 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Images;
-			sourceTree = "<group>";
-		};
 		D587671E1AD3230300F29BCC = {
 			isa = PBXGroup;
 			children = (
+				860D08181AE96F74006AE604 /* Parse.framework */,
+				860D08191AE96F74006AE604 /* Register_ViewController.h */,
+				860D081A1AE96F74006AE604 /* Register_ViewController.m */,
+				860D081B1AE96F74006AE604 /* SecondViewController.h */,
+				860D081C1AE96F74006AE604 /* SecondViewController.m */,
+				860D081D1AE96F74006AE604 /* SingletonData.h */,
+				860D081E1AE96F74006AE604 /* SingletonData.m */,
 				6B9FE2E31AE83A1600CBF66F /* libsqlite3.dylib */,
 				6B9FE2E11AE83A0900CBF66F /* libz.dylib */,
 				6B9FE2DF1AE839FC00CBF66F /* SystemConfiguration.framework */,
@@ -261,18 +273,12 @@
 		D59958191AD4483A00BCF33B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				867BB4891AE5BBA6004A4B15 /* SingletonData.h */,
-				867BB48A1AE5BBA6004A4B15 /* SingletonData.m */,
-				867BB4861AE5BB9A004A4B15 /* SecondViewController.h */,
-				867BB4871AE5BB9A004A4B15 /* SecondViewController.m */,
 				862C74EE1ADEF30C00CEA9AC /* MyColorHolder.h */,
 				862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */,
 				862C74EA1ADEF2CF00CEA9AC /* CustomCollectionViewController.h */,
 				862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */,
 				862C74E81ADEF2CF00CEA9AC /* CustomCollectionViewCell.h */,
 				862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */,
-				D5A913C21AE848C60067F58C /* Register_ViewController.h */,
-				D5A913C31AE848C60067F58C /* Register_ViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -314,12 +320,6 @@
 		D5A913B51AE830870067F58C /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				D5A913B61AE830990067F58C /* add_cronometro@2x.png */,
-				D5A913B71AE830990067F58C /* edit_cronometro@2x.png */,
-				D5A913B81AE830990067F58C /* icone_play@2x.png */,
-				D5A913B91AE830990067F58C /* icone_return@2x.png */,
-				D5A913BA1AE830990067F58C /* icone_volta@2x.png */,
-				D5A913BB1AE830990067F58C /* pause_grande@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -408,7 +408,6 @@
 			files = (
 				D58767361AD3230300F29BCC /* Main.storyboard in Resources */,
 				D587673B1AD3230300F29BCC /* LaunchScreen.xib in Resources */,
-				D5A913BF1AE830990067F58C /* icone_return@2x.png in Resources */,
 				6BF4FB1E1AD6EE0800BAE81B /* ViewController.xib in Resources */,
 				D58767381AD3230300F29BCC /* Images.xcassets in Resources */,
 			);
@@ -430,15 +429,18 @@
 			files = (
 				D594BF9F1AE5B79C00BCFCDC /* PickerView_Model.m in Sources */,
 				6BB7E3061AE80C7D00158533 /* Parada.m in Sources */,
+				860D08201AE96F74006AE604 /* Register_ViewController.m in Sources */,
 				6BF4FB1D1AD6EE0800BAE81B /* ViewController.m in Sources */,
 				6BB7E2FD1AE80C7C00158533 /* Atleta.m in Sources */,
 				D55F80811ADD7B560071A70C /* Login_Model.m in Sources */,
 				D58767301AD3230300F29BCC /* AppDelegate.m in Sources */,
 				6BB7E3091AE80C7D00158533 /* Volta.m in Sources */,
+				860D08211AE96F74006AE604 /* SecondViewController.m in Sources */,
 				D599581F1AD4497900BCF33B /* User_Model.m in Sources */,
 				862C74EC1ADEF2CF00CEA9AC /* CustomCollectionViewCell.m in Sources */,
 				6BB7E3001AE80C7D00158533 /* GrupoDeTempos.m in Sources */,
 				D5C59DB81AD4573A004C4BC7 /* Chronometer.m in Sources */,
+				860D08221AE96F74006AE604 /* SingletonData.m in Sources */,
 				6BB7E2F81AE80C2400158533 /* DB.m in Sources */,
 				D5C5765E1AD5DCAD0066CA29 /* TableView_Model.m in Sources */,
 				862C74F01ADEF30C00CEA9AC /* MyColorHolder.m in Sources */,
