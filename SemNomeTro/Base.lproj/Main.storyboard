@@ -134,11 +134,12 @@
                         <outlet property="txtEmail" destination="60v-xr-IAc" id="Fv6-5T-SQw"/>
                         <outlet property="txtPassword" destination="Gvf-Bw-wCc" id="NnL-R0-7r2"/>
                         <outlet property="txtPasswordConfirm" destination="ONn-cT-cGM" id="VIp-uJ-J6N"/>
+                        <segue destination="nZA-wg-NMT" kind="show" identifier="showMainCollectionView" id="QmV-YO-OqO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fFs-jL-6xq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="47" y="-164"/>
+            <point key="canvasLocation" x="195" y="168"/>
         </scene>
         <!--Custom Collection View Controller-->
         <scene sceneID="k6w-mj-hHe">

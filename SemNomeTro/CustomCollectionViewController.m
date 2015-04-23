@@ -366,7 +366,7 @@ static float const diferenceForAlphaColor = 0.2;
 
     }
     
-    }
+}
 //- (void)handlePinchGesture:(UIPinchGestureRecognizer *)sender {
 //    if ([sender numberOfTouches] != 2)
 //        return;

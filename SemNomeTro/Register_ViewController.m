@@ -57,7 +57,7 @@
                                                     message:@"Dados dos cronometros / atletas não serão salvos sem o cadastro. E o andré teve muito trabalho para fazer esta parte. Por favor faça o cadastro!"
                                                    delegate:self
                                           cancelButtonTitle:@"Desculpe, quero fazer cadastro!"
-                                          otherButtonTitles:@"Não gosto do andré mesmo...", nil];
+                                          otherButtonTitles:@"Não gosto do andré mesmo...",@"Mostrar Cronometros", nil];
     [alert show];
 }
 
@@ -67,6 +67,9 @@
         case 1:
             [self opcao1];
             break;
+        case 2:
+            [self opcao2];
+            break;
 
     }
 }
@@ -75,8 +78,10 @@
     [alert show];
 }
 
--(void)desculpe{
-    NSLog(@"o cancel eh o botao 0");
+-(void)opcao2{
+    //como ir para a pagina dos cronometros
+    [self performSegueWithIdentifier:@"showMainCollectionView" sender:nil];
+    
 }
 
 @end
