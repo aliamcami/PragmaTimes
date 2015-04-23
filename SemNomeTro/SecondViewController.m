@@ -12,6 +12,9 @@
 #import "MyColorHolder.h"
 #import "SingletonData.h"
 
+//Para passar dados pro banco
+#import "GeneralController.h"
+
 @interface SecondViewController ()
 @property (nonatomic)SingletonData *shared;
 @end
@@ -427,6 +430,15 @@ static float const diferenceForAlphaColor = 0.2;
  */
 - (IBAction)edit:(id)sender {
     [self.shared.arrayChronometers[self.shared.mainChronIndex] enableEditing];
+}
+
+- (IBAction)saveChronometer:(id)sender
+{
+    GeneralController *gc = [[GeneralController alloc] init];
+    
+    SingletonData *sgn = [SingletonData sharedSingleton];
+    
+    [gc adicionarTempos:@"" eTempos:[[sgn arrayChronometers] objectAtIndex:[sgn mainChronIndex]]];
 }
 
 

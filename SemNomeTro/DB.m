@@ -163,7 +163,7 @@
     novaParada.grupo = novoGrupoDeTempos;
   }
 
-  for (NSDate *volta in voltas) {
+  for (NSNumber *volta in voltas) {
     NOVA_VOLTA
     novaVolta.tempo = volta;
     [novoGrupoDeTempos addVoltasObject:novaVolta];
@@ -188,11 +188,13 @@
   if (arrayGrupoDeTemposUnico == nil) {
     NSLog(@"GrupoDeTempos(%@) do atleta(%@) deu erro", dataDeInicio, email);
     return nil;
-  } else if ([arrayGrupoDeTemposUnico count] > 1) {
-    NSLog(@"GrupoDeTempos(%@) do atleta(%@) está duplicado no banco", dataDeInicio, email);
-    return nil;
   } else if ([arrayGrupoDeTemposUnico count] == 1) {
     return arrayGrupoDeTemposUnico[0];
+  } else if ([arrayGrupoDeTemposUnico count] > 1) {
+    for (GrupoDeTempos *g in arrayGrupoDeTemposUnico)
+      if ([g.dataDeInicio isEqualToDate:dataDeInicio])
+        return g;
+    return nil;
   } else {
     NSLog(@"Nenhum grupoDeTempos(%@) do atleta(%@) encontrado", dataDeInicio, email);
     return nil;
@@ -205,7 +207,7 @@
                                   encontraGrupoDeTempos:grupoDeTemposOrdenadosAtualizado.atleta.email
                                   dataDeInicio:grupoDeTemposOrdenadosAtualizado.dataDeInicio];
   grupoDeTempos.voltas = [[NSMutableSet alloc] init];
-  for (NSDate *volta in grupoDeTemposOrdenadosAtualizado.voltas) {
+  for (NSNumber *volta in grupoDeTemposOrdenadosAtualizado.voltas) {
     NOVA_VOLTA
     novaVolta.tempo = volta;
     [grupoDeTempos addVoltasObject:novaVolta];

@@ -25,14 +25,14 @@
         <relationship name="grupo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GrupoDeTempos" inverseName="paradas" inverseEntity="GrupoDeTempos" syncable="YES"/>
     </entity>
     <entity name="Volta" representedClassName="Volta" syncable="YES">
-        <attribute name="tempo" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="tempo" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <relationship name="grupo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GrupoDeTempos" inverseName="voltas" inverseEntity="GrupoDeTempos" syncable="YES"/>
     </entity>
     <elements>
         <element name="Atleta" positionX="3202" positionY="920" width="128" height="148"/>
         <element name="GrupoDeTempos" positionX="3024" positionY="1007" width="128" height="118"/>
         <element name="Inicio" positionX="2736" positionY="981" width="128" height="73"/>
-        <element name="Volta" positionX="2736" positionY="1179" width="128" height="73"/>
         <element name="Parada" positionX="2716" positionY="1061" width="128" height="73"/>
+        <element name="Volta" positionX="2736" positionY="1179" width="128" height="73"/>
     </elements>
 </model>

@@ -26,5 +26,5 @@
                inicios:(NSArray *)inicios paradas:(NSArray *)paradas voltas:(NSArray *)voltas;
 
 -(BOOL)atualizaVoltas:(GrupoDeTemposOrdenados *)grupoDeTemposOrdenados;
-
+-(GrupoDeTempos *)encontraGrupoDeTempos:(NSString *)email dataDeInicio:(NSDate *)dataDeInicio;
 @end

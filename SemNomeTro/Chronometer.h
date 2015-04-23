@@ -31,6 +31,10 @@
 -(void)playChronometer;
 -(void)pauseChronometer;
 
+-(NSArray*)getPauseTimes;
+-(NSArray*)getStartTimes;
+-(NSArray*)getLapsContent;
+
 -(NSArray*)getChronometerContent;
 
 @end
