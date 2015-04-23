@@ -1,249 +1,220 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 //#import "DadosLocais_DataBase.h"
-
-#define DB DadosLocais_DataBase *db = [[DadosLocais_DataBase alloc] init];
+#import "DB.h"
 
 @interface SemNomeTroTests : XCTestCase
+@property DB *db;
+@property NSString *email;
 
 @end
 
 @implementation SemNomeTroTests
 
 - (void)setUp {
+  self.db = [[DB alloc] init];
+  self.email = @"email@teste.com";
+  for (Atleta *a in [self.db todosAtletas])
+    [self.db removeAtleta:a.email];
   [super setUp];
-  // Put setup code here. This method is called before the invocation of each test method in the class.
-//  DB
-//  [@[] writeToFile:db.arquivoAtletas atomically:YES];
-//  [@[] writeToFile:db.arquivoTempos atomically:YES];
-//  [@[] writeToFile:db.arquivoTreinador atomically:YES];
 }
 
 - (void)tearDown {
-  // Put teardown code here. This method is called after the invocation of each test method in the class.
   [super tearDown];
 }
 
 - (void)testPerformanceExample {
-  // This is an example of a performance test case.
-  [self measureBlock:^{
-    // Put the code you want to measure the time of here.
-  }];
+  [self measureBlock:^{}];
 }
 
-/*
-// Testes de atletas
-#pragma mark - Testes de atletas
+-(void)testarAdicionarAtletaDuplicadoERemoverAtleta {
+  // [self removeTodosAtletas];
+  NSLog(@"%s", __FUNCTION__);
+  unsigned long qtdAtletas = [[self.db todosAtletas] count];
+  NSLog(@"qtdAtletas: %lu", qtdAtletas);
 
-- (void)testarGravacaoERecuperacaoDeAtleta {
-  DB
-  NSString *idDoAtleta = @"andremiramor@gmail.com";
-  [db adicionarAtleta:idDoAtleta nome:@"André" foto:@"" peso:80.0 altura:1.85 sexo:@"M"];
-  NSDictionary *atletaAndreEsperado = @{@"nome": @"André",
-                                        @"foto": @"",
-                                        @"peso": @80.0,
-                                        @"altura": @1.85,
-                                        @"sexo": @"M"};
-  XCTAssertEqualObjects(atletaAndreEsperado, [db recuperarAtleta:idDoAtleta]);
+  XCTAssertFalse([self.db encontraAtleta:self.email], @"Atleta não deve existir");
+  XCTAssertTrue([self.db adicionarAtleta:self.email nome:@"André do teste"
+                                    foto:@"caminho/da/foto.jpg" peso:@80 altura:@1.85 sexo:@"M"],
+                @"Atleta deve continuar não existindo");
+  XCTAssertEqual(qtdAtletas+1, [[self.db todosAtletas] count],
+                 @"Nenhum atleta deve ter sido adicionado a mais");
+  XCTAssertTrue([self.db encontraAtleta:self.email], @"Atleta deve existir agora");
+
+  XCTAssertFalse([self.db adicionarAtleta:self.email nome:@"André do teste"
+                                     foto:@"caminho/da/foto.jpg" peso:@80 altura:@1.85 sexo:@"M"],
+                 @"Atleta já deve existir e não deve ser possível adicionar mais um");
+  NSLog(@"AQUI");
+  XCTAssertEqual(qtdAtletas+1, [[self.db todosAtletas] count],
+                 @"Nenhum atleta deve ter sido adicionado a mais");
+
+  XCTAssertTrue([self.db removeAtleta:self.email], @"Atleta não pode ser removido");
+  XCTAssertFalse([self.db encontraAtleta:self.email], @"Atleta deve existir agora");
+  XCTAssertEqual(qtdAtletas, [[self.db todosAtletas] count],
+                 @"Nenhum atleta deve ter sido adicionado a mais");
 }
 
-- (void)testarGravarAtletaDuplicado {
-  DB
-  NSString *idDoAtleta = @"aliamcamil@gmail.com";
-  [db adicionarAtleta:idDoAtleta nome:@"Camila" foto:@"" peso:80.0 altura:1.85 sexo:@"F"];
-  [db adicionarAtleta:idDoAtleta nome:@"Camila2" foto:@"" peso:80.0 altura:1.85 sexo:@"F"];
-  
-  NSDictionary *atletaCamilaEsperada = @{@"nome": @"Camila", // e não @"Camila2"
-                                         @"foto": @"",
-                                         @"peso": @80.0,
-                                         @"altura": @1.85,
-                                         @"sexo": @"F"};
-  XCTAssertEqualObjects(atletaCamilaEsperada, [db recuperarAtleta:idDoAtleta]);
+-(void)testarEncontrarTodosAtletas {
+  NSString *email1 = @"email@teste1.com";
+  NSString *email2 = @"email@teste2.com";
+  NSString *email3 = @"email@teste3.com";
+
+  XCTAssertEqual(0, [[self.db todosAtletas] count]);
+
+  XCTAssertTrue([self.db adicionarAtleta:email1 nome:@"André do teste"
+                                    foto:@"caminho/da/foto.jpg" peso:@80 altura:@1.85 sexo:@"M"],
+                @"Atleta não pode ser adicionado.");
+  XCTAssertTrue([self.db adicionarAtleta:email2 nome:@"André do teste"
+                                    foto:@"caminho/da/foto.jpg" peso:@80 altura:@1.85 sexo:@"M"],
+                @"Atleta não pode ser adicionado.");
+  XCTAssertTrue([self.db adicionarAtleta:email3 nome:@"André do teste"
+                                    foto:@"caminho/da/foto.jpg" peso:@80 altura:@1.85 sexo:@"M"],
+                @"Atleta não pode ser adicionado.");
+  XCTAssertEqual(3, [[self.db todosAtletas] count]);
+
+  XCTAssertTrue([self.db removeAtleta:email1], @"Atleta não pode ser removido");
+  XCTAssertTrue([self.db removeAtleta:email2], @"Atleta não pode ser removido");
+  XCTAssertTrue([self.db removeAtleta:email3], @"Atleta não pode ser removido");
+  XCTAssertEqual(0, [[self.db todosAtletas] count]);
 }
 
-- (void)testarAdicionarERemoverAtleta {
-  DB
-  NSString *idDoAtleta = @"andrecabeludo@hotmail.com";
-  [db adicionarAtleta:idDoAtleta nome:@"André" foto:@"" peso:80.0 altura:1.85 sexo:@"M"];
-  
-  NSDictionary *atletaAndreEsperado = @{@"nome": @"André",
-                                        @"foto": @"",
-                                        @"peso": @80.0,
-                                        @"altura": @1.85,
-                                        @"sexo": @"M"};
-  
-  XCTAssertEqualObjects(atletaAndreEsperado, [db recuperarAtleta:idDoAtleta]);
-  
-  [db removerAtleta:idDoAtleta];
-  XCTAssertNil([db recuperarAtleta:idDoAtleta]);
+-(void)removeTodosAtletas {
+  NSString *email1 = @"email@teste1.com";
+  NSString *email2 = @"email@teste2.com";
+  NSString *email3 = @"email@teste3.com";
+
+  XCTAssertEqual(0, [[self.db todosAtletas] count]);
+
+  XCTAssertTrue([self.db adicionarAtleta:email1 nome:@"André do teste"
+                                    foto:@"caminho/da/foto.jpg" peso:@80 altura:@1.85 sexo:@"M"],
+                @"Atleta não pode ser adicionado.");
+  XCTAssertTrue([self.db adicionarAtleta:email2 nome:@"André do teste"
+                                    foto:@"caminho/da/foto.jpg" peso:@80 altura:@1.85 sexo:@"M"],
+                @"Atleta não pode ser adicionado.");
+  XCTAssertTrue([self.db adicionarAtleta:email3 nome:@"André do teste"
+                                    foto:@"caminho/da/foto.jpg" peso:@80 altura:@1.85 sexo:@"M"],
+                @"Atleta não pode ser adicionado.");
+  XCTAssertEqual(3, [[self.db todosAtletas] count]);
+
+
+  for (Atleta *a in [self.db todosAtletas])
+    [self.db removeAtleta:a.email];
+
+  XCTAssertEqual(0, [[self.db todosAtletas] count]);
 }
 
-// TODO: adicionar mais testes de atletas, principalmente de atualizacao
-// TODO: CRUD do treinador
+-(void)testarAdicionarEEncontrarTemposDeAtleta {
+  NSArray *inicios = @[[NSDate date], [NSDate date]];
+  NSArray *paradas = @[[NSDate date], [NSDate date]];
+  NSArray *voltas  = @[[NSDate date], [NSDate date]];
 
-// Testes de tempos
-#pragma mark - Testes de tempos
+  XCTAssertEqual(0, [[self.db todosAtletas] count]);
+  XCTAssert([self.db adicionarAtleta:self.email nome:@"Atleta com tempos"
+                                foto:@"caminho/da/foto.jpg" peso:@100 altura:@2 sexo:@"F"]);
+  XCTAssertEqual(0, [[self.db temposDoAtleta:self.email] count],
+                 @"Não foi possível encontrar os tempos do atleta.");
+  XCTAssert([self.db adicionarTempos:self.email dataDeInicio:[NSDate date] inicios:inicios
+                             paradas:paradas voltas:voltas],
+            @"Não foi possível adicionar os tempos.");
+  XCTAssertEqual(1, [[self.db temposDoAtleta:self.email] count],
+                 @"Não foi possível encontrar os tempos do atleta.");
 
--(void) testarGravarTemposERecuperar {
-  DB
-  NSArray *arrayDeTempos = @[[NSDate date], @1.23, @4.56];
-  NSString *idDoAtleta = @"andre@silvassauro.com";
-  [db removerAtleta:idDoAtleta];
+  XCTAssert([self.db temposDoAtleta:self.email], @"Não foi possível encontrar os tempos do atleta.");
 
-  [db gravarTempos:arrayDeTempos identificadorDoAtleta:idDoAtleta];
-  
-  NSArray *tempos = [db recuperarTempos:idDoAtleta];
+  XCTAssertTrue([self.db removeAtleta:self.email], @"Atleta não pode ser removido");
+  XCTAssertEqual(0, [[self.db todosAtletas] count]);
+  XCTAssertEqual(0, [[self.db temposDoAtleta:self.email] count],
+                 @"Os tempos do atleta deletado continuam no banco.");
 
-  XCTAssert(tempos);
-  XCTAssertEqual(1, [tempos count]);
-  
-  XCTAssertEqualWithAccuracy([tempos[0][0] timeIntervalSinceReferenceDate],
-                             [arrayDeTempos[0] timeIntervalSinceReferenceDate],
-                             0.9); // Aff imprecisao do parada TODO consertar isso!
+
+  // Checar se os tempos de um atleta re-adicionado existem
+  XCTAssert([self.db adicionarAtleta:self.email nome:@"Atleta com tempos"
+                                foto:@"caminho/da/foto.jpg" peso:@100 altura:@2 sexo:@"F"]);
+
+  XCTAssertEqual(0, [[self.db temposDoAtleta:self.email] count],
+                 @"Não foi possível encontrar os tempos do atleta.");
+  XCTAssertTrue([self.db removeAtleta:self.email], @"Atleta não pode ser removido");
+  XCTAssertEqual(0, [[self.db todosAtletas] count]);
 }
 
-- (void) testarGravarDoisGruposDeTempoNoMesmoDia {
-  DB
-  NSString *idDoAtleta = @"andre@silvassauro.org";
-  NSArray *arrayDeTempos1 = @[[NSDate date], @0.12, @3.45];
-  sleep(1);
-  NSArray *arrayDeTempos2 = @[[NSDate date], @0.12, @3.45];
-  [db removerAtleta:idDoAtleta];
-  
-  float precisao = 0.9;
-  
-  [db gravarTempos:arrayDeTempos1 identificadorDoAtleta:idDoAtleta];
-  [db gravarTempos:arrayDeTempos2 identificadorDoAtleta:idDoAtleta];
-  
-  NSArray *tempos = [db recuperarTempos:idDoAtleta];
-  XCTAssert(tempos);
-  XCTAssertEqual(2, [tempos count]);
-  XCTAssertEqualWithAccuracy([tempos[0][0] timeIntervalSinceReferenceDate],
-                             [arrayDeTempos1[0] timeIntervalSinceReferenceDate],
-                             precisao);
-  XCTAssertEqualWithAccuracy([tempos[1][0] timeIntervalSinceReferenceDate],
-                             [arrayDeTempos2[0] timeIntervalSinceReferenceDate],
-                             precisao);
-  XCTAssertNotEqualWithAccuracy([tempos[0][0] timeIntervalSinceReferenceDate],
-                                [tempos[1][0] timeIntervalSinceReferenceDate],
-                                precisao);
-}
-
-- (void)testarRecuperarTemposDeAtletaRemovido {
-  DB
-  NSString *idDoAtleta = @"1@2.3";
-  [db adicionarAtleta:idDoAtleta nome:@"" foto:@"" peso:0.0 altura:0.0 sexo:@""];
-  [db gravarTempos:@[[NSDate date], @0.1, @2.3] identificadorDoAtleta:idDoAtleta];
-  
-  XCTAssert([db recuperarTempos:idDoAtleta]);
-  XCTAssert([db recuperarAtleta:idDoAtleta]);
-  [db removerAtleta:idDoAtleta];
-  XCTAssertNil([db recuperarTempos:idDoAtleta]);
-  XCTAssertNil([db recuperarAtleta:idDoAtleta]);
-}
-
--(void)testarRemoverTemposDeAtleta {
-  DB
-  NSString *idDoAtleta = @"arroba@ponto.com";
-  [db adicionarAtleta:idDoAtleta nome:@"" foto:@"" peso:0.0 altura:0.0 sexo:@""];
-  [db gravarTempos:@[[NSDate date], @0.1, @2.3] identificadorDoAtleta:idDoAtleta];
-
-  XCTAssert([db recuperarTempos:idDoAtleta]);
-  XCTAssert([db recuperarAtleta:idDoAtleta]);
-  [db removerTemposDoAtleta:idDoAtleta];
-  XCTAssertNil([db recuperarTempos:idDoAtleta]);
-  XCTAssert([db recuperarAtleta:idDoAtleta]);
-}
-
--(void)testarEmailDoAtualizarAtleta {
-  DB
-  NSString *atletaAntes = @"antes@doesporte.vai";
-  NSString *atletaDepois = @"depois@doesporte.foi";
-  NSArray *arrayDeTempos = @[[NSDate date], @1.1, @2.2];
-  
-  [db removerAtleta:atletaAntes];
-  [db removerAtleta:atletaDepois];
-  
-  XCTAssertNil([db recuperarAtleta:atletaAntes]);
-  XCTAssertNil([db recuperarTempos:atletaAntes]);
-  XCTAssertNil([db recuperarAtleta:atletaDepois]);
-  XCTAssertNil([db recuperarTempos:atletaDepois]);
-  
-  NSString *nome = @"", *foto = @"", *sexo = @"";
-  float peso = 0.0, altura = 0.0;
-  
-  [db adicionarAtleta:atletaAntes nome:nome foto:foto peso:peso altura:altura sexo:@""];
-  [db gravarTempos:arrayDeTempos identificadorDoAtleta:atletaAntes];
-  
-  XCTAssert([db recuperarAtleta:atletaAntes]);
-  XCTAssert([db recuperarTempos:atletaAntes]);
-  XCTAssertNil([db recuperarAtleta:atletaDepois]);
-  XCTAssertNil([db recuperarTempos:atletaDepois]);
-  [db atualizarAtletaComEmailNovo:atletaAntes emailNovo:atletaDepois nome:nome foto:foto peso:peso altura:altura sexo:sexo];
-  XCTAssertNil([db recuperarAtleta:atletaAntes]);
-  XCTAssertNil([db recuperarTempos:atletaAntes]);
-  XCTAssert([db recuperarAtleta:atletaDepois]);
-  XCTAssert([db recuperarTempos:atletaDepois]);
-  
-  NSArray *tempos = [db recuperarTempos:atletaDepois];
-  XCTAssert(tempos);
-  XCTAssertEqual(1, [tempos count]);
-  XCTAssertEqualWithAccuracy([tempos[0][0] timeIntervalSinceReferenceDate],
-                             [arrayDeTempos[0] timeIntervalSinceReferenceDate],
-                             0.9); // Aff imprecisao do parada TODO consertar isso!
-}
-
-   
 -(void)testarAtualizarAtleta {
-  DB
-  NSString *idDoAtleta = @"testar@o.atleta";
-  NSString *nomeAntes = @"sem", *fotoAntes = @"sem", *sexoAntes = @"sem";
-  float pesoAntes = 0.0, alturaAntes = 0.0;
-  NSString *nomeDepois = @"com", *fotoDepois = @"com", *sexoDepois = @"com";
-  float pesoDepois = 10.0, alturaDepois = 10.0;
-  
-  NSDictionary *atletaAntes = @{@"nome": nomeAntes,
-                                @"foto": fotoAntes,
-                                @"peso": [NSNumber numberWithFloat:pesoAntes],
-                                @"altura": [NSNumber numberWithFloat:alturaAntes],
-                                @"sexo": sexoAntes};
-  NSDictionary *atletaDepois = @{@"nome": nomeDepois,
-                                 @"foto": fotoDepois,
-                                 @"peso": [NSNumber numberWithFloat:pesoDepois],
-                                 @"altura": [NSNumber numberWithFloat:alturaDepois],
-                                 @"sexo": sexoDepois};
-  
-  [db removerAtleta:idDoAtleta];
-  [db adicionarAtleta:idDoAtleta nome:nomeAntes foto:fotoAntes peso:pesoAntes altura:alturaAntes sexo:sexoAntes];
-  XCTAssertEqualObjects(atletaAntes, [db recuperarAtleta:idDoAtleta]);
-  [db atualizarAtleta:idDoAtleta nome:nomeDepois foto:fotoDepois peso:pesoDepois altura:alturaDepois sexo:sexoDepois];
-  XCTAssertEqualObjects(atletaDepois, [db recuperarAtleta:idDoAtleta]);
+  NSString *emailDepois = @"email@depois.com";
+  XCTAssertEqual(0, [[self.db todosAtletas] count]);
+  XCTAssert([self.db adicionarAtleta:self.email nome:@"Nome antes"
+                                foto:@"foto antes" peso:@1 altura:@2 sexo:@"M"]);
+
+  Atleta *a = [self.db encontraAtleta:self.email];
+  XCTAssertEqual(@"Nome antes", a.nome);
+  XCTAssertEqual(@"foto antes", a.foto);
+  XCTAssertEqual(@"M", a.sexo);
+  XCTAssertEqualWithAccuracy([@1 floatValue], [a.peso   floatValue], 0.1);
+  XCTAssertEqualWithAccuracy([@2 floatValue], [a.altura floatValue], 0.1);
+
+  XCTAssert([self.db atualizarAtleta:self.email nome:@"Nome depois" foto:@"foto depois"
+                                peso:@3 altura:@4 sexo:@"F"]);
+
+  a = [self.db encontraAtleta:self.email];
+  XCTAssertEqual(@"Nome depois", a.nome);
+  XCTAssertEqual(@"foto depois", a.foto);
+  XCTAssertEqual(@"F", a.sexo);
+  XCTAssertEqualWithAccuracy([@3 floatValue], [a.peso   floatValue], 0.1);
+  XCTAssertEqualWithAccuracy([@4 floatValue], [a.altura floatValue], 0.1);
+
+
+  XCTAssert([self.db atualizarEmailDoAtleta:self.email emailNovo:emailDepois]);
+  XCTAssertFalse([self.db encontraAtleta:self.email]);
+  a = [self.db encontraAtleta:emailDepois];
+  XCTAssertEqual(@"Nome depois", a.nome);
+  XCTAssertEqual(@"foto depois", a.foto);
+  XCTAssertEqual(@"F", a.sexo);
+  XCTAssertEqualWithAccuracy([@3 floatValue], [a.peso   floatValue], 0.1);
+  XCTAssertEqualWithAccuracy([@4 floatValue], [a.altura floatValue], 0.1);
+
+  XCTAssertTrue([self.db removeAtleta:emailDepois], @"Atleta não pode ser removido");
+  XCTAssertFalse([self.db encontraAtleta:emailDepois], @"Atleta deve existir agora");
+  XCTAssertEqual(0, [[self.db todosAtletas] count],
+                 @"Nenhum atleta deve ter sido adicionado a mais");
 }
- */
+
+-(void)testarAtualizarVoltas {
+  NSArray *inicios = @[[NSDate date], [NSDate date]];
+  NSArray *paradas = @[[NSDate date], [NSDate date]];
+  NSArray *voltas  = @[[NSDate date], [NSDate date]];
+
+  XCTAssertEqual(0, [[self.db todosAtletas] count]);
+  XCTAssert([self.db adicionarAtleta:self.email nome:@"Atleta com tempos"
+                                foto:@"caminho/da/foto.jpg" peso:@100 altura:@2 sexo:@"F"]);
+  XCTAssertEqual(0, [[self.db temposDoAtleta:self.email] count],
+                 @"Não foi possível encontrar os tempos do atleta.");
+  XCTAssert([self.db adicionarTempos:self.email dataDeInicio:[NSDate date] inicios:inicios
+                             paradas:paradas voltas:voltas],
+            @"Não foi possível adicionar os tempos.");
+  XCTAssertEqual(1, [[self.db temposDoAtleta:self.email] count],
+                 @"Não foi possível encontrar os tempos do atleta.");
+
+  XCTAssert([self.db temposDoAtleta:self.email], @"Não foi possível encontrar os tempos do atleta.");
+
+  Atleta *a = [self.db encontraAtleta:self.email];
+  NSArray *temposAntes = [self.db temposDoAtleta:a.email];
+  GrupoDeTemposOrdenados *g1 = temposAntes[0];
+  sleep(1);
+
+  NSArray *voltasAntes = g1.voltas;
+  g1.voltas = @[[NSDate date], [NSDate date]];
+  XCTAssert([self.db atualizaVoltas:g1]);
+
+  NSArray *temposDepois = [self.db temposDoAtleta:a.email];
+  GrupoDeTemposOrdenados *g2 = temposDepois[0];
+  NSArray *voltasDepois = g2.voltas;
+
+  for (int i = 0; i < [voltas count]; i++) {
+    XCTAssertEqualObjects(voltas[i], voltasAntes[i]);
+    XCTAssertNotEqualObjects(voltas[i], voltasDepois[i]);
+  }
+  XCTAssertTrue([self.db removeAtleta:self.email], @"Atleta não pode ser removido");
+  XCTAssertEqual(0, [[self.db todosAtletas] count]);
+
+  XCTAssertEqual(0, [[self.db temposDoAtleta:self.email] count], @"Os tempos do atleta deletado continuam no banco.");
+}
+// TODO: testar adicionar um grupoDeTempos duaz vezes
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
