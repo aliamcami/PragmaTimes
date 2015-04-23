@@ -34,6 +34,4 @@
 
 
 
-//-(Chronometer*)getNewChronometer;
-
 @end

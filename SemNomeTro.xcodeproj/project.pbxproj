@@ -34,6 +34,7 @@
 		860D08201AE96F74006AE604 /* Register_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081A1AE96F74006AE604 /* Register_ViewController.m */; };
 		860D08211AE96F74006AE604 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081C1AE96F74006AE604 /* SecondViewController.m */; };
 		860D08221AE96F74006AE604 /* SingletonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081E1AE96F74006AE604 /* SingletonData.m */; };
+		861932871AE9856B00FBC563 /* DeleteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 861932861AE9856B00FBC563 /* DeleteCollectionView.m */; };
 		862C74EC1ADEF2CF00CEA9AC /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */; };
 		862C74ED1ADEF2CF00CEA9AC /* CustomCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */; };
 		862C74F01ADEF30C00CEA9AC /* MyColorHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */; };
@@ -94,12 +95,14 @@
 		6BF4FB1B1AD6EE0800BAE81B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6BF4FB1C1AD6EE0800BAE81B /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		860D08181AE96F74006AE604 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = SemNomeTro/Parse.framework; sourceTree = "<group>"; };
-		860D08191AE96F74006AE604 /* Register_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Register_ViewController.h; path = SemNomeTro/Register_ViewController.h; sourceTree = "<group>"; };
-		860D081A1AE96F74006AE604 /* Register_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Register_ViewController.m; path = SemNomeTro/Register_ViewController.m; sourceTree = "<group>"; };
-		860D081B1AE96F74006AE604 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondViewController.h; path = SemNomeTro/SecondViewController.h; sourceTree = "<group>"; };
-		860D081C1AE96F74006AE604 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondViewController.m; path = SemNomeTro/SecondViewController.m; sourceTree = "<group>"; };
-		860D081D1AE96F74006AE604 /* SingletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonData.h; path = SemNomeTro/SingletonData.h; sourceTree = "<group>"; };
-		860D081E1AE96F74006AE604 /* SingletonData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SingletonData.m; path = SemNomeTro/SingletonData.m; sourceTree = "<group>"; };
+		860D08191AE96F74006AE604 /* Register_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Register_ViewController.h; sourceTree = "<group>"; };
+		860D081A1AE96F74006AE604 /* Register_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Register_ViewController.m; sourceTree = "<group>"; };
+		860D081B1AE96F74006AE604 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		860D081C1AE96F74006AE604 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		860D081D1AE96F74006AE604 /* SingletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingletonData.h; sourceTree = "<group>"; };
+		860D081E1AE96F74006AE604 /* SingletonData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingletonData.m; sourceTree = "<group>"; };
+		861932851AE9856B00FBC563 /* DeleteCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteCollectionView.h; sourceTree = "<group>"; };
+		861932861AE9856B00FBC563 /* DeleteCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteCollectionView.m; sourceTree = "<group>"; };
 		862C74E81ADEF2CF00CEA9AC /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
 		862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
 		862C74EA1ADEF2CF00CEA9AC /* CustomCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewController.h; sourceTree = "<group>"; };
@@ -163,16 +166,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8619328B1AE98A1A00FBC563 /* collections */ = {
+			isa = PBXGroup;
+			children = (
+				862C74EA1ADEF2CF00CEA9AC /* CustomCollectionViewController.h */,
+				862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */,
+				861932851AE9856B00FBC563 /* DeleteCollectionView.h */,
+				861932861AE9856B00FBC563 /* DeleteCollectionView.m */,
+				860D081B1AE96F74006AE604 /* SecondViewController.h */,
+				860D081C1AE96F74006AE604 /* SecondViewController.m */,
+			);
+			name = collections;
+			sourceTree = "<group>";
+		};
+		8619328C1AE98A3900FBC563 /* support */ = {
+			isa = PBXGroup;
+			children = (
+				860D081D1AE96F74006AE604 /* SingletonData.h */,
+				860D081E1AE96F74006AE604 /* SingletonData.m */,
+				862C74EE1ADEF30C00CEA9AC /* MyColorHolder.h */,
+				862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */,
+				862C74E81ADEF2CF00CEA9AC /* CustomCollectionViewCell.h */,
+				862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */,
+			);
+			name = support;
+			sourceTree = "<group>";
+		};
 		D587671E1AD3230300F29BCC = {
 			isa = PBXGroup;
 			children = (
 				860D08181AE96F74006AE604 /* Parse.framework */,
-				860D08191AE96F74006AE604 /* Register_ViewController.h */,
-				860D081A1AE96F74006AE604 /* Register_ViewController.m */,
-				860D081B1AE96F74006AE604 /* SecondViewController.h */,
-				860D081C1AE96F74006AE604 /* SecondViewController.m */,
-				860D081D1AE96F74006AE604 /* SingletonData.h */,
-				860D081E1AE96F74006AE604 /* SingletonData.m */,
 				6B9FE2E31AE83A1600CBF66F /* libsqlite3.dylib */,
 				6B9FE2E11AE83A0900CBF66F /* libz.dylib */,
 				6B9FE2DF1AE839FC00CBF66F /* SystemConfiguration.framework */,
@@ -273,12 +296,10 @@
 		D59958191AD4483A00BCF33B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				862C74EE1ADEF30C00CEA9AC /* MyColorHolder.h */,
-				862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */,
-				862C74EA1ADEF2CF00CEA9AC /* CustomCollectionViewController.h */,
-				862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */,
-				862C74E81ADEF2CF00CEA9AC /* CustomCollectionViewCell.h */,
-				862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */,
+				8619328C1AE98A3900FBC563 /* support */,
+				8619328B1AE98A1A00FBC563 /* collections */,
+				860D08191AE96F74006AE604 /* Register_ViewController.h */,
+				860D081A1AE96F74006AE604 /* Register_ViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -438,6 +459,7 @@
 				860D08211AE96F74006AE604 /* SecondViewController.m in Sources */,
 				D599581F1AD4497900BCF33B /* User_Model.m in Sources */,
 				862C74EC1ADEF2CF00CEA9AC /* CustomCollectionViewCell.m in Sources */,
+				861932871AE9856B00FBC563 /* DeleteCollectionView.m in Sources */,
 				6BB7E3001AE80C7D00158533 /* GrupoDeTempos.m in Sources */,
 				D5C59DB81AD4573A004C4BC7 /* Chronometer.m in Sources */,
 				860D08221AE96F74006AE604 /* SingletonData.m in Sources */,
