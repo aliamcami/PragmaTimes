@@ -25,6 +25,7 @@
 		6BB7E3001AE80C7D00158533 /* GrupoDeTempos.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E2FF1AE80C7D00158533 /* GrupoDeTempos.m */; };
 		6BB7E3031AE80C7D00158533 /* Inicio.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E3021AE80C7D00158533 /* Inicio.m */; };
 		6BB7E3061AE80C7D00158533 /* Parada.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E3051AE80C7D00158533 /* Parada.m */; };
+		6BB7E3091AE80C7D00158533 /* Volta.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E3081AE80C7D00158533 /* Volta.m */; };
 		6BB7E30F1AE80D5800158533 /* GrupoDeTemposOrdenados.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E30E1AE80D5800158533 /* GrupoDeTemposOrdenados.m */; };
 		6BB7E3171AE8174300158533 /* KorreData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E3161AE8174300158533 /* KorreData.xcdatamodel */; };
 		6BF4FB1D1AD6EE0800BAE81B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4FB1B1AD6EE0800BAE81B /* ViewController.m */; };
@@ -44,14 +45,9 @@
 		D58767381AD3230300F29BCC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D58767371AD3230300F29BCC /* Images.xcassets */; };
 		D587673B1AD3230300F29BCC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58767391AD3230300F29BCC /* LaunchScreen.xib */; };
 		D58767471AD3230300F29BCC /* SemNomeTroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D58767461AD3230300F29BCC /* SemNomeTroTests.m */; };
-		D58A8B531AE9638500580109 /* Register_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D58A8B4E1AE9638500580109 /* Register_ViewController.m */; };
-		D58A8B541AE9638500580109 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D58A8B501AE9638500580109 /* SecondViewController.m */; };
-		D58A8B551AE9638500580109 /* SingletonData.m in Sources */ = {isa = PBXBuildFile; fileRef = D58A8B521AE9638500580109 /* SingletonData.m */; };
-		D58A8B581AE96C7A00580109 /* GeneralController.m in Sources */ = {isa = PBXBuildFile; fileRef = D58A8B571AE96C7A00580109 /* GeneralController.m */; };
-		D58A8B5B1AE9794F00580109 /* Volta.m in Sources */ = {isa = PBXBuildFile; fileRef = D58A8B5A1AE9794F00580109 /* Volta.m */; };
+		D58A8B901AE9866B00580109 /* Volta.m in Sources */ = {isa = PBXBuildFile; fileRef = D58A8B8F1AE9866B00580109 /* Volta.m */; };
 		D594BF9F1AE5B79C00BCFCDC /* PickerView_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D594BF9E1AE5B79C00BCFCDC /* PickerView_Model.m */; };
 		D599581F1AD4497900BCF33B /* User_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D599581E1AD4497900BCF33B /* User_Model.m */; };
-		D5C43B291AE9627600A15F1F /* CustomCollectionViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EA1ADEF2CF00CEA9AC /* CustomCollectionViewController.h */; };
 		D5C5765E1AD5DCAD0066CA29 /* TableView_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5765D1AD5DCAD0066CA29 /* TableView_Model.m */; };
 		D5C59DB81AD4573A004C4BC7 /* Chronometer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C59DB71AD4573A004C4BC7 /* Chronometer.m */; };
 /* End PBXBuildFile section */
@@ -90,12 +86,20 @@
 		6BB7E3021AE80C7D00158533 /* Inicio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Inicio.m; sourceTree = "<group>"; };
 		6BB7E3041AE80C7D00158533 /* Parada.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parada.h; sourceTree = "<group>"; };
 		6BB7E3051AE80C7D00158533 /* Parada.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parada.m; sourceTree = "<group>"; };
+		6BB7E3081AE80C7D00158533 /* Volta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Volta.m; sourceTree = "<group>"; };
 		6BB7E30D1AE80D5800158533 /* GrupoDeTemposOrdenados.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrupoDeTemposOrdenados.h; sourceTree = "<group>"; };
 		6BB7E30E1AE80D5800158533 /* GrupoDeTemposOrdenados.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrupoDeTemposOrdenados.m; sourceTree = "<group>"; };
 		6BB7E3161AE8174300158533 /* KorreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KorreData.xcdatamodel; sourceTree = "<group>"; };
 		6BF4FB1A1AD6EE0800BAE81B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6BF4FB1B1AD6EE0800BAE81B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6BF4FB1C1AD6EE0800BAE81B /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		860D08181AE96F74006AE604 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = SemNomeTro/Parse.framework; sourceTree = "<group>"; };
+		860D08191AE96F74006AE604 /* Register_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Register_ViewController.h; path = SemNomeTro/Register_ViewController.h; sourceTree = "<group>"; };
+		860D081A1AE96F74006AE604 /* Register_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Register_ViewController.m; path = SemNomeTro/Register_ViewController.m; sourceTree = "<group>"; };
+		860D081B1AE96F74006AE604 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondViewController.h; path = SemNomeTro/SecondViewController.h; sourceTree = "<group>"; };
+		860D081C1AE96F74006AE604 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondViewController.m; path = SemNomeTro/SecondViewController.m; sourceTree = "<group>"; };
+		860D081D1AE96F74006AE604 /* SingletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonData.h; path = SemNomeTro/SingletonData.h; sourceTree = "<group>"; };
+		860D081E1AE96F74006AE604 /* SingletonData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SingletonData.m; path = SemNomeTro/SingletonData.m; sourceTree = "<group>"; };
 		862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
 		862C74EA1ADEF2CF00CEA9AC /* CustomCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewController.h; sourceTree = "<group>"; };
 		862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewController.m; sourceTree = "<group>"; };
@@ -116,17 +120,8 @@
 		D58767401AD3230300F29BCC /* SemNomeTroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SemNomeTroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D58767451AD3230300F29BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D58767461AD3230300F29BCC /* SemNomeTroTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SemNomeTroTests.m; sourceTree = "<group>"; };
-		D58A8B4C1AE9636D00580109 /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
-		D58A8B4D1AE9638500580109 /* Register_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Register_ViewController.h; sourceTree = "<group>"; };
-		D58A8B4E1AE9638500580109 /* Register_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Register_ViewController.m; sourceTree = "<group>"; };
-		D58A8B4F1AE9638500580109 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		D58A8B501AE9638500580109 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		D58A8B511AE9638500580109 /* SingletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingletonData.h; sourceTree = "<group>"; };
-		D58A8B521AE9638500580109 /* SingletonData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingletonData.m; sourceTree = "<group>"; };
-		D58A8B561AE96C7A00580109 /* GeneralController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralController.h; sourceTree = "<group>"; };
-		D58A8B571AE96C7A00580109 /* GeneralController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralController.m; sourceTree = "<group>"; };
-		D58A8B591AE9794F00580109 /* Volta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Volta.h; sourceTree = "<group>"; };
-		D58A8B5A1AE9794F00580109 /* Volta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Volta.m; sourceTree = "<group>"; };
+		D58A8B8E1AE9866B00580109 /* Volta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Volta.h; path = ../Volta.h; sourceTree = "<group>"; };
+		D58A8B8F1AE9866B00580109 /* Volta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Volta.m; path = ../Volta.m; sourceTree = "<group>"; };
 		D594BF9D1AE5B79C00BCFCDC /* PickerView_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerView_Model.h; sourceTree = "<group>"; };
 		D594BF9E1AE5B79C00BCFCDC /* PickerView_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerView_Model.m; sourceTree = "<group>"; };
 		D599581D1AD4497900BCF33B /* User_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User_Model.h; sourceTree = "<group>"; };
@@ -258,8 +253,6 @@
 				6B9FE2CB1AE8393600CBF66F /* Bolts.framework */,
 				6B9FE2CC1AE8393600CBF66F /* Parse.framework */,
 				6BB7E3161AE8174300158533 /* KorreData.xcdatamodel */,
-				D58A8B591AE9794F00580109 /* Volta.h */,
-				D58A8B5A1AE9794F00580109 /* Volta.m */,
 				6BB7E3041AE80C7D00158533 /* Parada.h */,
 				6BB7E3051AE80C7D00158533 /* Parada.m */,
 				6BB7E3011AE80C7D00158533 /* Inicio.h */,
@@ -270,6 +263,8 @@
 				6BB7E30E1AE80D5800158533 /* GrupoDeTemposOrdenados.m */,
 				6BB7E2FB1AE80C7C00158533 /* Atleta.h */,
 				6BB7E2FC1AE80C7C00158533 /* Atleta.m */,
+				D58A8B8E1AE9866B00580109 /* Volta.h */,
+				D58A8B8F1AE9866B00580109 /* Volta.m */,
 				6BB7E2F61AE80C2400158533 /* DB.h */,
 				6BB7E2F71AE80C2400158533 /* DB.m */,
 			);
@@ -279,11 +274,6 @@
 		D59958191AD4483A00BCF33B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D58A8B4F1AE9638500580109 /* SecondViewController.h */,
-				D58A8B501AE9638500580109 /* SecondViewController.m */,
-				D58A8B511AE9638500580109 /* SingletonData.h */,
-				D58A8B521AE9638500580109 /* SingletonData.m */,
-				D58A8B4C1AE9636D00580109 /* CustomCollectionViewCell.h */,
 				862C74EE1ADEF30C00CEA9AC /* MyColorHolder.h */,
 				862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */,
 				862C74EA1ADEF2CF00CEA9AC /* CustomCollectionViewController.h */,
@@ -315,10 +305,6 @@
 		D599581B1AD4485700BCF33B /* Control */ = {
 			isa = PBXGroup;
 			children = (
-				D58A8B4D1AE9638500580109 /* Register_ViewController.h */,
-				D58A8B4E1AE9638500580109 /* Register_ViewController.m */,
-				D58A8B561AE96C7A00580109 /* GeneralController.h */,
-				D58A8B571AE96C7A00580109 /* GeneralController.m */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -441,20 +427,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5C43B291AE9627600A15F1F /* CustomCollectionViewController.h in Sources */,
+				D58A8B901AE9866B00580109 /* Volta.m in Sources */,
 				D594BF9F1AE5B79C00BCFCDC /* PickerView_Model.m in Sources */,
 				6BB7E3061AE80C7D00158533 /* Parada.m in Sources */,
 				860D08201AE96F74006AE604 /* Register_ViewController.m in Sources */,
 				6BF4FB1D1AD6EE0800BAE81B /* ViewController.m in Sources */,
-				D58A8B5B1AE9794F00580109 /* Volta.m in Sources */,
 				6BB7E2FD1AE80C7C00158533 /* Atleta.m in Sources */,
-				D58A8B531AE9638500580109 /* Register_ViewController.m in Sources */,
 				D55F80811ADD7B560071A70C /* Login_Model.m in Sources */,
-				D58A8B551AE9638500580109 /* SingletonData.m in Sources */,
 				D58767301AD3230300F29BCC /* AppDelegate.m in Sources */,
+				6BB7E3091AE80C7D00158533 /* Volta.m in Sources */,
+				860D08211AE96F74006AE604 /* SecondViewController.m in Sources */,
 				D599581F1AD4497900BCF33B /* User_Model.m in Sources */,
 				862C74EC1ADEF2CF00CEA9AC /* CustomCollectionViewCell.m in Sources */,
-				D58A8B541AE9638500580109 /* SecondViewController.m in Sources */,
 				6BB7E3001AE80C7D00158533 /* GrupoDeTempos.m in Sources */,
 				D5C59DB81AD4573A004C4BC7 /* Chronometer.m in Sources */,
 				860D08221AE96F74006AE604 /* SingletonData.m in Sources */,
@@ -463,7 +447,6 @@
 				862C74F01ADEF30C00CEA9AC /* MyColorHolder.m in Sources */,
 				6BB7E3171AE8174300158533 /* KorreData.xcdatamodel in Sources */,
 				6BB7E3031AE80C7D00158533 /* Inicio.m in Sources */,
-				D58A8B581AE96C7A00580109 /* GeneralController.m in Sources */,
 				6BB7E30F1AE80D5800158533 /* GrupoDeTemposOrdenados.m in Sources */,
 				D587672D1AD3230300F29BCC /* main.m in Sources */,
 				862C74ED1ADEF2CF00CEA9AC /* CustomCollectionViewController.m in Sources */,
