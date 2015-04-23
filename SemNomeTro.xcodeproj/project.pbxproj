@@ -261,12 +261,18 @@
 		D59958191AD4483A00BCF33B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				867BB4891AE5BBA6004A4B15 /* SingletonData.h */,
+				867BB48A1AE5BBA6004A4B15 /* SingletonData.m */,
+				867BB4861AE5BB9A004A4B15 /* SecondViewController.h */,
+				867BB4871AE5BB9A004A4B15 /* SecondViewController.m */,
 				862C74EE1ADEF30C00CEA9AC /* MyColorHolder.h */,
 				862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */,
 				862C74EA1ADEF2CF00CEA9AC /* CustomCollectionViewController.h */,
 				862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */,
 				862C74E81ADEF2CF00CEA9AC /* CustomCollectionViewCell.h */,
 				862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */,
+				D5A913C21AE848C60067F58C /* Register_ViewController.h */,
+				D5A913C31AE848C60067F58C /* Register_ViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -300,9 +306,22 @@
 		D599581C1AD4488B00BCF33B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D5539BAF1ADF19E300499473 /* Images */,
+				D5A913B51AE830870067F58C /* Images */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		D5A913B51AE830870067F58C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D5A913B61AE830990067F58C /* add_cronometro@2x.png */,
+				D5A913B71AE830990067F58C /* edit_cronometro@2x.png */,
+				D5A913B81AE830990067F58C /* icone_play@2x.png */,
+				D5A913B91AE830990067F58C /* icone_return@2x.png */,
+				D5A913BA1AE830990067F58C /* icone_volta@2x.png */,
+				D5A913BB1AE830990067F58C /* pause_grande@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,6 +408,7 @@
 			files = (
 				D58767361AD3230300F29BCC /* Main.storyboard in Resources */,
 				D587673B1AD3230300F29BCC /* LaunchScreen.xib in Resources */,
+				D5A913BF1AE830990067F58C /* icone_return@2x.png in Resources */,
 				6BF4FB1E1AD6EE0800BAE81B /* ViewController.xib in Resources */,
 				D58767381AD3230300F29BCC /* Images.xcassets in Resources */,
 			);

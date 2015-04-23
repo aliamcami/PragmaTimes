@@ -36,7 +36,6 @@
 
 //Informacoes do cronometro
 @property (nonatomic) short focus;
-@property (nonatomic) BOOL isEditable;
 @property (nonatomic) NSString *name;
 @property (nonatomic) int restTime;
 
@@ -61,6 +60,9 @@
 @property (nonatomic) NSMutableArray *lapTimes;
 @property (nonatomic) NSMutableArray *chronometerTimeAtLap;
 @property (nonatomic) NSMutableArray *pausedTimeUntilLap;
+
+//Gambiarra
+@property (nonatomic) BOOL onlyMS;
 
 @end
 
@@ -149,11 +151,19 @@
     
     //Adiciona o icone e o numero de voltas
     if ([self.lapTimes count] > 0) {
-        self.lapIcon.frame = CGRectMake(15, 10, 21, 15);
+        if (self.frame.size.width < 100) {
+            self.lapIcon.frame = CGRectMake(5, 5, 10, 10);
+            
+            self.lblCountLap.frame = CGRectMake(20, 5, 11, 10);
+            int lblTextSize = MIN(self.lblCountLap.frame.size.width, self.lblCountLap.frame.size.height);
+            self.lblCountLap.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize];
+        }else{
+            self.lapIcon.frame = CGRectMake(15, 10, 21, 15);
+            self.lblCountLap.frame = CGRectMake(45, 11, 50, 15);
+        }
+        
         [self.icons addSubview:self.lapIcon];
         
-        //Adiciona o numero de voltas a tela
-        self.lblCountLap.frame = CGRectMake(45, 11, 50, 15);
         self.lblCountLap.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.lapTimes count]];
         self.lblCountLap.textColor = [UIColor whiteColor];
         
@@ -162,7 +172,11 @@
     
     //Adiciona o simbolo de play se o cronometro estiver rodando
     if ([self.startTimes count] > [self.pauseTimes count]) {
-        self.playIcon.frame = CGRectMake(self.icons.frame.size.width - 40, 10, 15, 15);
+        if (self.frame.size.width < 100) {
+            self.playIcon.frame = CGRectMake(self.icons.frame.size.width - 15, 5, 10, 10);
+        }else{
+            self.playIcon.frame = CGRectMake(self.icons.frame.size.width - 40, 10, 15, 15);
+        }
         [self.icons addSubview:self.playIcon];
     }
     
@@ -222,9 +236,9 @@
             [self updateIcons];
             
             //atribui pedacos da tela as labels que mostram o nome e o tempo
-            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions), self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 4)];
+            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions), self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 3)];
             
-            [self.txtChronometerName setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 5, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.txtChronometerName setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 4, self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
             
             break;
             
@@ -237,12 +251,12 @@
         {
             screenDivisions = 8;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
-            [self.txtChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.txtChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
             
-            [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions))];
+            [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 2, self.frame.size.width, (self.frame.size.height / screenDivisions))];
             [self updateIcons];
             
-            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions) * 2, self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 3)];
+            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 2)];
             
             //Define o tamanho que a tableview com as laps ocupara
             CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 5, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
@@ -268,12 +282,12 @@
         {
             screenDivisions = 9;    //Seta em quantos pedacos a view em que o cronometro aparecera sera mostrado
             
-            [self.txtChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, self.frame.size.height / screenDivisions)];
+            [self.txtChronometerName setFrame:CGRectMake(origin, origin, self.frame.size.width, (self.frame.size.height / screenDivisions) * 2)];
             
-            [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions), self.frame.size.width, (self.frame.size.height / screenDivisions))];
+            [self.icons setFrame:CGRectMake(origin, (self.frame.size.height / screenDivisions) * 2, self.frame.size.width, (self.frame.size.height / screenDivisions))];
             [self updateIcons];
             
-            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions) * 2, self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 3)];
+            [self.lblChronometer setFrame:CGRectMake(5, (self.frame.size.height / screenDivisions) * 3, self.frame.size.width - 10, (self.frame.size.height / screenDivisions) * 2)];
             
             //Define o tamanho que a tableview com as laps ocupara
             CGRect tableViewLapsSize = CGRectMake(origin, (self.frame.size.height / screenDivisions) * 5, self.frame.size.width, (self.frame.size.height / screenDivisions) * 3);
@@ -326,12 +340,18 @@
             int lblTextSize = MIN(self.lblTimeRest.frame.size.width, self.lblTimeRest.frame.size.height);
             self.lblTimeRest.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.5];
             self.lblTimeRest.adjustsFontSizeToFitWidth = YES;
+            self.lblTimeRest.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
             
             self.btnTimeRest = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             [self.btnTimeRest setFrame:CGRectMake(self.restView.frame.size.width - 78, 0, 78, self.restView.frame.size.height)];
             
             [self.btnTimeRest addTarget:self action:@selector(editRestTime) forControlEvents:UIControlEventTouchUpInside];
+            self.btnTimeRest.titleLabel.textColor = [UIColor blackColor];
+            
+            //Gambiarra pra mostrar so Minutos e segundos de forma rapida
+            self.onlyMS = true;
             [self.btnTimeRest setTitle:[NSString stringWithFormat:@"%@", [self timeFormatter:[NSNumber numberWithFloat:self.restTime]]] forState:UIControlStateNormal];
+            self.onlyMS = false;
             
             lblTextSize = MIN(self.btnTimeRest.frame.size.width, self.btnTimeRest.frame.size.height);
             self.btnTimeRest.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.3];
@@ -423,8 +443,8 @@
     
     self.pickerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self.pickerButton addTarget:self action:@selector(confirmedRestTime) forControlEvents:UIControlEventTouchUpInside];
-    [self.pickerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.pickerButton setBackgroundColor:[UIColor greenColor]];
+    [self.pickerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.pickerButton setBackgroundColor:[UIColor purpleColor]];
     
     self.pickerButton.frame = CGRectMake(0, (self.pickerView.frame.size.height / 3) * 2, self.pickerView.frame.size.width, (self.pickerView.frame.size.height / 3));
     
@@ -443,7 +463,10 @@
     NSTimeInterval time = ((self.picker.min * 60) + self.picker.sec);
     self.restTime = time;
     
+    //Gambiarra pra mostrar so Minutos e Segundos
+    self.onlyMS = true;
     self.btnTimeRest.titleLabel.text = [self timeFormatter:[NSNumber numberWithFloat:time]];
+    self.onlyMS = false;
     
     [self.pickerView removeFromSuperview];
     
@@ -472,6 +495,9 @@
         [self.formatterChronometer setDateFormat:@"HH:mm:ss.SS"];
     }else{
         [self.formatterChronometer setDateFormat:@"mm:ss.SS"];
+    }
+    if (self.onlyMS) {
+        [self.formatterChronometer setDateFormat:@"mm:ss"];
     }
     
     //transforma o tempo do cronometro em uma NSDate
@@ -509,43 +535,49 @@
 
 -(void)playChronometer
 {
-    if (self.isEditable) {
-        [self enableEditing];
+    //    if (self.isEditable) {
+    //        [self enableEditing];
+    //    }
+    
+    //Foi necessario recolocar essa validacao aqui, pois esse metodo sera chamado de uma classe exterior diretamente
+    if (![self.timeController isValid]) {//Verifica se o cronometro está parado
+        //Ativa o cronometro
+        self.timeController = [NSTimer scheduledTimerWithTimeInterval:0.045
+                                                               target:self
+                                                             selector:@selector(updateChronometer)
+                                                             userInfo:nil repeats:YES];
+        //Adiciona ao array de inicio o momento em que o cronometro começou a correr
+        [self.startTimes addObject:[NSDate date]];
+        
+        self.pausedTime = [self getTimeOfPause];
+        
+        //Faz o timer correr em um loop separado do loop da aplicacao, evitando o problema de para atualizacao da label do cronometro
+        [[NSRunLoop currentRunLoop] addTimer:self.timeController
+                                     forMode:NSRunLoopCommonModes];
+        
+        [self updateIcons]; //Atualiza os icones da tela
     }
-    
-    //Ativa o cronometro
-    self.timeController = [NSTimer scheduledTimerWithTimeInterval:0.045
-                                                           target:self
-                                                         selector:@selector(updateChronometer)
-                                                         userInfo:nil repeats:YES];
-    //Adiciona ao array de inicio o momento em que o cronometro começou a correr
-    [self.startTimes addObject:[NSDate date]];
-    
-    self.pausedTime = [self getTimeOfPause];
-    
-    //Faz o timer correr em um loop separado do loop da aplicacao, evitando o problema de para atualizacao da label do cronometro
-    [[NSRunLoop currentRunLoop] addTimer:self.timeController
-                                 forMode:NSRunLoopCommonModes];
-    
-    [self updateIcons]; //Atualiza os icones da tela
 }
 
 -(void)pauseChronometer
 {
-    if (self.isEditable) {
-        [self enableEditing];
+    //    if (self.isEditable) {
+    //        [self enableEditing];
+    //    }
+    
+    //Necessario recolocar essa validacao pq esse metodo sera chamado de uma classe exterior
+    if ([self.timeController isValid]) {
+        //Destroi o timer do cronometro, resultando na nao atualizaçao do cronometro
+        [self.timeController invalidate];
+        
+        //Libera a memoria ocupada pelo timer
+        self.timeController = nil;
+        
+        //Adiciona ao array de pausas o momento em que o cronometro foi pausado
+        [self.pauseTimes addObject:[NSDate date]];
+        
+        [self updateIcons];
     }
-    
-    //Destroi o timer do cronometro, resultando na nao atualizaçao do cronometro
-    [self.timeController invalidate];
-    
-    //Libera a memoria ocupada pelo timer
-    self.timeController = nil;
-    
-    //Adiciona ao array de pausas o momento em que o cronometro foi pausado
-    [self.pauseTimes addObject:[NSDate date]];
-    
-    [self updateIcons];
 }
 
 //Controlador de tempo do cronometro, dividi o play e pause em dois metodos pq precisava chamar o pause manualmente algumsa vezes
@@ -600,9 +632,9 @@
 {
     if (!([[self startTimes] count] == [[self pauseTimes] count])) {
         
-        if (self.isEditable) {
-            [self enableEditing];
-        }
+//        if (self.isEditable) {
+//            [self enableEditing];
+//        }
         
         //Adiciona ao array de voltas o momento em que foi solicitado uma volta
         [self.lapTimes addObject:[NSDate date]];

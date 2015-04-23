@@ -15,8 +15,10 @@
 
 @interface Chronometer : UIView
 
-//- (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus; //Nao necessario por enquanto
+//Para ajudar a camila na hora de fazer os bagulho dela lá
+@property (nonatomic) BOOL isEditable;
 
+//- (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus; //Nao necessario por enquanto
 -(void)resizeCronometer:(CGRect)size andFocus:(int)focus;
 -(void)enableEditing;
 
@@ -24,6 +26,10 @@
 -(void)play_pauseChronometer;
 -(void)restChronometer;
 -(void)lapChronometer;
+
+//Necessario colocar esses metodos de volta no cabecalho pois precisarao ser chamados por uma classe externa
+-(void)playChronometer;
+-(void)pauseChronometer;
 
 -(NSArray*)getChronometerContent;
 
