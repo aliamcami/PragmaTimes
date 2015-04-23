@@ -29,6 +29,10 @@
 		6BB7E3171AE8174300158533 /* KorreData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E3161AE8174300158533 /* KorreData.xcdatamodel */; };
 		6BF4FB1D1AD6EE0800BAE81B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4FB1B1AD6EE0800BAE81B /* ViewController.m */; };
 		6BF4FB1E1AD6EE0800BAE81B /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BF4FB1C1AD6EE0800BAE81B /* ViewController.xib */; };
+		860D081F1AE96F74006AE604 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860D08181AE96F74006AE604 /* Parse.framework */; };
+		860D08201AE96F74006AE604 /* Register_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081A1AE96F74006AE604 /* Register_ViewController.m */; };
+		860D08211AE96F74006AE604 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081C1AE96F74006AE604 /* SecondViewController.m */; };
+		860D08221AE96F74006AE604 /* SingletonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081E1AE96F74006AE604 /* SingletonData.m */; };
 		862C74EC1ADEF2CF00CEA9AC /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */; };
 		862C74ED1ADEF2CF00CEA9AC /* CustomCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */; };
 		862C74F01ADEF30C00CEA9AC /* MyColorHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */; };
@@ -148,6 +152,7 @@
 				6B9FE2D61AE839CE00CBF66F /* CoreLocation.framework in Frameworks */,
 				6B9FE2D41AE839C400CBF66F /* CoreGraphics.framework in Frameworks */,
 				6B9FE2D21AE839BA00CBF66F /* CFNetwork.framework in Frameworks */,
+				860D081F1AE96F74006AE604 /* Parse.framework in Frameworks */,
 				6B9FE2D01AE839B000CBF66F /* AudioToolbox.framework in Frameworks */,
 				6B9FE2CE1AE8393600CBF66F /* Parse.framework in Frameworks */,
 				6B9FE2CD1AE8393600CBF66F /* Bolts.framework in Frameworks */,
@@ -167,6 +172,13 @@
 		D587671E1AD3230300F29BCC = {
 			isa = PBXGroup;
 			children = (
+				860D08181AE96F74006AE604 /* Parse.framework */,
+				860D08191AE96F74006AE604 /* Register_ViewController.h */,
+				860D081A1AE96F74006AE604 /* Register_ViewController.m */,
+				860D081B1AE96F74006AE604 /* SecondViewController.h */,
+				860D081C1AE96F74006AE604 /* SecondViewController.m */,
+				860D081D1AE96F74006AE604 /* SingletonData.h */,
+				860D081E1AE96F74006AE604 /* SingletonData.m */,
 				6B9FE2E31AE83A1600CBF66F /* libsqlite3.dylib */,
 				6B9FE2E11AE83A0900CBF66F /* libz.dylib */,
 				6B9FE2DF1AE839FC00CBF66F /* SystemConfiguration.framework */,
@@ -432,6 +444,7 @@
 				D5C43B291AE9627600A15F1F /* CustomCollectionViewController.h in Sources */,
 				D594BF9F1AE5B79C00BCFCDC /* PickerView_Model.m in Sources */,
 				6BB7E3061AE80C7D00158533 /* Parada.m in Sources */,
+				860D08201AE96F74006AE604 /* Register_ViewController.m in Sources */,
 				6BF4FB1D1AD6EE0800BAE81B /* ViewController.m in Sources */,
 				D58A8B5B1AE9794F00580109 /* Volta.m in Sources */,
 				6BB7E2FD1AE80C7C00158533 /* Atleta.m in Sources */,
@@ -444,6 +457,7 @@
 				D58A8B541AE9638500580109 /* SecondViewController.m in Sources */,
 				6BB7E3001AE80C7D00158533 /* GrupoDeTempos.m in Sources */,
 				D5C59DB81AD4573A004C4BC7 /* Chronometer.m in Sources */,
+				860D08221AE96F74006AE604 /* SingletonData.m in Sources */,
 				6BB7E2F81AE80C2400158533 /* DB.m in Sources */,
 				D5C5765E1AD5DCAD0066CA29 /* TableView_Model.m in Sources */,
 				862C74F01ADEF30C00CEA9AC /* MyColorHolder.m in Sources */,
