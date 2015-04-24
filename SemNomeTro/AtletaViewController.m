@@ -8,7 +8,14 @@
 
 #import "AtletaViewController.h"
 
-@interface AtletaViewController ()
+@interface AtletaViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+
+@property (nonatomic) NSMutableArray *autocompleteUrls;
+@property (nonatomic) NSMutableArray *pastUrls;
+@property (nonatomic) NSMutableArray *past;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -16,7 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,14 +35,5 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
