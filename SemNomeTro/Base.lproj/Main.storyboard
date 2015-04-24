@@ -17,16 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jf6-eR-mF2" userLabel="Email">
-                                <rect key="frame" x="150" y="165" width="300" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jf6-eR-mF2" userLabel="Email">
+                                <rect key="frame" x="150" y="120" width="300" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="79c-gH-Odg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0FN-ZZ-yEx">
-                                <rect key="frame" x="150" y="460" width="300" height="68"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0FN-ZZ-yEx">
+                                <rect key="frame" x="150" y="452" width="300" height="60"/>
                                 <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <state key="normal" title="Continuar sem Cadastro">
@@ -37,8 +37,8 @@
                                     <action selector="onContinuePressed:" destination="CHb-mS-1mP" eventType="touchUpInside" id="Rad-zK-aHb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SCC-Eo-dOf">
-                                <rect key="frame" x="150" y="327" width="300" height="68"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SCC-Eo-dOf">
+                                <rect key="frame" x="150" y="372" width="300" height="60"/>
                                 <color key="backgroundColor" red="0.064170927710000006" green="0.71734927400000004" blue="0.11888378099999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <state key="normal" title="Cadastrar">
@@ -49,8 +49,8 @@
                                     <action selector="onRegisterPressed:" destination="CHb-mS-1mP" eventType="touchUpInside" id="JBj-g9-lgx"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="senha" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Kns-bk-JGH" userLabel="Senha">
-                                <rect key="frame" x="150" y="222" width="300" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="senha" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Kns-bk-JGH" userLabel="Senha">
+                                <rect key="frame" x="150" y="207" width="300" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="9iL-69-VZ1"/>
                                     <constraint firstAttribute="height" constant="60" id="Yty-CS-2Yx"/>
@@ -58,8 +58,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="senha" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bhp-tg-Hpw" userLabel="Senha">
-                                <rect key="frame" x="150" y="277" width="300" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="senha" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bhp-tg-Hpw" userLabel="Senha">
+                                <rect key="frame" x="150" y="292" width="300" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Xuq-6i-GII"/>
                                 </constraints>
@@ -71,20 +71,20 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="E-mail:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8e-Bf-3SD">
-                                <rect key="frame" x="152" y="143" width="45" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mail:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8e-Bf-3SD">
+                                <rect key="frame" x="152" y="98" width="45" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GdT-OY-hcF">
-                                <rect key="frame" x="152" y="200" width="68" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GdT-OY-hcF">
+                                <rect key="frame" x="152" y="185" width="68" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99o-wo-yWG">
-                                <rect key="frame" x="152" y="255" width="68" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99o-wo-yWG">
+                                <rect key="frame" x="152" y="270" width="68" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -144,7 +144,7 @@
         <!--Menu-->
         <scene sceneID="ilI-P9-YEe">
             <objects>
-                <viewController title="Menu" id="agv-iE-UAi" sceneMemberID="viewController">
+                <viewController title="Menu" id="agv-iE-UAi" customClass="MenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uaR-T7-AcH"/>
                         <viewControllerLayoutGuide type="bottom" id="IHR-lD-tJx"/>
@@ -165,7 +165,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4c-pa-zOS">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem title="Back" id="nXw-iv-ZZb"/>
+                                    <barButtonItem title="Back" id="nXw-iv-ZZb">
+                                        <connections>
+                                            <action selector="back:" destination="agv-iE-UAi" id="ut1-RW-iNt"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNa-hx-ASP">
@@ -243,7 +247,7 @@
         <!--NovoAtleta-->
         <scene sceneID="nCZ-Qz-MQd">
             <objects>
-                <viewController title="NovoAtleta" id="c1s-m9-VhS" sceneMemberID="viewController">
+                <viewController title="NovoAtleta" id="c1s-m9-VhS" customClass="NovoAtletaViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PZQ-wH-bcb"/>
                         <viewControllerLayoutGuide type="bottom" id="eqQ-EL-sbS"/>
@@ -255,7 +259,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl1-Ef-kIs">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem title="Back" id="bCN-dO-MaE"/>
+                                    <barButtonItem title="Back" id="bCN-dO-MaE">
+                                        <connections>
+                                            <action selector="back:" destination="c1s-m9-VhS" id="iyN-4z-dbL"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title=" " width="20" style="plain" id="W7r-T8-1e6"/>
                                     <barButtonItem title="Menu" id="uEl-bu-yZU">
                                         <connections>
@@ -345,7 +353,7 @@
         <!--SouAtleta-->
         <scene sceneID="D37-ew-Hyc">
             <objects>
-                <viewController title="SouAtleta" id="TeE-Ob-iJ5" sceneMemberID="viewController">
+                <viewController title="SouAtleta" id="TeE-Ob-iJ5" customClass="SouAtletaViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dSA-ns-EqP"/>
                         <viewControllerLayoutGuide type="bottom" id="1PW-BP-rqX"/>
@@ -377,7 +385,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="33x-fW-Fog">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem title="Back" id="DIb-X5-kGZ"/>
+                                    <barButtonItem title="Back" id="DIb-X5-kGZ">
+                                        <connections>
+                                            <action selector="back:" destination="TeE-Ob-iJ5" id="dui-j1-PiF"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title=" " width="20" style="plain" id="7IG-jF-Smw"/>
                                     <barButtonItem title="Menu" id="42y-l3-zTz">
                                         <connections>
@@ -424,7 +436,7 @@
         <!--Atletas-->
         <scene sceneID="A76-z7-rxY">
             <objects>
-                <viewController title="Atletas" id="v1k-MT-onT" sceneMemberID="viewController">
+                <viewController title="Atletas" id="v1k-MT-onT" customClass="AtletaViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SgK-NE-a8q"/>
                         <viewControllerLayoutGuide type="bottom" id="NgZ-sN-Jbd"/>
@@ -456,6 +468,12 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBV-M0-4id">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
+                                    <barButtonItem title="Back" id="se2-QC-4Wu">
+                                        <connections>
+                                            <action selector="back:" destination="v1k-MT-onT" id="8LW-jS-wbd"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title=" " width="20" style="plain" id="BUz-Xj-27F"/>
                                     <barButtonItem style="plain" systemItem="add" id="Pea-46-f7T">
                                         <connections>
                                             <segue destination="c1s-m9-VhS" kind="show" id="YlV-Ym-THv"/>
@@ -807,7 +825,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="V0l-N2-gQc"/>
+        <segue reference="jtJ-pI-agW"/>
         <segue reference="Tdk-r2-SVW"/>
     </inferredMetricsTieBreakers>
 </document>

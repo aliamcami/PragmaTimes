@@ -52,7 +52,7 @@ static float const diferenceForAlphaColor = 0.2;
 }
 - (void)viewDidLoad {
     
-    self.collectionView.allowsMultipleSelection = YES;
+//    self.collectionView.allowsMultipleSelection = YES;
     
     
     
