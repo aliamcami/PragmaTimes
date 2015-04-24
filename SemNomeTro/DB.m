@@ -1,6 +1,6 @@
 #import "DB.h"
-
-#import <Parse/Parse.h>
+//#import <Parse/Parse.h>
+//#import "Parse.framework/Headers/Parse.h"
 
 #define WITH_CTX NSManagedObjectContext *ctx = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
 #define GET NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init]; NSError *erroLer;
@@ -82,7 +82,7 @@ NSString* geraEmail() {
     novoAtletaParse[@"sexo"]   = sexo;
     [novoAtletaParse saveEventually];
   }
-
+  
   NOVO_ATLETA
   novoAtleta.email  = email;
   novoAtleta.nome   = nome;

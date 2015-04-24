@@ -1,5 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
+// #import "../Parse.framework/Parse"
+// #import "../Parse.framework/Headers/Parse.h"
 
 #import "Atleta.h"
 #import "GrupoDeTempos.h"

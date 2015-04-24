@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SemNomeTro/DB.m"
-            timestampString = "451417680.681381"
+            timestampString = "451601068.092066"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
             endingLineNumber = "90"
-            landmarkName = "-encontraAtleta:"
+            landmarkName = "-adicionarAtleta:nome:foto:peso:altura:sexo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
