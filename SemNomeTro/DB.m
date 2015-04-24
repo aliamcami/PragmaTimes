@@ -6,7 +6,7 @@
 #define GET NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init]; NSError *erroLer;
 #define ENCONTRA_ATLETA Atleta *atleta = [self encontraAtleta:email];
 #define FN NSLog(@"%s", __FUNCTION__);
-#define FLAG_PARSE TRUE
+#define FLAG_PARSE NO  //TRUE
 //iweJFPOASEIFJPOASIEJFPOASIEJFOI
 
 #define ATLETA_STR                    @"Atleta"
@@ -33,6 +33,17 @@
 @implementation DB
 
 
+NSString* geraEmail() {
+  NSString *path = [[NSBundle mainBundle] pathForResource: @"Treinador" ofType: @"plist"];
+  NSMutableDictionary *dictplist =[[NSMutableDictionary alloc] initWithContentsOfFile:path];
+  NSNumber *c = [dictplist objectForKey:@"contador"];
+  [dictplist setObject:[NSNumber numberWithInt:1 + [c intValue]]
+                forKey:@"contador"];
+  [dictplist writeToFile:path atomically:YES];
+
+  return [NSString stringWithFormat:@"@Atleta %@", c];
+}
+
 -(NSArray *)todosAtletas {
   FN WITH_CTX GET ATLETA
   NSArray *todosAtletas = [ctx executeFetchRequest:fetchRequest error:&erroLer];
@@ -46,13 +57,20 @@
   if ([self encontraAtleta:email] != nil) {
     NSLog(@"Atleta já existe: %@", email);
     return NO;
-  } else if (email == nil) {
-    NSLog(@"Email do atleta é nulo");
-    return NO;
+  } else if (email == nil || [email isEqualToString:@""]) {
+    email = geraEmail();
   } else {
     NSLog(@"Atleta novo: %@", email);
   }
-  // TODO verificar que o email não e null
+
+  if (nome   == nil) nome   = @"";
+  if (foto   == nil) foto   = @"";
+  if (peso   == nil) peso   = @0;
+  if (altura == nil) altura = @0;
+  if (sexo   == nil) sexo   = @"";
+
+
+  // Falta verificar se o email é valido...
 
   if (FLAG_PARSE) {
     PFObject *novoAtletaParse = [PFObject objectWithClassName:@"Atleta"];
@@ -64,6 +82,7 @@
     novoAtletaParse[@"sexo"]   = sexo;
     [novoAtletaParse saveEventually];
   }
+
   NOVO_ATLETA
   novoAtleta.email  = email;
   novoAtleta.nome   = nome;
@@ -146,6 +165,10 @@
                inicios:(NSArray *)inicios paradas:(NSArray *)paradas voltas:(NSArray *)voltas {
   FN
   WITH_CTX NOVO_GRUPO_DE_TEMPOS ENCONTRA_ATLETA
+
+  if (email == nil || [email isEqualToString:@""]) {
+    email = geraEmail();
+  }
 
   novoGrupoDeTempos.dataDeInicio = dataDeInicio;
 
