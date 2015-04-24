@@ -52,8 +52,8 @@ static float const diferenceForAlphaColor = 0.2;
 }
 - (void)viewDidLoad {
     
-//    self.collectionView.allowsMultipleSelection = YES;
-    
+    self.collectionView.allowsMultipleSelection = YES;
+    selectedArray = [[ NSMutableArray alloc]init];
     
     
     [super viewDidLoad];
@@ -172,29 +172,33 @@ static float const diferenceForAlphaColor = 0.2;
 #pragma mark select items
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"lkjlk");
-    Chronometer *item = self.shared.arrayChronometers[indexPath.row];
-    [selectedArray addObject: item];
-    NSLog(@" - -%@", selectedArray);
+    NSLog(@"lkjlk %lu", [selectedArray count]);
+    //    Chronometer *item = self.shared.arrayChronometers[indexPath.row];
+    [selectedArray addObject: indexPath];
+    [self.collectionView cellForItemAtIndexPath:indexPath].layer.borderColor = [UIColor redColor].CGColor;
+    [self.collectionView cellForItemAtIndexPath:indexPath].layer.borderWidth = 3.0f;
+    
 }
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Chronometer *item = self.shared.arrayChronometers[indexPath.row];
-    [selectedArray removeObject:item];
+    //    Chronometer *item = self.shared.arrayChronometers[indexPath.row];
+    [selectedArray removeObject:indexPath];
+    [self.collectionView cellForItemAtIndexPath:indexPath].layer.borderColor = [UIColor clearColor].CGColor;
+    [self.collectionView cellForItemAtIndexPath:indexPath].layer.borderWidth = .0f;
 }
 
- // Uncomment this method to specify if the specified item should be highlighted during tracking
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-     NSLog(@"should hith");
-	return YES;
- }
+// // Uncomment this method to specify if the specified item should be highlighted during tracking
+// - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+//     NSLog(@"should hith");
+//	return YES;
+// }
+//
+// // Uncomment this method to specify if the specified item should be selected
+// - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+//     NSLog(@"should select");
+//     return YES;
+// }
 
- // Uncomment this method to specify if the specified item should be selected
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-     NSLog(@"should select");
-     return YES;
- }
- 
  
 /*
  // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
@@ -397,7 +401,23 @@ static float const diferenceForAlphaColor = 0.2;
     NSArray *deleteItems = @[indexPath];
     [self.collectionView deleteItemsAtIndexPaths:deleteItems]; //deleta da collection
 }
-
+-(void) deleteCellsIndexPaths:(NSArray*)indexPaths{
+    
+    NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc]init];
+    
+    if ([self.shared.arrayChronometers count] - [indexPaths count] == 0) {
+        [self addNewCell];
+    }
+    for (NSIndexPath *indexPath in indexPaths) {
+        [indexes addIndex:indexPath.row];
+        [[self.collectionView cellForItemAtIndexPath:indexPath] removeFromSuperview];
+        [[self.shared arrayChronometers][indexPath.row] removeFromSuperview]; //remove da superview
+    }
+    [self.shared.arrayChronometers removeObjectsAtIndexes:indexes];
+    [self.shared.arrayColors removeObjectsAtIndexes:indexes];
+    [self.collectionView deleteItemsAtIndexPaths:indexPaths]; //deleta da collection
+    [selectedArray removeAllObjects];
+}
 
 -(void) addNewCell{
     NSIndexPath *indexp = [NSIndexPath
@@ -420,6 +440,7 @@ static float const diferenceForAlphaColor = 0.2;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)remove:(id)sender {
+    [self deleteCellsIndexPaths:selectedArray];
 }
 
 
