@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B01DA741AEAE1E600FFAA9B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B01DA731AEAE1E600FFAA9B /* Parse.framework */; };
 		6B9FE2CD1AE8393600CBF66F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9FE2CB1AE8393600CBF66F /* Bolts.framework */; };
 		6B9FE2D01AE839B000CBF66F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9FE2CF1AE839B000CBF66F /* AudioToolbox.framework */; };
 		6B9FE2D21AE839BA00CBF66F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9FE2D11AE839BA00CBF66F /* CFNetwork.framework */; };
@@ -29,32 +30,8 @@
 		860D08201AE96F74006AE604 /* Register_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081A1AE96F74006AE604 /* Register_ViewController.m */; };
 		860D08211AE96F74006AE604 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081C1AE96F74006AE604 /* SecondViewController.m */; };
 		860D08221AE96F74006AE604 /* SingletonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081E1AE96F74006AE604 /* SingletonData.m */; };
-		8619331F1AEAC95900FBC563 /* Register_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081A1AE96F74006AE604 /* Register_ViewController.m */; };
-		861933201AEAC95900FBC563 /* GeneralController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6012E1AE98B030078A198 /* GeneralController.m */; };
-		861933211AEAC95900FBC563 /* User_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D599581E1AD4497900BCF33B /* User_Model.m */; };
-		861933221AEAC95900FBC563 /* Chronometer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C59DB71AD4573A004C4BC7 /* Chronometer.m */; };
-		861933231AEAC95900FBC563 /* Athlete_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D5779E8E1AD47908003957E2 /* Athlete_Model.m */; };
-		861933241AEAC95900FBC563 /* TableView_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5765D1AD5DCAD0066CA29 /* TableView_Model.m */; };
-		861933251AEAC95900FBC563 /* Login_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D55F80801ADD7B560071A70C /* Login_Model.m */; };
-		861933261AEAC95900FBC563 /* PickerView_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D594BF9E1AE5B79C00BCFCDC /* PickerView_Model.m */; };
-		861933281AEAC95900FBC563 /* SingletonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081E1AE96F74006AE604 /* SingletonData.m */; };
-		861933291AEAC95900FBC563 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081C1AE96F74006AE604 /* SecondViewController.m */; };
-		8619332A1AEAC95900FBC563 /* MyColorHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */; };
-		8619332B1AEAC95900FBC563 /* CustomCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */; };
-		8619332C1AEAC95900FBC563 /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */; };
-		8619332D1AEAC95900FBC563 /* Parada.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E3051AE80C7D00158533 /* Parada.m */; };
-		8619332E1AEAC95900FBC563 /* Inicio.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E3021AE80C7D00158533 /* Inicio.m */; };
-		8619332F1AEAC95900FBC563 /* GrupoDeTempos.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E2FF1AE80C7D00158533 /* GrupoDeTempos.m */; };
-		861933301AEAC95900FBC563 /* GrupoDeTemposOrdenados.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E30E1AE80D5800158533 /* GrupoDeTemposOrdenados.m */; };
-		861933311AEAC95900FBC563 /* Atleta.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E2FC1AE80C7C00158533 /* Atleta.m */; };
-		861933321AEAC95900FBC563 /* DB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E2F71AE80C2400158533 /* DB.m */; };
-		861933341AEAC95900FBC563 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D587672F1AD3230300F29BCC /* AppDelegate.m */; };
-		861933351AEAC95900FBC563 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D587672C1AD3230300F29BCC /* main.m */; };
-		861933361AEAC95900FBC563 /* SemNomeTroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D58767461AD3230300F29BCC /* SemNomeTroTests.m */; };
-		861933381AEAC9AC00FBC563 /* KorreData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E3161AE8174300158533 /* KorreData.xcdatamodel */; };
 		8619333E1AEACA8E00FBC563 /* Volta.m in Sources */ = {isa = PBXBuildFile; fileRef = 8619333D1AEACA8E00FBC563 /* Volta.m */; };
 		861933411AEACAAF00FBC563 /* DeleteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 861933401AEACAAF00FBC563 /* DeleteCollectionView.m */; };
-		8619334D1AEACD2500FBC563 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8619334C1AEACD2500FBC563 /* Parse.framework */; };
 		861933501AEACD9A00FBC563 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8619334F1AEACD9A00FBC563 /* MenuViewController.m */; };
 		861933531AEACE2A00FBC563 /* SouAtletaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861933521AEACE2A00FBC563 /* SouAtletaViewController.m */; };
 		861933561AEACE7800FBC563 /* NovoAtletaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861933551AEACE7800FBC563 /* NovoAtletaViewController.m */; };
@@ -77,6 +54,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B01DA731AEAE1E600FFAA9B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		6B9FE2CB1AE8393600CBF66F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		6B9FE2CF1AE839B000CBF66F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6B9FE2D11AE839BA00CBF66F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -112,7 +90,6 @@
 		8619333D1AEACA8E00FBC563 /* Volta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Volta.m; sourceTree = "<group>"; };
 		8619333F1AEACAAF00FBC563 /* DeleteCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteCollectionView.h; sourceTree = "<group>"; };
 		861933401AEACAAF00FBC563 /* DeleteCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteCollectionView.m; sourceTree = "<group>"; };
-		8619334C1AEACD2500FBC563 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = SemNomeTro/Parse.framework; sourceTree = "<group>"; };
 		8619334E1AEACD9A00FBC563 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		8619334F1AEACD9A00FBC563 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		861933511AEACE2A00FBC563 /* SouAtletaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SouAtletaViewController.h; sourceTree = "<group>"; };
@@ -138,7 +115,6 @@
 		D58767351AD3230300F29BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D58767371AD3230300F29BCC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D587673A1AD3230300F29BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		D58767401AD3230300F29BCC /* SemNomeTroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SemNomeTroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D58767451AD3230300F29BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D58767461AD3230300F29BCC /* SemNomeTroTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SemNomeTroTests.m; sourceTree = "<group>"; };
 		D594BF9D1AE5B79C00BCFCDC /* PickerView_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerView_Model.h; sourceTree = "<group>"; };
@@ -165,20 +141,13 @@
 				6B9FE2DE1AE839F100CBF66F /* StoreKit.framework in Frameworks */,
 				6B9FE2DC1AE839E800CBF66F /* Security.framework in Frameworks */,
 				6B9FE2DA1AE839DE00CBF66F /* QuartzCore.framework in Frameworks */,
+				6B01DA741AEAE1E600FFAA9B /* Parse.framework in Frameworks */,
 				6B9FE2D81AE839D600CBF66F /* MobileCoreServices.framework in Frameworks */,
 				6B9FE2D61AE839CE00CBF66F /* CoreLocation.framework in Frameworks */,
 				6B9FE2D41AE839C400CBF66F /* CoreGraphics.framework in Frameworks */,
 				6B9FE2D21AE839BA00CBF66F /* CFNetwork.framework in Frameworks */,
-				8619334D1AEACD2500FBC563 /* Parse.framework in Frameworks */,
 				6B9FE2D01AE839B000CBF66F /* AudioToolbox.framework in Frameworks */,
 				6B9FE2CD1AE8393600CBF66F /* Bolts.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D587673D1AD3230300F29BCC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,7 +200,6 @@
 			children = (
 				6B9FE2E31AE83A1600CBF66F /* libsqlite3.dylib */,
 				6B9FE2E11AE83A0900CBF66F /* libz.dylib */,
-				8619334C1AEACD2500FBC563 /* Parse.framework */,
 				6B9FE2DF1AE839FC00CBF66F /* SystemConfiguration.framework */,
 				6B9FE2DD1AE839F100CBF66F /* StoreKit.framework */,
 				6B9FE2DB1AE839E800CBF66F /* Security.framework */,
@@ -251,7 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				D58767271AD3230300F29BCC /* SemNomeTro.app */,
-				D58767401AD3230300F29BCC /* SemNomeTroTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -305,6 +272,7 @@
 			children = (
 				8619333C1AEACA8E00FBC563 /* Volta.h */,
 				8619333D1AEACA8E00FBC563 /* Volta.m */,
+				6B01DA731AEAE1E600FFAA9B /* Parse.framework */,
 				6B9FE2CB1AE8393600CBF66F /* Bolts.framework */,
 				6BB7E3161AE8174300158533 /* KorreData.xcdatamodel */,
 				6BB7E3041AE80C7D00158533 /* Parada.h */,
@@ -398,23 +366,6 @@
 			productReference = D58767271AD3230300F29BCC /* SemNomeTro.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D587673F1AD3230300F29BCC /* SemNomeTroTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D587674D1AD3230300F29BCC /* Build configuration list for PBXNativeTarget "SemNomeTroTests" */;
-			buildPhases = (
-				D587673C1AD3230300F29BCC /* Sources */,
-				D587673D1AD3230300F29BCC /* Frameworks */,
-				D587673E1AD3230300F29BCC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SemNomeTroTests;
-			productName = SemNomeTroTests;
-			productReference = D58767401AD3230300F29BCC /* SemNomeTroTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -427,11 +378,6 @@
 					D58767261AD3230300F29BCC = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 8ZMYQBCU73;
-					};
-					D587673F1AD3230300F29BCC = {
-						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 8ZMYQBCU73;
-						TestTargetID = D58767261AD3230300F29BCC;
 					};
 				};
 			};
@@ -449,7 +395,6 @@
 			projectRoot = "";
 			targets = (
 				D58767261AD3230300F29BCC /* SemNomeTro */,
-				D587673F1AD3230300F29BCC /* SemNomeTroTests */,
 			);
 		};
 /* End PBXProject section */
@@ -462,13 +407,6 @@
 				D58767361AD3230300F29BCC /* Main.storyboard in Resources */,
 				D587673B1AD3230300F29BCC /* LaunchScreen.xib in Resources */,
 				D58767381AD3230300F29BCC /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D587673E1AD3230300F29BCC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,36 +445,6 @@
 				862C74ED1ADEF2CF00CEA9AC /* CustomCollectionViewController.m in Sources */,
 				D5779E8F1AD47908003957E2 /* Athlete_Model.m in Sources */,
 				861933591AEACEA900FBC563 /* AtletaViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D587673C1AD3230300F29BCC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				861933381AEAC9AC00FBC563 /* KorreData.xcdatamodel in Sources */,
-				8619331F1AEAC95900FBC563 /* Register_ViewController.m in Sources */,
-				861933201AEAC95900FBC563 /* GeneralController.m in Sources */,
-				861933211AEAC95900FBC563 /* User_Model.m in Sources */,
-				861933221AEAC95900FBC563 /* Chronometer.m in Sources */,
-				861933231AEAC95900FBC563 /* Athlete_Model.m in Sources */,
-				861933241AEAC95900FBC563 /* TableView_Model.m in Sources */,
-				861933251AEAC95900FBC563 /* Login_Model.m in Sources */,
-				861933261AEAC95900FBC563 /* PickerView_Model.m in Sources */,
-				861933281AEAC95900FBC563 /* SingletonData.m in Sources */,
-				861933291AEAC95900FBC563 /* SecondViewController.m in Sources */,
-				8619332A1AEAC95900FBC563 /* MyColorHolder.m in Sources */,
-				8619332B1AEAC95900FBC563 /* CustomCollectionViewController.m in Sources */,
-				8619332C1AEAC95900FBC563 /* CustomCollectionViewCell.m in Sources */,
-				8619332D1AEAC95900FBC563 /* Parada.m in Sources */,
-				8619332E1AEAC95900FBC563 /* Inicio.m in Sources */,
-				8619332F1AEAC95900FBC563 /* GrupoDeTempos.m in Sources */,
-				861933301AEAC95900FBC563 /* GrupoDeTemposOrdenados.m in Sources */,
-				861933311AEAC95900FBC563 /* Atleta.m in Sources */,
-				861933321AEAC95900FBC563 /* DB.m in Sources */,
-				861933341AEAC95900FBC563 /* AppDelegate.m in Sources */,
-				861933351AEAC95900FBC563 /* main.m in Sources */,
-				861933361AEAC95900FBC563 /* SemNomeTroTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +556,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SemNomeTro",
+					"$(PROJECT_DIR)/SemNomeTro/SemNomeTro/SemNomeTro",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = SemNomeTro/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -665,44 +575,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SemNomeTro",
+					"$(PROJECT_DIR)/SemNomeTro/SemNomeTro/SemNomeTro",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = SemNomeTro/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		D587674E1AD3230300F29BCC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SemNomeTroTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SemNomeTro.app/SemNomeTro";
-			};
-			name = Debug;
-		};
-		D587674F1AD3230300F29BCC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SemNomeTroTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SemNomeTro.app/SemNomeTro";
 			};
 			name = Release;
 		};
@@ -723,15 +601,6 @@
 			buildConfigurations = (
 				D587674B1AD3230300F29BCC /* Debug */,
 				D587674C1AD3230300F29BCC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D587674D1AD3230300F29BCC /* Build configuration list for PBXNativeTarget "SemNomeTroTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D587674E1AD3230300F29BCC /* Debug */,
-				D587674F1AD3230300F29BCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
