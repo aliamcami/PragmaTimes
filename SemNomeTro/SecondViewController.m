@@ -208,6 +208,7 @@ static float const diferenceForAlphaColor = 0.2;
     //set tamanho dos cronometros dependendo da quantidade de cronometros
     int largura;
     switch (qntChronometros) {
+        case 0:
         case 1:
             chronometerSize = CGSizeMake(workWidth, workHeight);
             tipoChronometro = CRONOMETRO_COMPLETO;

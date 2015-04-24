@@ -79,15 +79,15 @@ static float const diferenceForAlphaColor = 0.2;
     
     CustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"myCell" forIndexPath:indexPath];
 //    
-//    //removendo as subviews lixo das celulas
-//    for (UIView *v in cell.subviews) {
-//        [v removeFromSuperview];
-//    }
-//    
-//    //    //coloca o crhonometro em cada celula
-//    Chronometer *chron = [[self.shared arrayChronometers] objectAtIndex:indexPath.row];
-//    [cell addSubview:chron];
-//    
+    //removendo as subviews lixo das celulas
+    for (UIView *v in cell.subviews) {
+        [v removeFromSuperview];
+    }
+    
+    //    //coloca o crhonometro em cada celula
+    Chronometer *chron = [[self.shared arrayChronometers] objectAtIndex:indexPath.row];
+    [cell addSubview:chron];
+    
     //arredonda os cantos da celula
     [cell.layer setCornerRadius:20];
     
@@ -95,8 +95,8 @@ static float const diferenceForAlphaColor = 0.2;
     MyColorHolder *color = [[self.shared arrayColors] objectAtIndex:indexPath.row];
     [cell setBackgroundColor:color.theColor];
     
-//    cell.selectedBackgroundView.layer.borderColor = [UIColor redColor].CGColor;
-//    cell.selectedBackgroundView.layer.borderWidth = 4.0f;
+    cell.selectedBackgroundView.layer.borderColor = [UIColor redColor].CGColor;
+    cell.selectedBackgroundView.layer.borderWidth = 4.0f;
     
     //retorna a celula ja com um chronometro em cada e cor de background
     return cell;
@@ -440,6 +440,8 @@ static float const diferenceForAlphaColor = 0.2;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)remove:(id)sender {
+    
+    //salvar dados? n / s
     [self deleteCellsIndexPaths:selectedArray];
 }
 

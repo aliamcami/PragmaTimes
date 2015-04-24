@@ -183,6 +183,8 @@
 		8619334B1AEACCF100FBC563 /* outras telas */ = {
 			isa = PBXGroup;
 			children = (
+				860D08191AE96F74006AE604 /* Register_ViewController.h */,
+				860D081A1AE96F74006AE604 /* Register_ViewController.m */,
 				8619334E1AEACD9A00FBC563 /* MenuViewController.h */,
 				8619334F1AEACD9A00FBC563 /* MenuViewController.m */,
 				861933511AEACE2A00FBC563 /* SouAtletaViewController.h */,
@@ -323,8 +325,6 @@
 		D599581B1AD4485700BCF33B /* Control */ = {
 			isa = PBXGroup;
 			children = (
-				860D08191AE96F74006AE604 /* Register_ViewController.h */,
-				860D081A1AE96F74006AE604 /* Register_ViewController.m */,
 				D5C6012D1AE98B030078A198 /* GeneralController.h */,
 				D5C6012E1AE98B030078A198 /* GeneralController.m */,
 			);
