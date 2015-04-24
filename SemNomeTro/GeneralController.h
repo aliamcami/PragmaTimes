@@ -12,7 +12,7 @@
 
 @interface GeneralController : NSObject
 
-//-(NSArray *)todosAtletas;
+-(NSArray *)todosAtletas;
 
 -(BOOL)adicionarAtleta:(NSString *)email nome:(NSString *)nome foto:(NSString *)foto
                   peso:(NSNumber *)peso altura:(NSNumber *)altura sexo:(NSString *)sexo;

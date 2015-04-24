@@ -34,14 +34,24 @@
 
 
 NSString* geraEmail() {
-  NSString *path = [[NSBundle mainBundle] pathForResource: @"Treinador" ofType: @"plist"];
-  NSMutableDictionary *dictplist =[[NSMutableDictionary alloc] initWithContentsOfFile:path];
-  NSNumber *c = [dictplist objectForKey:@"contador"];
-  [dictplist setObject:[NSNumber numberWithInt:1 + [c intValue]]
-                forKey:@"contador"];
-  [dictplist writeToFile:path atomically:YES];
+    // Tratar erros de leitura e escrita de arquivo
+    
+    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/treinador"];
+    NSError *erro;
+    NSString *numeroStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&erro];
+    if (numeroStr == nil) numeroStr = @"0";
+    int numero = [numeroStr intValue];
+    
+    NSString *novoNumero = [NSString stringWithFormat:@"%d", numero + 1];
+    [novoNumero writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&erro];
+//  NSMutableDictionary *dictplist =[[NSMutableDictionary alloc] initWithContentsOfFile:path];
+//  NSNumber *c = [dictplist objectForKey:@"contador"];
+//    if (c == nil) c = @0;
+//  [dictplist setObject:[NSNumber numberWithInt:1 + [c intValue]]
+//                forKey:@"contador"];
+//  [dictplist writeToFile:path atomically:YES];
 
-  return [NSString stringWithFormat:@"@Atleta %@", c];
+  return [NSString stringWithFormat:@"@Atleta %d", numero];
 }
 
 -(NSArray *)todosAtletas {
@@ -59,6 +69,7 @@ NSString* geraEmail() {
     return NO;
   } else if (email == nil || [email isEqualToString:@""]) {
     email = geraEmail();
+    nome = email;
   } else {
     NSLog(@"Atleta novo: %@", email);
   }
