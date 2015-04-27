@@ -6,8 +6,8 @@
 #define GET NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init]; NSError *erroLer;
 #define ENCONTRA_ATLETA Atleta *atleta = [self encontraAtleta:email];
 #define FN NSLog(@"%s", __FUNCTION__);
-#define FLAG_PARSE NO  //TRUE
-//iweJFPOASEIFJPOASIEJFPOASIEJFOI
+#define FLAG_PARSE [[NSUserDefaults standardUserDefaults] objectForKey:@"parse"] != nil
+
 
 #define ATLETA_STR                    @"Atleta"
 #define GRUPO_DE_TEMPOS_STR           @"GrupoDeTempos"
@@ -34,22 +34,22 @@
 
 
 NSString* geraEmail() {
-    // Tratar erros de leitura e escrita de arquivo
-    
-    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/treinador"];
-    NSError *erro;
-    NSString *numeroStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&erro];
-    if (numeroStr == nil) numeroStr = @"0";
-    int numero = [numeroStr intValue];
-    
-    NSString *novoNumero = [NSString stringWithFormat:@"%d", numero + 1];
-    [novoNumero writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&erro];
-//  NSMutableDictionary *dictplist =[[NSMutableDictionary alloc] initWithContentsOfFile:path];
-//  NSNumber *c = [dictplist objectForKey:@"contador"];
-//    if (c == nil) c = @0;
-//  [dictplist setObject:[NSNumber numberWithInt:1 + [c intValue]]
-//                forKey:@"contador"];
-//  [dictplist writeToFile:path atomically:YES];
+  // Tratar erros de leitura e escrita de arquivo
+
+  NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/treinador"];
+  NSError *erro;
+  NSString *numeroStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&erro];
+  if (numeroStr == nil) numeroStr = @"0";
+  int numero = [numeroStr intValue];
+
+  NSString *novoNumero = [NSString stringWithFormat:@"%d", numero + 1];
+  [novoNumero writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&erro];
+  //  NSMutableDictionary *dictplist =[[NSMutableDictionary alloc] initWithContentsOfFile:path];
+  //  NSNumber *c = [dictplist objectForKey:@"contador"];
+  //    if (c == nil) c = @0;
+  //  [dictplist setObject:[NSNumber numberWithInt:1 + [c intValue]]
+  //                forKey:@"contador"];
+  //  [dictplist writeToFile:path atomically:YES];
 
   return [NSString stringWithFormat:@"@Atleta %d", numero];
 }
@@ -93,7 +93,7 @@ NSString* geraEmail() {
     novoAtletaParse[@"sexo"]   = sexo;
     [novoAtletaParse saveEventually];
   }
-  
+
   NOVO_ATLETA
   novoAtleta.email  = email;
   novoAtleta.nome   = nome;
@@ -252,5 +252,31 @@ NSString* geraEmail() {
   return YES;
 }
 
+-(BOOL)novoUsuario:(NSString *)email senha:(NSString *)senha {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+  Cryptography *cripto = [[Cryptography alloc] initWithPassword:senha];
+  NSString *hashSenha = [cripto password];
+  NSString *sal = [cripto sal];
+
+  [defaults setObject:hashSenha forKey:@"hashSenha"];
+  [defaults setObject:email forKey:@"email"];
+  [defaults setObject:sal forKey:@"sal"];
+
+  [defaults synchronize];
+
+  return YES;
+}
+
+-(BOOL)autenticaUsuario:(NSString *)email senha:(NSString *)senha {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSString *senhaDefault = [defaults objectForKey:@"hashSenha"];
+  NSString *emailDefault = [defaults objectForKey:@"email"];
+  NSString *salDefault   = [defaults objectForKey:@"sal"];
+  Cryptography *cripto = [[Cryptography alloc] initComSenha:senhaDefault eSal:salDefault];
+
+  return [cripto autenticaSenha:senha sal:salDefault] &&
+  [emailDefault isEqualToString:email];
+}
 
 @end

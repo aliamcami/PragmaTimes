@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "Cryptography.h"
 // #import "../Parse.framework/Parse"
 // #import "../Parse.framework/Headers/Parse.h"
 
