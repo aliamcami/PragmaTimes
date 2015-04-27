@@ -27,6 +27,7 @@
 		6BB7E3061AE80C7D00158533 /* Parada.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E3051AE80C7D00158533 /* Parada.m */; };
 		6BB7E30F1AE80D5800158533 /* GrupoDeTemposOrdenados.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E30E1AE80D5800158533 /* GrupoDeTemposOrdenados.m */; };
 		6BB7E3171AE8174300158533 /* KorreData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7E3161AE8174300158533 /* KorreData.xcdatamodel */; };
+		6BE316661AEED3B4000BEEF6 /* Cryptography.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE316651AEED3B4000BEEF6 /* Cryptography.m */; };
 		860D08201AE96F74006AE604 /* Register_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081A1AE96F74006AE604 /* Register_ViewController.m */; };
 		860D08211AE96F74006AE604 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081C1AE96F74006AE604 /* SecondViewController.m */; };
 		860D08221AE96F74006AE604 /* SingletonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D081E1AE96F74006AE604 /* SingletonData.m */; };
@@ -81,6 +82,8 @@
 		6BB7E30D1AE80D5800158533 /* GrupoDeTemposOrdenados.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrupoDeTemposOrdenados.h; sourceTree = "<group>"; };
 		6BB7E30E1AE80D5800158533 /* GrupoDeTemposOrdenados.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrupoDeTemposOrdenados.m; sourceTree = "<group>"; };
 		6BB7E3161AE8174300158533 /* KorreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KorreData.xcdatamodel; sourceTree = "<group>"; };
+		6BE316641AEED3B4000BEEF6 /* Cryptography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cryptography.h; sourceTree = "<group>"; };
+		6BE316651AEED3B4000BEEF6 /* Cryptography.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cryptography.m; sourceTree = "<group>"; };
 		860D08191AE96F74006AE604 /* Register_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Register_ViewController.h; sourceTree = "<group>"; };
 		860D081A1AE96F74006AE604 /* Register_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Register_ViewController.m; sourceTree = "<group>"; };
 		860D081B1AE96F74006AE604 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
@@ -271,6 +274,8 @@
 		D59958181AD4482400BCF33B /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
+				6BE316641AEED3B4000BEEF6 /* Cryptography.h */,
+				6BE316651AEED3B4000BEEF6 /* Cryptography.m */,
 				8619333C1AEACA8E00FBC563 /* Volta.h */,
 				8619333D1AEACA8E00FBC563 /* Volta.m */,
 				6B01DA731AEAE1E600FFAA9B /* Parse.framework */,
@@ -441,6 +446,7 @@
 				D5C6012F1AE98B030078A198 /* GeneralController.m in Sources */,
 				6BB7E30F1AE80D5800158533 /* GrupoDeTemposOrdenados.m in Sources */,
 				D587672D1AD3230300F29BCC /* main.m in Sources */,
+				6BE316661AEED3B4000BEEF6 /* Cryptography.m in Sources */,
 				862C74ED1ADEF2CF00CEA9AC /* CustomCollectionViewController.m in Sources */,
 				861933591AEACEA900FBC563 /* AtletaViewController.m in Sources */,
 			);
