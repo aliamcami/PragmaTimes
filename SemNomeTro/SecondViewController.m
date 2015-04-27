@@ -26,6 +26,7 @@
     int lastUsedColor;
     int tipoChronometro;
     int qntChronometros;
+    __weak IBOutlet UIBarButtonItem *editSave;
 }
 
 //constantes
@@ -411,7 +412,7 @@ static float const diferenceForAlphaColor = 0.2;
     [[self.shared arrayChronometers] removeObjectAtIndex:row]; //remove do array
     [[self.shared arrayColors] removeObjectAtIndex:row]; //remove a cor do array de cores
     NSArray *deleteItems = @[indexPath];
-    [self.collectionView deleteItemsAtIndexPaths:deleteItems]; //deleta da collection
+    [self.collectionView deleteItemsAtIndexPaths:deleteItems]; //deleta da collectionf
 }
 
 -(void) addNewCell{
@@ -431,6 +432,20 @@ static float const diferenceForAlphaColor = 0.2;
  */
 - (IBAction)edit:(id)sender {
     [self.shared.arrayChronometers[self.shared.mainChronIndex] enableEditing];
+    BOOL isedit = [self.shared.arrayChronometers[self.shared.mainChronIndex] isEditable];
+    if (isedit) {
+            for (UIGestureRecognizer *gesture in self.mainChronView.gestureRecognizers ) {
+                gesture.enabled = NO;
+            }
+        [editSave setTitle:@"save"];
+
+    }else{
+        for (UIGestureRecognizer *gesture in self.mainChronView.gestureRecognizers ) {
+            gesture.enabled = YES;
+        }
+        [editSave setTitle:@"edit"];
+    }
+//
 }
 
 - (IBAction)saveChronometer:(id)sender
@@ -442,5 +457,8 @@ static float const diferenceForAlphaColor = 0.2;
     [gc adicionarTempos:@"" eTempos:[[sgn arrayChronometers] objectAtIndex:[sgn mainChronIndex]]];
 }
 
+- (IBAction)back:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
