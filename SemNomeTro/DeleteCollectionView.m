@@ -454,7 +454,13 @@ static float const diferenceForAlphaColor = 0.2;
         case 1:
             for (int i = 0; i < [selectedArray count]; i++) {
                 //Preciso da Camila aqui para resolver isso.
-                [self.shared.arrayChronometers objectAtIndex:[selectedArray objectAtIndex:i]];
+                NSIndexPath *index = selectedArray[i];
+                Chronometer *c = [self.shared.arrayChronometers objectAtIndex:index.row];
+                
+                //Mandar isso pro metodo do andré
+                [c getPauseTimes];
+                [c getStartTimes];
+                [c getLapsContent];
             }
             
             [self deleteCellsIndexPaths:selectedArray];
