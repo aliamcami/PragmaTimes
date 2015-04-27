@@ -244,6 +244,36 @@
             </objects>
             <point key="canvasLocation" x="911" y="-542"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="ZmY-ZB-zSW">
+            <objects>
+                <viewController id="5XI-Mt-7f7" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3lh-vW-Wrv"/>
+                        <viewControllerLayoutGuide type="bottom" id="fq2-j2-ohx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cj3-BS-AIe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8gL-8d-m5Y">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8gL-8d-m5Y" firstAttribute="top" secondItem="Cj3-BS-AIe" secondAttribute="topMargin" id="SgS-NH-Cy9"/>
+                            <constraint firstItem="8gL-8d-m5Y" firstAttribute="leading" secondItem="Cj3-BS-AIe" secondAttribute="leadingMargin" constant="-16" id="TQ3-Be-1IO"/>
+                            <constraint firstItem="fq2-j2-ohx" firstAttribute="top" secondItem="8gL-8d-m5Y" secondAttribute="bottom" id="cnF-HS-qp6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8gL-8d-m5Y" secondAttribute="trailing" constant="-16" id="vqn-ei-Naa"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EIh-eO-3b7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1986" y="-1187"/>
+        </scene>
         <!--NovoAtleta-->
         <scene sceneID="nCZ-Qz-MQd">
             <objects>
@@ -538,6 +568,7 @@
                         <outlet property="searchBar" destination="Iwp-sc-b3Z" id="WW3-D6-BJC"/>
                         <outlet property="searchDisplayController" destination="Ndf-Jb-KSX" id="QKn-sy-uuB"/>
                         <outlet property="tableView" destination="gu0-qB-tSH" id="qea-Ta-CUS"/>
+                        <segue destination="5XI-Mt-7f7" kind="show" identifier="apareceTatu" id="IAF-iG-A8h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Vh-xY-Wgz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -741,15 +772,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QwX-fO-Zds">
                                 <rect key="frame" x="0.0" y="-13" width="600" height="395"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sER-mx-FRL">
-                                        <rect key="frame" x="8" y="22" width="50" height="30"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Edit">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ml-un-hNX">
@@ -797,7 +819,7 @@
                                 <items>
                                     <barButtonItem title="back" width="40" style="plain" id="oZ5-kU-9CI">
                                         <connections>
-                                            <action selector="back:" destination="kEJ-3t-ede" id="B08-yz-9XF"/>
+                                            <action selector="back:" destination="kEJ-3t-ede" id="crQ-SU-jZ3"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem title=" " width="10" style="plain" id="o17-3e-AOI"/>
@@ -819,7 +841,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem title=" " width="10" style="plain" id="ghN-xe-z6x"/>
-                                    <barButtonItem style="plain" systemItem="edit" id="uA6-mw-fQl"/>
+                                    <barButtonItem title="Edit" style="plain" id="uA6-mw-fQl">
+                                        <connections>
+                                            <action selector="edit:" destination="kEJ-3t-ede" id="11n-V7-798"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title=" " width="20" style="plain" id="Ebj-uC-KwP"/>
                                     <barButtonItem title="Menu" id="PiB-Rv-TQ2">
                                         <connections>
@@ -845,6 +871,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="vqX-q4-QKr" id="ZMl-G2-Ccg"/>
+                        <outlet property="editSave" destination="uA6-mw-fQl" id="DVM-id-a3N"/>
                         <outlet property="mainChronView" destination="QwX-fO-Zds" id="efw-Ux-C2p"/>
                         <outlet property="myView" destination="1ml-un-hNX" id="flK-zg-A9E"/>
                     </connections>
@@ -855,7 +882,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zHt-rT-BKG"/>
         <segue reference="Tdk-r2-SVW"/>
+        <segue reference="zHt-rT-BKG"/>
     </inferredMetricsTieBreakers>
 </document>

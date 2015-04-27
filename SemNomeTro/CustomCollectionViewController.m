@@ -328,7 +328,8 @@ static float const diferenceForAlphaColor = 0.2;
     
 //    //inicia o tempo de descanso, dois cliques com um dedo
         UITapGestureRecognizer *restTime = [[UITapGestureRecognizer alloc]initWithTarget:chron action:@selector(restChronometer)];
-        restTime.numberOfTouchesRequired = 1;
+        restTime.numberOfTouchesRequired = 0.7
+    ;
         restTime.numberOfTapsRequired = 2;
         restTime.cancelsTouchesInView = NO;
     
@@ -413,7 +414,11 @@ static float const diferenceForAlphaColor = 0.2;
 //        [self.movingCell removeFromSuperview];
 //    }
 //}
-
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                               duration:(NSTimeInterval)duration{
+    
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
 #pragma  mark Add/Del
 -(void) deleteCellatIndexPath:(NSIndexPath*)indexPath{
     long int row = [indexPath row]; //locla da celula a ser deletada
