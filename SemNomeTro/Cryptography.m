@@ -36,7 +36,7 @@ NSString* geraHash (NSString *senha, NSString *sal) {
   return self;
 }
 
-- (instancetype)initComSenha:(NSString *)senha sal:(NSString *)sal {
+- (instancetype)initComSenha:(NSString *)senha eSal:(NSString *)sal {
   self = [super init];
   if (self) {
     self.sal = sal;

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface DeleteCollectionView : UIViewController
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 //quantidade de colunas que os chronometros serão divididos

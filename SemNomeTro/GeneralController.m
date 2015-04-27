@@ -66,9 +66,10 @@
 
 -(BOOL)adicionarTempos:(NSString *)email eTempos:(Chronometer *)c
 {
-    email = @"email@testes.com";
-    [self.db adicionarAtleta:email nome:@"" foto:@"" peso:@0 altura:@0 sexo:@""];
-    GrupoDeTempos *g = [self.db encontraGrupoDeTempos:email dataDeInicio:[[c getStartTimes] objectAtIndex:0]];
+    //email = @"email@testes.com";
+    //[self.db adicionarAtleta:email nome:@"" foto:@"" peso:@0 altura:@0 sexo:@""];
+
+    GrupoDeTempos *g = [self.db encontraGrupoDeTempos:c.name dataDeInicio:[[c getStartTimes] objectAtIndex:0]];
     
     if (g != nil) {
         GrupoDeTemposOrdenados *grupoDeTemposOrdenados = [[GrupoDeTemposOrdenados alloc] initComGrupoDeTempos:g];

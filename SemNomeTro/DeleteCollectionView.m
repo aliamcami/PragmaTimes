@@ -12,6 +12,7 @@
 #import "Chronometer.h"
 #import "MyColorHolder.h"
 #import "SingletonData.h"
+#import "GeneralController.h"
 
 @interface DeleteCollectionView ()
 @property (nonatomic)SingletonData *shared;
@@ -458,11 +459,10 @@ static float const diferenceForAlphaColor = 0.2;
                 Chronometer *c = [self.shared.arrayChronometers objectAtIndex:index.row];
                 
                 //Mandar isso pro metodo do andré
-                [c getPauseTimes];
-                [c getStartTimes];
-                [c getLapsContent];
+              GeneralController *gc = [[GeneralController alloc] init];
+              [gc adicionarTempos:nil eTempos:c];
             }
-            
+
             [self deleteCellsIndexPaths:selectedArray];
             break;
         case 2:
