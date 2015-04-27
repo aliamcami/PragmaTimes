@@ -441,8 +441,34 @@ static float const diferenceForAlphaColor = 0.2;
 }
 - (IBAction)remove:(id)sender {
     
-    //salvar dados? n / s
-    [self deleteCellsIndexPaths:selectedArray];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:@"Deseja salvar os dados antes de excluir?"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancelar Exclusao"
+                                          otherButtonTitles:@"Salvar",@"Nao Salvar", nil];
+    [alert show];
+}
+
+-(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 1:
+            for (int i = 0; i < [selectedArray count]; i++) {
+                //Preciso da Camila aqui para resolver isso.
+                NSIndexPath *index = selectedArray[i];
+                Chronometer *c = [self.shared.arrayChronometers objectAtIndex:index.row];
+                
+                //Mandar isso pro metodo do andré
+                [c getPauseTimes];
+                [c getStartTimes];
+                [c getLapsContent];
+            }
+            
+            [self deleteCellsIndexPaths:selectedArray];
+            break;
+        case 2:
+            [self deleteCellsIndexPaths:selectedArray];
+            break;
+    }
 }
 
 

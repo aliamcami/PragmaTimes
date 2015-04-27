@@ -152,18 +152,27 @@
     //Adiciona o icone e o numero de voltas
     if ([self.lapTimes count] > 0) {
         if (self.frame.size.width < 100) {
+//            NSLog(@"%f", self.frame.size.width);
             self.lapIcon.frame = CGRectMake(5, 5, 10, 10);
             
             self.lblCountLap.frame = CGRectMake(20, 5, 11, 40);
             int lblTextSize = MIN(self.lblCountLap.frame.size.width, self.lblCountLap.frame.size.height);
             self.lblCountLap.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize];
+        }else if(self.frame.size.width < 200){
+            self.lapIcon.frame = CGRectMake(10, 10, 21, 15);
+            
+            self.lblCountLap.frame = CGRectMake(30, 11, 20, 40);
+            int lblTextSize = MIN(self.lblCountLap.frame.size.width, self.lblCountLap.frame.size.height);
+            self.lblCountLap.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize];
         }else{
+//            NSLog(@"%f", self.frame.size.width);
+
             self.lapIcon.frame = CGRectMake(15, 10, 21, 15);
             
             self.lblCountLap.frame = CGRectMake(45, 11, 50, 40);
             
             int lblTextSize = MIN(self.lblCountLap.frame.size.width, self.lblCountLap.frame.size.height);
-            self.lblCountLap.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize];
+            self.lblCountLap.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.9];
         }
         
         [self.icons addSubview:self.lapIcon];
