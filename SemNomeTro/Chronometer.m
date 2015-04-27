@@ -161,7 +161,7 @@
         }else if(self.frame.size.width < 200){
             self.lapIcon.frame = CGRectMake(10, 10, 21, 15);
             
-            self.lblCountLap.frame = CGRectMake(30, 11, 20, 40);
+            self.lblCountLap.frame = CGRectMake(30, 0, 20, 40);
             int lblTextSize = MIN(self.lblCountLap.frame.size.width, self.lblCountLap.frame.size.height);
             self.lblCountLap.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize];
         }else{
