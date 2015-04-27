@@ -36,7 +36,6 @@
 
 //Informacoes do cronometro
 @property (nonatomic) short focus;
-@property (nonatomic) NSString *name;
 @property (nonatomic) int restTime;
 
 //PickerView Contents
@@ -155,13 +154,13 @@
 //            NSLog(@"%f", self.frame.size.width);
             self.lapIcon.frame = CGRectMake(5, 5, 10, 10);
             
-            self.lblCountLap.frame = CGRectMake(20, 5, 11, 40);
+            self.lblCountLap.frame = CGRectMake(20, 5, 40, 11);
             int lblTextSize = MIN(self.lblCountLap.frame.size.width, self.lblCountLap.frame.size.height);
             self.lblCountLap.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize];
         }else if(self.frame.size.width < 200){
             self.lapIcon.frame = CGRectMake(10, 10, 21, 15);
             
-            self.lblCountLap.frame = CGRectMake(30, 0, 20, 40);
+            self.lblCountLap.frame = CGRectMake(35, 7, 50, 20);
             int lblTextSize = MIN(self.lblCountLap.frame.size.width, self.lblCountLap.frame.size.height);
             self.lblCountLap.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize];
         }else{
@@ -169,7 +168,7 @@
 
             self.lapIcon.frame = CGRectMake(15, 10, 21, 15);
             
-            self.lblCountLap.frame = CGRectMake(45, 11, 50, 40);
+            self.lblCountLap.frame = CGRectMake(45, 7, 50, 20);
             
             int lblTextSize = MIN(self.lblCountLap.frame.size.width, self.lblCountLap.frame.size.height);
             self.lblCountLap.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.9];

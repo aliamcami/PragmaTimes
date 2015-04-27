@@ -17,6 +17,7 @@
 
 //Para ajudar a camila na hora de fazer os bagulho dela lá
 @property (nonatomic) BOOL isEditable;
+@property (nonatomic) NSString *name;
 
 //- (instancetype)initWithFrame:(CGRect)frame andFocus:(int)focus; //Nao necessario por enquanto
 -(void)resizeCronometer:(CGRect)size andFocus:(int)focus;
