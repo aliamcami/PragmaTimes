@@ -275,7 +275,7 @@ NSString* geraEmail() {
   NSString *salDefault   = [defaults objectForKey:@"sal"];
   Cryptography *cripto = [[Cryptography alloc] initComSenha:senhaDefault eSal:salDefault];
 
-  return [cripto autenticaSenha:senha sal:salDefault] &&
+  return [cripto autenticaSenha:senha eSal:salDefault] &&
   [emailDefault isEqualToString:email];
 }
 
