@@ -53,7 +53,7 @@ NSString* geraHash (NSString *senha, NSString *sal) {
   return [NSString stringWithFormat:@"%@", self.password];
 }
 
--(BOOL)autenticaSenha:(NSString *)senha sal:(NSString *)sal {
+-(BOOL)autenticaSenha:(NSString *)senha eSal:(NSString *)sal {
   NSString* hashCandidata = geraHash(senha, sal);
   return [hashCandidata isEqualToString:self.password];
 }
