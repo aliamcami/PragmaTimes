@@ -14,5 +14,5 @@
 
 - (instancetype)initWithPassword:(NSString*)psw;
 - (instancetype)initComSenha:(NSString *)senha eSal:(NSString *)sal;
--(instancetype)autenticaSenha:(NSString *)senha eSal:(NSString *)sal;
+-(BOOL)autenticaSenha:(NSString *)senha eSal:(NSString *)sal;
 @end
