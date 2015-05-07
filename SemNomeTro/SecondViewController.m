@@ -70,8 +70,14 @@ static float const diferenceForAlphaColor = 0.2;
     
     [self.mainChronView addSubview:chron];
     [self.mainChronView setBackgroundColor: color.theColor];
-    self.collectionView.backgroundColor = [UIColor clearColor];
-    self.collectionView.backgroundColor = color.theColor;
+    
+    
+    CGFloat r1, g1,b1,a1;
+    [[color theColor] getRed:&r1 green:&g1 blue:&b1 alpha:&a1];
+    UIColor *c = [UIColor colorWithRed:r1 green:g1 blue:b1 alpha:1];
+    
+    
+    self.collectionView.backgroundColor = c;
 
     //muda cor da navigation bar
     //    [[[self navigationController] navigationBar] setTranslucent:YES];
@@ -320,8 +326,8 @@ static float const diferenceForAlphaColor = 0.2;
     restTime.cancelsTouchesInView = NO;
     
     //    //temporariamente adiciona cronometro
-    UISwipeGestureRecognizer *addChron= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(addNewCell)];
-    addChron.cancelsTouchesInView = NO;
+//    UISwipeGestureRecognizer *addChron= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(addNewCell)];
+//    addChron.cancelsTouchesInView = NO;
     
     //    UISwipeGestureRecognizer *deleteChron = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(deleteCellatIndexPath:)];
     
@@ -329,13 +335,31 @@ static float const diferenceForAlphaColor = 0.2;
     //editaChronometro
     UILongPressGestureRecognizer *edit = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(goToEditableChronView:)];
     edit.minimumPressDuration = 1;
+    
+    UILongPressGestureRecognizer *reset = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(resetChronometer:)];
+    reset.minimumPressDuration = 1;
+    reset.numberOfTouchesRequired = 2;
+    
+    
     [cell addGestureRecognizer:playStop];
     [cell addGestureRecognizer:lapMark];
     [cell addGestureRecognizer:restTime];
 //    [cell addGestureRecognizer: addChron];
     [cell addGestureRecognizer:edit];
+    [cell addGestureRecognizer:reset];
     //    [cell addGestureRecognizer: deleteChron];
     
+}
+-(void)resetChronometer:(UILongPressGestureRecognizer*)gestureRecognizer{
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        return;
+    }else if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
+        NSIndexPath *i = [self.collectionView indexPathForItemAtPoint: [gestureRecognizer locationInView:self.collectionView]];
+        Chronometer * chron = [self.shared.arrayChronometers objectAtIndex:i.row];
+        if (chron != nil) {
+            [chron resetChronometer];
+        }
+    }
 }
 -(void)goToEditableChronView:(UILongPressGestureRecognizer*)gestureRecognizer{
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
@@ -417,12 +441,13 @@ static float const diferenceForAlphaColor = 0.2;
 
 -(void) addNewCell{
     NSIndexPath *indexp = [NSIndexPath
-                           indexPathForItem:[[self.shared arrayChronometers]count]
+                           indexPathForItem:[[self.shared arrayChronometers]count]-1
                            inSection:0];
     [[self.shared arrayChronometers]addObject:[self getNewChronometer]]; //adiciona um cronometro no array
     [self addColorToUsedColorsArray]; //adiciona uma cor no array de cores
     NSArray *indexes = [NSArray arrayWithObjects:indexp, nil];
     [self.collectionView insertItemsAtIndexPaths:indexes];
+    [self.collectionView scrollToItemAtIndexPath:indexp atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
 }
 
 //metodo long pres
@@ -438,14 +463,27 @@ static float const diferenceForAlphaColor = 0.2;
                 gesture.enabled = NO;
             }
         [editSave setTitle:@"save"];
+        
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+        tapRecognizer.cancelsTouchesInView = NO;
+        [self.mainChronView addGestureRecognizer:tapRecognizer];
 
     }else{
         for (UIGestureRecognizer *gesture in self.mainChronView.gestureRecognizers ) {
             gesture.enabled = YES;
+
         }
+        UIGestureRecognizer* gest = [self.mainChronView.gestureRecognizers lastObject];
+        gest.enabled = NO;
         [editSave setTitle:@"edit"];
     }
 //
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *) sender
+{
+    [self.view endEditing:YES];
+
 }
 
 - (IBAction)saveChronometer:(id)sender
@@ -459,6 +497,19 @@ static float const diferenceForAlphaColor = 0.2;
 
 - (IBAction)back:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)addChronometer:(id)sender {
+    [self addNewCell];
+}
+- (IBAction)playAllChronometer:(id)sender {
+    for (Chronometer *chron in self.shared.arrayChronometers) {
+        [chron playChronometer];
+    }
+}
+- (IBAction)stopAllChronometer:(id)sender {
+    for (Chronometer *chron in self.shared.arrayChronometers) {
+        [chron pauseChronometer];
+    }
 }
 
 @end

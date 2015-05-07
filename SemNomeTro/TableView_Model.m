@@ -51,7 +51,10 @@
     self.lapTimes = lapTimes;
     self.chronometerTotalTimeAtLap = selectedLapTimes;
     [self.tableView reloadData];    //Funcao que atualiza os dados das celulas da tableview
-    [self.tableView scrollToRowAtIndexPath:[self lastIndexPath] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    
+    if (![self.lapTimes count] == 0) {
+            [self.tableView scrollToRowAtIndexPath:[self lastIndexPath] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 #pragma mark - TableView Config

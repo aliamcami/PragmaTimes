@@ -10,4 +10,6 @@
 
 @interface AtletaViewController : UIViewController
 
+@property (nonatomic) NSString *selected;
+
 @end

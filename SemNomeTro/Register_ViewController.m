@@ -64,39 +64,50 @@
     GeneralController *gc = [[GeneralController alloc] init];
     
     [gc adicionarAtleta:email nome:nome foto:@"" peso:@1 altura:@1 sexo:sexo];
+    
+    UIAlertView *alrt = [[UIAlertView alloc] initWithTitle:@"" message:@"Successfully Registered" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    alrt.tag = 1;
+    [alrt show];
 }
 
 - (IBAction)onContinuePressed:(id)sender
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
-                                                    message:@"Dados dos cronometros / atletas não serão salvos sem o cadastro. E o andré teve muito trabalho para fazer esta parte. Por favor faça o cadastro!"
+                                                    message:@"You will not be able to save your times! Continue?"
                                                    delegate:self
-                                          cancelButtonTitle:@"Desculpe, quero fazer cadastro!"
-                                          otherButtonTitles:@"Não gosto do andré mesmo...",@"Mostrar Cronometros", nil];
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"Continue Without Register", nil];
+    alert.tag = 2;
+    
     [alert show];
 }
 
 //como fazer o alertview com açoes
 -(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    switch (buttonIndex) {
-        case 1:
-            [self opcao1];
-            break;
-        case 2:
-            [self opcao2];
-            break;
-
+    if (alertView.tag == 1) {
+        switch (buttonIndex) {
+            case 0:
+                [self performSegueWithIdentifier:@"showMainCollectionView" sender:nil];
+                break;
+        }
+    }else{
+        switch (buttonIndex) {
+            case 1:
+                [self opcao1];
+                break;
+        }
     }
 }
 -(void)opcao1{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"DIE" message:nil delegate:nil cancelButtonTitle:@"Im sorry...Ill never cancel again!" otherButtonTitles:nil];
-    [alert show];
+    [self performSegueWithIdentifier:@"showMainCollectionView" sender:nil];
+//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"DIE" message:nil delegate:nil cancelButtonTitle:@"Im sorry...Ill never cancel again!" otherButtonTitles:nil];
+//    [alert show];
 }
 
--(void)opcao2{
-    //como ir para a pagina dos cronometros
-    [self performSegueWithIdentifier:@"showMainCollectionView" sender:nil];
-    
-}
+//-(void)opcao2{
+//    //como ir para a pagina dos cronometros
+//    [self performSegueWithIdentifier:@"showMainCollectionView" sender:nil];
+//    
+//}
 
 @end

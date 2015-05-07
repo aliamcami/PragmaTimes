@@ -123,8 +123,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    self.textField.text = [self.autocompleteUrls objectAtIndex:indexPath.row];
-//    self.tableView.hidden = YES;
+    self.selected = [[NSString alloc] initWithString:[self.autocompleteData objectAtIndex:indexPath.row]];
+    
+     [self performSegueWithIdentifier:@"apareceTatu" sender:self];
 }
 
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring

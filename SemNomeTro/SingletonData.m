@@ -13,7 +13,7 @@
     static SingletonData *shared = nil;
 
     static float const diferenceForAlphaColor = 0.2;
-    static int const qntInicialBasicaCronometros = 8;
+    static int const qntInicialBasicaCronometros = 1;
     
 
 +(SingletonData*)sharedSingleton{

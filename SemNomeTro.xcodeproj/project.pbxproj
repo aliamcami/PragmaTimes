@@ -40,6 +40,8 @@
 		862C74EC1ADEF2CF00CEA9AC /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74E91ADEF2CF00CEA9AC /* CustomCollectionViewCell.m */; };
 		862C74ED1ADEF2CF00CEA9AC /* CustomCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */; };
 		862C74F01ADEF30C00CEA9AC /* MyColorHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */; };
+		D521A8C01AF12001005A9AEA /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D521A8BF1AF12001005A9AEA /* Launch Screen.xib */; };
+		D55A0C631AEFF067002D2E95 /* DataTreinoController.m in Sources */ = {isa = PBXBuildFile; fileRef = D55A0C621AEFF067002D2E95 /* DataTreinoController.m */; };
 		D56B9E581AEED5CB002816BA /* icone_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D56B9E541AEED5CB002816BA /* icone_play@2x.png */; };
 		D56B9E591AEED5CB002816BA /* icone_return@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D56B9E551AEED5CB002816BA /* icone_return@2x.png */; };
 		D56B9E5A1AEED5CB002816BA /* icone_volta@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D56B9E561AEED5CB002816BA /* icone_volta@2x.png */; };
@@ -48,7 +50,6 @@
 		D58767301AD3230300F29BCC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D587672F1AD3230300F29BCC /* AppDelegate.m */; };
 		D58767361AD3230300F29BCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D58767341AD3230300F29BCC /* Main.storyboard */; };
 		D58767381AD3230300F29BCC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D58767371AD3230300F29BCC /* Images.xcassets */; };
-		D587673B1AD3230300F29BCC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58767391AD3230300F29BCC /* LaunchScreen.xib */; };
 		D594BF9F1AE5B79C00BCFCDC /* PickerView_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D594BF9E1AE5B79C00BCFCDC /* PickerView_Model.m */; };
 		D5C5765E1AD5DCAD0066CA29 /* TableView_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5765D1AD5DCAD0066CA29 /* TableView_Model.m */; };
 		D5C59DB81AD4573A004C4BC7 /* Chronometer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C59DB71AD4573A004C4BC7 /* Chronometer.m */; };
@@ -107,6 +108,9 @@
 		862C74EB1ADEF2CF00CEA9AC /* CustomCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewController.m; sourceTree = "<group>"; };
 		862C74EE1ADEF30C00CEA9AC /* MyColorHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyColorHolder.h; sourceTree = "<group>"; };
 		862C74EF1ADEF30C00CEA9AC /* MyColorHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyColorHolder.m; sourceTree = "<group>"; };
+		D521A8BF1AF12001005A9AEA /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "../Launch Screen.xib"; sourceTree = "<group>"; };
+		D55A0C611AEFF067002D2E95 /* DataTreinoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTreinoController.h; sourceTree = "<group>"; };
+		D55A0C621AEFF067002D2E95 /* DataTreinoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataTreinoController.m; sourceTree = "<group>"; };
 		D56B9E541AEED5CB002816BA /* icone_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icone_play@2x.png"; sourceTree = "<group>"; };
 		D56B9E551AEED5CB002816BA /* icone_return@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icone_return@2x.png"; sourceTree = "<group>"; };
 		D56B9E561AEED5CB002816BA /* icone_volta@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icone_volta@2x.png"; sourceTree = "<group>"; };
@@ -118,7 +122,6 @@
 		D587672F1AD3230300F29BCC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D58767351AD3230300F29BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D58767371AD3230300F29BCC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		D587673A1AD3230300F29BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D58767451AD3230300F29BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D58767461AD3230300F29BCC /* SemNomeTroTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SemNomeTroTests.m; sourceTree = "<group>"; };
 		D594BF9D1AE5B79C00BCFCDC /* PickerView_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerView_Model.h; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 				861933551AEACE7800FBC563 /* NovoAtletaViewController.m */,
 				861933571AEACEA900FBC563 /* AtletaViewController.h */,
 				861933581AEACEA900FBC563 /* AtletaViewController.m */,
+				D55A0C611AEFF067002D2E95 /* DataTreinoController.h */,
+				D55A0C621AEFF067002D2E95 /* DataTreinoController.m */,
 			);
 			name = "outras telas";
 			sourceTree = "<group>";
@@ -238,8 +243,8 @@
 				D587672E1AD3230300F29BCC /* AppDelegate.h */,
 				D587672F1AD3230300F29BCC /* AppDelegate.m */,
 				D58767341AD3230300F29BCC /* Main.storyboard */,
+				D521A8BF1AF12001005A9AEA /* Launch Screen.xib */,
 				D58767371AD3230300F29BCC /* Images.xcassets */,
-				D58767391AD3230300F29BCC /* LaunchScreen.xib */,
 				D587672A1AD3230300F29BCC /* Supporting Files */,
 			);
 			path = SemNomeTro;
@@ -410,8 +415,8 @@
 				D56B9E581AEED5CB002816BA /* icone_play@2x.png in Resources */,
 				D56B9E5B1AEED5CB002816BA /* pause_grande@2x.png in Resources */,
 				D56B9E5A1AEED5CB002816BA /* icone_volta@2x.png in Resources */,
-				D587673B1AD3230300F29BCC /* LaunchScreen.xib in Resources */,
 				D58767381AD3230300F29BCC /* Images.xcassets in Resources */,
+				D521A8C01AF12001005A9AEA /* Launch Screen.xib in Resources */,
 				D56B9E591AEED5CB002816BA /* icone_return@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,6 +445,7 @@
 				6BB7E2F81AE80C2400158533 /* DB.m in Sources */,
 				D5C5765E1AD5DCAD0066CA29 /* TableView_Model.m in Sources */,
 				861933561AEACE7800FBC563 /* NovoAtletaViewController.m in Sources */,
+				D55A0C631AEFF067002D2E95 /* DataTreinoController.m in Sources */,
 				862C74F01ADEF30C00CEA9AC /* MyColorHolder.m in Sources */,
 				6BB7E3171AE8174300158533 /* KorreData.xcdatamodel in Sources */,
 				6BB7E3031AE80C7D00158533 /* Inicio.m in Sources */,
@@ -461,14 +467,6 @@
 				D58767351AD3230300F29BCC /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D58767391AD3230300F29BCC /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D587673A1AD3230300F29BCC /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

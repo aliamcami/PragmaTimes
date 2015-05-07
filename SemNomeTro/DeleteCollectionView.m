@@ -443,10 +443,10 @@ static float const diferenceForAlphaColor = 0.2;
 - (IBAction)remove:(id)sender {
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
-                                                    message:@"Deseja salvar os dados antes de excluir?"
+                                                    message:@"Do you want to save the data before deleting?"
                                                    delegate:self
-                                          cancelButtonTitle:@"Cancelar Exclusao"
-                                          otherButtonTitles:@"Salvar",@"Nao Salvar", nil];
+                                          cancelButtonTitle:@"Cancel Deleting"
+                                          otherButtonTitles:@"Save",@"Don't Save", nil];
     [alert show];
 }
 

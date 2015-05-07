@@ -334,10 +334,14 @@ static float const diferenceForAlphaColor = 0.2;
         restTime.cancelsTouchesInView = NO;
     
 //    //temporariamente adiciona cronometro
-        UISwipeGestureRecognizer *addChron= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(addNewCell)];
-        addChron.cancelsTouchesInView = NO;
+//        UISwipeGestureRecognizer *addChron= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(addNewCell)];
+//        addChron.cancelsTouchesInView = NO;
     
     //    UISwipeGestureRecognizer *deleteChron = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(deleteCellatIndexPath:)];
+    
+    UILongPressGestureRecognizer *reset = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(resetChronometer:)];
+    reset.minimumPressDuration = 1;
+    reset.numberOfTouchesRequired = 2;
     
     
     //editaChronometro
@@ -348,10 +352,21 @@ static float const diferenceForAlphaColor = 0.2;
         [cell addGestureRecognizer:playStop];
         [cell addGestureRecognizer:lapMark];
         [cell addGestureRecognizer:restTime];
-        [cell addGestureRecognizer: addChron];
+        [cell addGestureRecognizer:reset];
         [cell addGestureRecognizer:edit];
     //    [cell addGestureRecognizer: deleteChron];
     
+}
+-(void)resetChronometer:(UILongPressGestureRecognizer*)gestureRecognizer{
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        return;
+    }else if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
+        NSIndexPath *i = [self.collectionView indexPathForItemAtPoint: [gestureRecognizer locationInView:self.collectionView]];
+        Chronometer * chron = [self.shared.arrayChronometers objectAtIndex:i.row];
+        if (chron != nil) {
+            [chron resetChronometer];
+        }
+    }
 }
 -(void)goToEditableChronView:(UILongPressGestureRecognizer*)gestureRecognizer{
 
@@ -453,12 +468,12 @@ static float const diferenceForAlphaColor = 0.2;
 }
 - (IBAction)playAllChronometer:(id)sender {
     for (Chronometer *chron in self.shared.arrayChronometers) {
-        [chron play_pauseChronometer];
+        [chron playChronometer];
     }
 }
 - (IBAction)stopAllChronometer:(id)sender {
     for (Chronometer *chron in self.shared.arrayChronometers) {
-        [chron play_pauseChronometer];
+        [chron pauseChronometer];
     }
 }
 

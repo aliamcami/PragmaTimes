@@ -368,7 +368,7 @@
             lblTextSize = MIN(self.btnTimeRest.frame.size.width, self.btnTimeRest.frame.size.height);
             self.btnTimeRest.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:lblTextSize * 0.3];
             
-            self.lblTimeRest.text = @"Tempo de Descanso:";
+            self.lblTimeRest.text = @"Rest Time:";
             self.lblTimeRest.textAlignment = NSTextAlignmentCenter;
             
             [self.restView addSubview:self.lblTimeRest];
@@ -533,16 +533,18 @@
     [self.lapTimes removeAllObjects];
     [self.pauseTimes removeAllObjects];
     [self.startTimes removeAllObjects];
+    [self.chronometerTimeAtLap removeAllObjects];
     
     //define a melhor volta como zero
     self.lblChronometerBestLap.text = [self timeFormatter:0];
     
     //atualiza a tableView
     [self.tbLaps refreshTableViewWithLapTimes:[self formattedLapContents] andchronometerTotalTimeAtLap:[self formattedChronometerTimeAtLaps]];
-    self.
+//    self.
     
     //zera o cronometro que aparece na tela
     self.lblChronometer.text = [self timeFormatter:0];
+    [self pauseChronometer];
 }
 
 -(void)playChronometer
@@ -588,8 +590,11 @@
         //Adiciona ao array de pausas o momento em que o cronometro foi pausado
         [self.pauseTimes addObject:[NSDate date]];
         
-        [self updateIcons];
+        
+        //se fica dentro ele nao da update algumas vezes.... by camila. 
+//        [self updateIcons];
     }
+    [self updateIcons];
 }
 
 //Controlador de tempo do cronometro, dividi o play e pause em dois metodos pq precisava chamar o pause manualmente algumsa vezes
