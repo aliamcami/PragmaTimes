@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Atleta" representedClassName="Atleta" syncable="YES">
+        <attribute name="altura" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="foto" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="peso" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sexo" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tempos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GrupoDeTempos" inverseName="atleta" inverseEntity="GrupoDeTempos" syncable="YES"/>
+    </entity>
+    <entity name="GrupoDeTempos" representedClassName="GrupoDeTempos" syncable="YES">
+        <attribute name="dataDeInicio" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="atleta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Atleta" inverseName="tempos" inverseEntity="Atleta" syncable="YES"/>
+        <relationship name="inicios" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Inicio" inverseName="grupo" inverseEntity="Inicio" syncable="YES"/>
+        <relationship name="paradas" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Parada" inverseName="grupo" inverseEntity="Parada" syncable="YES"/>
+        <relationship name="voltas" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Volta" inverseName="grupo" inverseEntity="Volta" syncable="YES"/>
+    </entity>
+    <entity name="Inicio" representedClassName="Inicio" syncable="YES">
+        <attribute name="tempo" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="grupo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GrupoDeTempos" inverseName="inicios" inverseEntity="GrupoDeTempos" syncable="YES"/>
+    </entity>
+    <entity name="Parada" representedClassName="Parada" syncable="YES">
+        <attribute name="tempo" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="grupo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GrupoDeTempos" inverseName="paradas" inverseEntity="GrupoDeTempos" syncable="YES"/>
+    </entity>
+    <entity name="Volta" representedClassName="Volta" syncable="YES">
+        <attribute name="tempo" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <relationship name="grupo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GrupoDeTempos" inverseName="voltas" inverseEntity="GrupoDeTempos" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Atleta" positionX="3202" positionY="920" width="128" height="148"/>
+        <element name="GrupoDeTempos" positionX="3024" positionY="1007" width="128" height="118"/>
+        <element name="Inicio" positionX="2736" positionY="981" width="128" height="73"/>
+        <element name="Parada" positionX="2716" positionY="1061" width="128" height="73"/>
+        <element name="Volta" positionX="2736" positionY="1179" width="128" height="73"/>
+    </elements>
+</model>
